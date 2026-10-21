@@ -11,6 +11,7 @@ A personal website for Hariom Patel: BCA student, developer, and independent bui
 - Shareable Builder DNA mini-quiz with three archetypes, reproducible result links, and no backend
 - Build Quest: a three-decision product-reliability scenario with trade-off explanations and a copyable local decision trail
 - Visitor-specific three-stop portfolio routes for recruiters, developers and curious explorers, inspired by the reference portfolio profile selector
+- Landing Studio with 16 selectable art directions, a live interactive preview and links back to real project content
 - Quick Jump command palette with searchable section navigation using Ctrl/⌘ + K
 - Project Autopsy case studies: problem, design choice, evidence, and limitations
 - Small interactive Build Lab with Focus, Explore, and Debug modes
@@ -35,7 +36,7 @@ Then visit `http://localhost:8000`.
 - Build Quest is a fictional decision simulator, not a scored engineering assessment; choices stay in the browser
 - Keep Project Autopsy evidence current; do not publish unverified results, fabricated metrics, or claims about unfinished features
 - Update design tokens, responsive layouts and visual treatments in `styles.css`
-- Update mobile navigation, reading progress, Build Lab, Builder DNA, Build Quest, Quick Jump and visitor route selection in `script.js`
+- Update mobile navigation, reading progress, Build Lab, Builder DNA, Build Quest, Quick Jump, visitor routes and Landing Studio template selection in `script.js`
 - Keep project status honest. The project-card artwork is illustrative, not a screenshot or proof of a feature.
 - The Build Lab is a local interaction. It does not call an AI API.
 
