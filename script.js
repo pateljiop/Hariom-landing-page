@@ -63,4 +63,44 @@
       lab.querySelector('.p-output-symbol').textContent = state.symbol;
     }));
   }
+
+  // Build Atlas: project connections are explicit content, not simulated live data.
+  const atlas = document.querySelector('#build-atlas-interaction');
+  if (atlas) {
+    const entries = {
+      builder: {category:'START HERE / 00',title:'The builder is the connection.',description:'I like turning messy ideas into things people can try. Each project explores a different angle: useful tools, controlled automation, or showing the work honestly.',question:'Can I make an idea useful, understandable, and real?',link:'#projects',label:'Explore the projects'},
+      haryomix: {category:'PRODUCT / 01',title:'Make useful tools easier to reach.',description:'Haryomix explores a student-focused digital workspace: bringing study and productivity utilities together. Its scope should be judged by what actually works on the live site.',question:'Can one focused workspace reduce the friction of everyday study tasks?',link:'https://haryomix.eu.cc',label:'Visit Haryomix ↗'},
+      hariomai: {category:'AUTOMATION / 02',title:'Give automation guardrails.',description:'Hariom AI explores a Windows-first personal assistant with tool use, explicit approvals for risky actions, and verification after execution. The important part is controlled action—not just a convincing chat.',question:'How can an assistant act usefully while keeping the human in control?',link:'https://github.com/pateljiop/hariom-ai',label:'Inspect the repository ↗'},
+      portfolio: {category:'IDENTITY / 03',title:'Show the work behind the work.',description:'This page is itself an experiment: make the developer, decisions, projects, and unfinished edges visible without pretending to be an agency or a finished startup.',question:'Can a portfolio feel like a living workbench rather than a static résumé?',link:'https://github.com/pateljiop/Hariom-landing-page',label:'Explore this repository ↗'},
+      principle: {category:'METHOD / 04',title:'Build. Verify. Be honest.',description:'A feature is not finished because a button looks right. It should respond, handle edge cases, work on a phone, and clearly communicate its limits.',question:'What evidence shows that this feature works outside the mockup?',link:'#lab',label:'Try the Build Lab'}
+    };
+    const buttons = [...atlas.querySelectorAll('[data-atlas]')];
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const item = entries[button.dataset.atlas];
+      if (!item) return;
+      buttons.forEach(node => {
+        const active = node === button;
+        node.classList.toggle('active', active);
+        node.setAttribute('aria-pressed', String(active));
+      });
+      atlas.querySelector('#atlas-category').textContent = item.category;
+      atlas.querySelector('#atlas-title').textContent = item.title;
+      atlas.querySelector('#atlas-description').textContent = item.description;
+      atlas.querySelector('#atlas-question').textContent = item.question;
+      const link = atlas.querySelector('#atlas-link');
+      link.href = item.link;
+      link.textContent = item.label;
+      const arrow = document.createElement('span');
+      arrow.textContent = '↗';
+      link.append(' ', arrow);
+      if (item.link.startsWith('https://')) {
+        link.target = '_blank';
+        link.rel = 'noreferrer';
+      } else {
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+      }
+    }));
+  }
+
 })();
