@@ -147,3 +147,53 @@ html{scroll-behavior:smooth;scroll-padding-top:86px}body.personal-site{margin:0;
 .p-autopsy-footnote{font-size:10px;line-height:1.7;color:#7f8ba0;margin:18px 0 0}
 @media(max-width:700px){.p-autopsy{padding:20px 16px;margin-top:25px}.p-autopsy-head{grid-template-columns:1fr;gap:10px}.p-autopsy-content{grid-template-columns:1fr;gap:17px;padding-left:0}.p-autopsy-content>a{grid-column:auto}.p-autopsy-item summary{gap:12px}.p-autopsy-name small{line-height:1.5}}
 @media(prefers-reduced-motion:reduce){.p-autopsy-toggle{transition:none}}
+
+
+/* Builder DNA — shareable, lightweight personality mini-experience */
+.p-dna{padding-top:84px;padding-bottom:84px}
+.p-dna-heading{display:grid;grid-template-columns:1fr minmax(250px,.62fr);gap:35px;align-items:end;margin:32px 0}
+.p-dna-kicker{font:9px 'DM Mono',monospace;letter-spacing:.13em;color:#9db5f5;margin:0 0 14px}
+.p-dna-heading h2{font:600 clamp(36px,5.8vw,66px)/.99 'Space Grotesk',sans-serif;letter-spacing:-.065em;margin:0}
+.p-dna-heading h2 span{color:#a9bdff}
+.p-dna-heading>p{color:#aab3c3;font-size:12px;line-height:1.9;margin:0 0 3px}
+.p-dna-app{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(270px,.9fr);gap:16px;align-items:stretch}
+.p-dna-quiz,.p-dna-result{border:1px solid var(--p-line,#30343e);border-radius:19px;background:linear-gradient(145deg,#131a26,#0d1119);padding:24px;min-width:0}
+.p-dna-progress,.p-dna-result-top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#8fa9ef;font:9px 'DM Mono',monospace;letter-spacing:.09em}
+.p-dna-progress{padding-bottom:17px;border-bottom:1px solid #303744}
+.p-dna-progress span:last-child{color:#e5ebf7}
+.p-dna-question{padding:22px 0 8px}
+.p-dna-question[hidden]{display:none}
+.p-dna-question h3{font:600 clamp(20px,2.6vw,27px)/1.2 'Space Grotesk',sans-serif;letter-spacing:-.035em;margin:0 0 18px}
+.p-dna-options{display:grid;gap:9px}
+.p-dna-options button{display:grid;grid-template-columns:32px 1fr;grid-template-rows:auto auto;align-items:center;text-align:left;column-gap:10px;padding:13px;border:1px solid #303b4d;border-radius:12px;background:#111722;color:#eef2fb;cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+.p-dna-options button>span{grid-row:1/3;display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#1c2940;color:#b6c8ff;font-size:16px}
+.p-dna-options button b{font-size:12px;font-weight:600}
+.p-dna-options button small{font-size:10px;line-height:1.6;color:#8997ac;margin-top:4px}
+.p-dna-options button:hover{border-color:#718cc8;transform:translateY(-1px)}
+.p-dna-options button[aria-pressed="true"]{border-color:#a9bdff;background:#1a2940;box-shadow:0 0 0 2px #a9bdff16}
+.p-dna-controls{display:flex;justify-content:space-between;gap:10px;padding-top:19px;margin-top:9px;border-top:1px solid #303744}
+.p-dna-controls button,.p-dna-share button{border:1px solid #3a465a;border-radius:9px;background:transparent;color:#dce5f7;padding:11px 13px;font-size:11px;font-weight:600;cursor:pointer}
+.p-dna-controls button:disabled,.p-dna-share button:disabled{opacity:.35;cursor:not-allowed}
+.p-dna-controls button:last-child,.p-dna-share button:first-child{background:#c5d2ff;border-color:#c5d2ff;color:#111827}
+.p-dna-privacy{font-size:9px;line-height:1.7;color:#77859a;margin:16px 0 0}
+.p-dna-result{display:flex;flex-direction:column;min-height:490px;background:radial-gradient(ellipse at 50% 43%,rgba(119,141,222,.14),transparent 54%),linear-gradient(145deg,#141a27,#0b0f17)}
+.p-dna-result-top span:last-child{color:#77859a}
+.p-dna-result-art{position:relative;display:grid;place-items:center;align-self:center;width:130px;height:130px;margin:34px auto 25px;border:1px solid #455476;border-radius:35px;background:linear-gradient(145deg,#1a2942,#111722);box-shadow:0 15px 60px #05070d70;transform:rotate(-4deg)}
+.p-dna-result-art span{font:700 61px 'Space Grotesk',sans-serif;letter-spacing:-.08em;color:#c7d4ff}
+.p-dna-result-art i{position:absolute;right:-13px;top:-12px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#d5ff7b;color:#111827;font-style:normal;font-size:20px}
+.p-dna-result-label{font:9px 'DM Mono',monospace;letter-spacing:.14em;color:#9db5f5;margin:0}
+.p-dna-result h3{font:600 clamp(26px,3.2vw,36px)/1.08 'Space Grotesk',sans-serif;letter-spacing:-.05em;margin:10px 0}
+.p-dna-result>p:not(.p-dna-result-label):not(.p-dna-share-status){font-size:11px;line-height:1.8;color:#aab3c3;margin:0}
+.p-dna-traits{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0}
+.p-dna-traits span{padding:6px 8px;border:1px solid #344056;border-radius:100px;font:8px 'DM Mono',monospace;letter-spacing:.05em;color:#c2cdef}
+.p-dna-share{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:16px;border-top:1px solid #303744}
+.p-dna-share button{flex:1}
+.p-dna-share-status{min-height:14px;color:#8794aa;font-size:9px;line-height:1.6;margin:10px 0 0}
+.p-dna-app[data-result="spark"] .p-dna-result-art{background:linear-gradient(145deg,#42301d,#191621);border-color:#a77c49}
+.p-dna-app[data-result="spark"] .p-dna-result-art span{color:#ffcf91}
+.p-dna-app[data-result="map"] .p-dna-result-art{background:linear-gradient(145deg,#193d39,#111722);border-color:#4c9e92}
+.p-dna-app[data-result="map"] .p-dna-result-art span{color:#9ce4d5}
+.p-dna-app[data-result="break"] .p-dna-result-art{background:linear-gradient(145deg,#3a2245,#111722);border-color:#9a70b4}
+.p-dna-app[data-result="break"] .p-dna-result-art span{color:#e0b8ff}
+@media(max-width:760px){.p-dna{padding-top:62px;padding-bottom:64px}.p-dna-heading{grid-template-columns:1fr;gap:14px;margin:25px 0}.p-dna-app{grid-template-columns:1fr}.p-dna-result{min-height:430px}.p-dna-quiz,.p-dna-result{padding:20px}.p-dna-result-art{margin:25px auto 22px}}
+@media(prefers-reduced-motion:reduce){.p-dna-options button{transition:none}}
