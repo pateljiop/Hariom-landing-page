@@ -21,7 +21,7 @@ if not errors:
 
     for required in (
         'name="viewport"', 'name="description"', 'application/ld+json',
-        'id="work"', 'id="lab"', 'id="offers"', 'id="brief"', 'id="faq"',
+        'id="work"', 'id="playground"', 'id="site-playground"', 'id="lab"', 'id="offers"', 'id="brief"', 'id="faq"',
         'id="contact"', 'id="project-brief"', 'aria-label="Main navigation"',
     ):
         if required not in html:
@@ -31,13 +31,13 @@ if not errors:
         if not re.search(rf'(?:href|src)="{re.escape(asset)}"', html):
             errors.append(f"HTML does not link {asset}")
 
-    for selector in ('.lab-shell[data-mood="signal"]', '.lab-shell[data-mood="form"]',
+    for selector in ('.playground-shell', '.playground-stage[data-site="product"]', '.playground-stage[data-energy="editorial"]', '.lab-shell[data-mood="signal"]', '.lab-shell[data-mood="form"]',
                      '.lab-shell[data-mood="play"]', '.brief-form', ':focus-visible',
                      'prefers-reduced-motion'):
         if selector not in css:
             errors.append(f"Missing CSS support: {selector}")
 
-    for feature in ("mood-button", "project-brief", "mailto:", "scroll-progress"):
+    for feature in ("mood-button", "play-option", "energy-option", "Live landing-page playground", "project-brief", "mailto:", "scroll-progress"):
         if feature not in js:
             errors.append(f"Missing JavaScript feature: {feature}")
 
