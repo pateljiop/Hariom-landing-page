@@ -1,23 +1,20 @@
-# Hariom Studio — Landing Page Showcase
+# Hariom Patel — Personal Developer Portfolio
 
-A standalone, responsive landing page designed to demonstrate how thoughtful positioning, art direction, interaction and conversion-focused structure can make a digital product or service memorable.
+A personal website for Hariom Patel: BCA student, developer, and independent builder. This is **not an agency website**. It focuses on real projects, experiments, the learning process, and direct links to inspect the work.
 
-## What is included
+## Sections
 
-- Dark editorial visual system with acid-lime contrast and oversized typography
-- CSS-built hero mockup and three original concept directions
-- Four-point value strip focused on clarity, action, distinction and responsive design
-- **Interactive business-specific playground:** switch between digital product, brand/commerce and service-business concepts, then change Electric / Editorial / Playful art direction; preview updates instantly
-- **Interactive Art Direction Lab:** switch the same mockup between Signal, Form and Play visual systems
-- Three service offers with scope-oriented deliverables (no invented prices)
-- Process section, FAQ accordions, clear contact CTA
-- Filterable showcase categories, responsive mobile menu and subtle scroll reveals
-- Semantic HTML, SEO/social metadata, keyboard-friendly controls and reduced-motion support
-- No framework or build step required
+- Personal introduction and illustrated developer workspace
+- About / working principles
+- Project showcase: Haryomix, Hariom AI, and the developer portfolio
+- Small interactive Build Lab with Focus, Explore, and Debug modes
+- A transparent build/verify/improve workflow
+- Notes connected to actual projects and repositories
+- Direct contact and GitHub links
 
 ## Run locally
 
-Open `index.html` in a browser, or serve the folder:
+Open `index.html` in a browser or start a local server:
 
 ```bash
 python -m http.server 8000
@@ -27,55 +24,22 @@ Then visit `http://localhost:8000`.
 
 ## Customize
 
-- Edit copy, sections, contact details and links in `index.html`
-- Change colors, layout and responsive breakpoints in `styles.css`
-- Change navigation, project filters and interactive art direction in `script.js`
-- Replace concept studies with real client work only when you have permission and accurate project details
-- The contact action currently opens an email draft; it does not submit to a backend
+- Update personal copy, project descriptions, contact details and URLs in `index.html`
+- Update design tokens, responsive layouts and visual treatments in `styles.css`
+- Update mobile navigation, reading progress and Build Lab state transitions in `script.js`
+- Keep project status honest. The project-card artwork is illustrative, not a screenshot or proof of a feature.
+- The Build Lab is a local interaction. It does not call an AI API.
 
-## GitHub research and design synthesis
+## Research and design principles
 
-The page was informed by a broad, curated review of public GitHub landing-page repositories and topic directories—not every repository on GitHub, which is too large and constantly changing to exhaustively inspect.
+This pass was informed by a curated look at personal developer portfolio references and open-source examples, including:
+- [emmabostian/developer-portfolios](https://github.com/emmabostian/developer-portfolios) — a large collection of real developer portfolios to study
+- [yashovardhan/developer-portfolio](https://github.com/yashovardhan/developer-portfolio) — a lightweight interactive personal-site starter
+- [Evavic44/portfolio-ideas](https://github.com/Evavic44/portfolio-ideas) — a curated directory of portfolio examples
+- [GitHub developer portfolio topic](https://github.com/topics/developer-portfolio-website)
 
-Reference repositories/directories reviewed for patterns:
-- [cruip/tailwind-landing-page-template](https://github.com/cruip/tailwind-landing-page-template) — polished SaaS hierarchy and reusable section rhythm
-- [cruip/open-react-template](https://github.com/cruip/open-react-template) — product storytelling and benefit-led structure
-- [StartBootstrap/startbootstrap-landing-page](https://github.com/StartBootstrap/startbootstrap-landing-page) — familiar landing-page information hierarchy
-- [tailwindtoolbox/Landing-Page](https://github.com/tailwindtoolbox/Landing-Page) — lightweight layout and responsive fundamentals
-- [issaafalkattan/React-Landing-Page-Template](https://github.com/issaafalkattan/React-Landing-Page-Template) — modular content sections
-- [PaulleDemon/awesome-landing-pages](https://github.com/PaulleDemon/awesome-landing-pages) — broad catalogue of landing-page approaches
-- [GitHub landing-page topic](https://github.com/topics/landing-page) and [landing-pages topic](https://github.com/topics/landing-pages) — wider pattern discovery across frameworks and styles
+The design emphasizes inspectable work, a clear personal point of view, honest project status, original CSS-built illustrations, responsive behavior, keyboard access, and reduced-motion support. It does not copy a complete site or proprietary visual assets.
 
-The synthesis focuses on general design principles: fast message comprehension, clear hierarchy, one primary action, benefit-led sections, mobile responsiveness, a coherent visual system, progressive interaction, transparent offers, and FAQs that remove purchase uncertainty. This project does **not** copy another repository's complete page, assets, or proprietary text; all page copy and CSS-built concept visuals here were authored for this project.
+## Validation status
 
-
-Additional references added in the second research pass:
-- [getFrontend/react-app-brainmaster](https://github.com/getFrontend/react-app-brainmaster) — bento composition, feature narrative and motion ideas
-- [trinkui/trinkui](https://github.com/trinkui/trinkui) — accessible component patterns, focus-visible handling, responsive sections and reduced-motion awareness
-- [arnobt78/Portfolio-Landing-Page-1-NextJS-Frontend](https://github.com/arnobt78/Portfolio-Landing-Page-1-NextJS-Frontend) — structured storytelling, project showcase and metadata patterns
-- [GitHub bento-grid topic](https://github.com/topics/bento-grid) — discovery of alternative grid and portfolio compositions
-
-### Additional implementation from the second pass
-
-- A local-only project brief builder with live summary and art-direction selection
-- A second live playground that combines business type + visual energy into distinct copy, color, typography and abstract art
-- The brief becomes a pre-filled email draft only after the visitor presses submit; the site does not transmit or store form responses
-- Scroll progress indicator and keyboard skip link
-- Visible keyboard focus styling
-- JSON-LD Person metadata for search engines
-- More explicit service-scope explanations and FAQ answers
-
-## Honest presentation
-
-The showcase cards are original concept studies, not client case studies. No fake client logos, testimonials, performance metrics, or guaranteed conversion claims are used.
-
-## Deploy
-
-This is a static site and can be hosted on GitHub Pages, Cloudflare Pages, or any static web host. For Cloudflare Pages, use the repository root as the build output directory; no build command is needed.
-
-## Before public launch
-
-- Test on a real phone and desktop browser
-- Verify every contact/social URL
-- Add a custom social preview image if desired
-- Run a performance/accessibility audit on the deployed URL
+Static source checks were performed after implementation for required sections, duplicate IDs, in-page anchors, asset links, and key interaction code. No live deployment, real-device browser session, automated accessibility audit, or Lighthouse/PageSpeed run has been completed. This is a working branch, not a claim of verified production readiness.
