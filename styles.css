@@ -120,3 +120,30 @@ html{scroll-behavior:smooth;scroll-padding-top:86px}body.personal-site{margin:0;
 @media(max-width:760px){.p-atlas{padding-top:66px;padding-bottom:68px}.p-atlas-shell{grid-template-columns:1fr;gap:12px}.p-atlas-map{min-height:350px}.p-atlas-node{width:94px;height:78px}.p-node-core{width:92px;height:92px;left:calc(50% - 46px);top:calc(45% - 46px)}.p-node-product,.p-node-portfolio{left:4%}.p-node-agent,.p-node-principle{right:4%}.p-atlas-detail{min-height:330px;padding:22px}.p-atlas-detail h3{margin-top:25px}}
 @media(max-width:390px){.p-atlas-map{min-height:320px}.p-atlas-node{width:84px;height:70px}.p-atlas-node small{font-size:8px}.p-node-core{width:84px;height:84px;left:calc(50% - 42px);top:calc(45% - 42px)}.p-node-product,.p-node-portfolio{left:3%}.p-node-agent,.p-node-principle{right:3%}}
 @media(prefers-reduced-motion:reduce){.p-atlas-node{transition:none}}
+
+
+/* Project Autopsy — progressive disclosure case studies */
+.p-autopsy{margin:34px 0 16px;padding:28px;border:1px solid var(--p-line,#30343e);border-radius:20px;background:linear-gradient(135deg,rgba(23,30,43,.9),rgba(12,15,22,.94))}
+.p-autopsy-head{display:grid;grid-template-columns:1fr minmax(230px,.7fr);gap:24px;align-items:end;padding-bottom:24px;border-bottom:1px solid #303744}
+.p-autopsy-eyebrow,.p-autopsy-label{font:9px 'DM Mono',monospace;letter-spacing:.12em;color:#9db5f5}
+.p-autopsy-head h3{font:600 clamp(25px,3vw,36px)/1.1 'Space Grotesk',sans-serif;letter-spacing:-.045em;margin:10px 0 0}
+.p-autopsy-head>p{margin:0;color:#aab3c3;font-size:12px;line-height:1.8}
+.p-autopsy-list{display:grid;gap:0}
+.p-autopsy-item{border-bottom:1px solid #2b3341}
+.p-autopsy-item:last-child{border-bottom:0}
+.p-autopsy-item summary{display:flex;align-items:center;gap:17px;padding:20px 2px;cursor:pointer;list-style:none}
+.p-autopsy-item summary::-webkit-details-marker{display:none}
+.p-autopsy-number{font:11px 'DM Mono',monospace;color:#8da7ed}
+.p-autopsy-name{display:flex;flex-direction:column;gap:5px;flex:1}
+.p-autopsy-name b{font-size:14px;font-weight:600;color:#edf1fb}
+.p-autopsy-name small{font-size:11px;color:#8995a9}
+.p-autopsy-toggle{display:grid;place-items:center;width:27px;height:27px;border:1px solid #3c4659;border-radius:50%;font-size:18px;color:#a9bdff;transition:transform .18s}
+.p-autopsy-item[open] .p-autopsy-toggle{transform:rotate(45deg)}
+.p-autopsy-item summary:focus-visible{outline:2px solid #a9bdff;outline-offset:4px;border-radius:5px}
+.p-autopsy-content{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:0 2px 23px 32px}
+.p-autopsy-content>div{min-width:0}
+.p-autopsy-content p{font-size:11px;line-height:1.85;color:#aab3c3;margin:9px 0 0}
+.p-autopsy-content>a{grid-column:1/-1;justify-self:start;color:#c5d2ff;font-size:11px;font-weight:600}
+.p-autopsy-footnote{font-size:10px;line-height:1.7;color:#7f8ba0;margin:18px 0 0}
+@media(max-width:700px){.p-autopsy{padding:20px 16px;margin-top:25px}.p-autopsy-head{grid-template-columns:1fr;gap:10px}.p-autopsy-content{grid-template-columns:1fr;gap:17px;padding-left:0}.p-autopsy-content>a{grid-column:auto}.p-autopsy-item summary{gap:12px}.p-autopsy-name small{line-height:1.5}}
+@media(prefers-reduced-motion:reduce){.p-autopsy-toggle{transition:none}}
