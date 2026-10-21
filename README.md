@@ -11,7 +11,7 @@ A personal website for Hariom Patel: BCA student, developer, and independent bui
 - Shareable Builder DNA mini-quiz with three archetypes, reproducible result links, and no backend
 - Build Quest: a three-decision product-reliability scenario with trade-off explanations and a copyable local decision trail
 - Visitor-specific three-stop portfolio routes for recruiters, developers and curious explorers, inspired by the reference portfolio profile selector
-- Landing Studio with 16 selectable art directions, a live interactive preview and links back to real project content
+- Landing Studio with 18 selectable art directions, including Office Pro and a Netflix-inspired series layout, a live interactive preview and links back to real project content
 - Quick Jump command palette with searchable section navigation using Ctrl/⌘ + K
 - Project Autopsy case studies: problem, design choice, evidence, and limitations
 - Small interactive Build Lab with Focus, Explore, and Debug modes
