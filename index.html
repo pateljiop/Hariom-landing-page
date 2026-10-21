@@ -143,6 +143,18 @@
     </section>
 
 
+    <section class="p-section p-quest" id="build-quest">
+      <div class="p-section-label"><span>02 / THE BUILD QUEST</span><span>THREE DECISIONS · NO WRONG PERSONALITY</span></div>
+      <div class="p-quest-heading"><div><p class="p-dna-kicker">A TINY PRODUCT-THINKING SIMULATOR</p><h2>Something broke.<br><span>What do you do?</span></h2></div><p>Make three calls in a fictional build scenario. See the trade-offs your choices create—not just a random score. Everything runs locally in your browser.</p></div>
+      <div class="p-quest-shell" id="build-quest-app">
+        <div class="p-quest-main"><div class="p-quest-top"><span id="quest-step-label">INCIDENT / 01 OF 03</span><span id="quest-progress">0 decisions</span></div><h3 id="quest-question">Your study tool's quiz generator fails the night before an exam. What do you do first?</h3><p id="quest-context">Users need a result now, but the root cause is not confirmed.</p><div class="p-quest-options" id="quest-options">
+          <button type="button" data-choice="inspect"><span>01</span><b>Reproduce the failure</b><small>Inspect the error and isolate the failing step.</small></button><button type="button" data-choice="fallback"><span>02</span><b>Ship a useful fallback</b><small>Offer a clear manual path while investigating.</small></button><button type="button" data-choice="rewrite"><span>03</span><b>Rewrite the whole flow</b><small>Replace the integration before more users hit it.</small></button></div>
+          <div class="p-quest-controls"><button type="button" id="quest-back" disabled>← Back</button><button type="button" id="quest-next" disabled>Choose this path ↗</button></div><p class="p-quest-privacy">No sign-up. No tracking. Choices are not sent to a server.</p>
+        </div>
+        <aside class="p-quest-result" id="quest-result" aria-live="polite"><div class="p-quest-result-top"><span>YOUR BUILD TRAIL</span><span id="quest-result-state">IN PROGRESS</span></div><div class="p-quest-result-mark" id="quest-result-mark">↗</div><h3 id="quest-result-title">Make your first call.</h3><p id="quest-result-copy">There is no universally perfect answer. The interesting part is what you optimize for and what risk you accept.</p><div class="p-quest-trail" id="quest-trail"><span>Decision trail appears here.</span></div><button type="button" id="quest-share" disabled>Copy my build trail ↗</button><p id="quest-share-status" class="p-quest-share-status" aria-live="polite">Finish all three decisions to create a shareable summary.</p><button type="button" id="quest-restart" class="p-quest-restart">Restart scenario ↻</button></aside>
+      </div>
+    </section>
+
     <section class="p-section p-atlas" id="build-atlas">
       <div class="p-section-label"><span>03 / THE BUILD ATLAS</span><span>HOW THE PROJECTS CONNECT</span></div>
       <div class="p-heading-row"><h2>Different ideas.<br><span>One builder's brain.</span></h2><p>Explore the shared questions behind my projects. Select a node to see what it connects to and why it matters. This is a map of the work—not a claim that everything is finished.</p></div>
