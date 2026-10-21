@@ -55,4 +55,21 @@
       observer.observe(target);
     });
   }
+
+  // Live art-direction switcher: one set of content, three visual systems.
+  const lab = document.querySelector('.lab-shell');
+  const moodButtons = [...document.querySelectorAll('.mood-button')];
+  const editionNumber = document.querySelector('.lab-edition-number');
+  moodButtons.forEach((button) => button.addEventListener('click', () => {
+    if (!lab) return;
+    const mood = button.dataset.mood;
+    lab.dataset.mood = mood;
+    moodButtons.forEach((item) => {
+      const active = item === button;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    if (editionNumber) editionNumber.textContent = mood === 'signal' ? '1' : mood === 'form' ? '2' : '3';
+  }));
+
 })();
