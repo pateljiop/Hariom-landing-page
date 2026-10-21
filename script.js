@@ -122,6 +122,23 @@
     command.addEventListener('click',event=>{if(event.target===command)close();});
   }
 
+  // Portfolio route selector inspired by viewer-specific portfolio journeys.
+  const routeRoot=document.querySelector('#choose-route');
+  if(routeRoot){
+    const routes={
+      recruiter:{overline:'YOUR 3-STOP TOUR',title:"The builder's work, without the fluff.",description:'Start with real projects, inspect one honest case study, then reach out if something clicks.',stops:[['projects','Projects','See what exists today'],['project-autopsy','Project Autopsy','Understand the decisions'],['contact','Contact','Talk about the work']]},
+      developer:{overline:'UNDER THE HOOD',title:'Show me the decisions, not just the screenshots.',description:'Trace how ideas connect, explore the interactive lab, and inspect the trade-offs behind the builds.',stops:[['build-atlas','Build Atlas','Trace project connections'],['lab','Build Lab','Explore the interactions'],['project-autopsy','Project Autopsy','Read the evidence and limits']]},
+      explorer:{overline:'PLAY YOUR WAY',title:'A portfolio with things to try.',description:'Find your builder style, make a few product calls, and leave with a trail you can share.',stops:[['builder-dna','Builder DNA','Find a playful archetype'],['build-quest','Build Quest','Make three decisions'],['notes','Field Notes','See what I am learning']]}
+    };
+    const title=routeRoot.querySelector('#route-title'),description=routeRoot.querySelector('#route-description'),overline=routeRoot.querySelector('#route-overline'),stops=routeRoot.querySelector('#route-stops'),buttons=[...routeRoot.querySelectorAll('[data-route]')];
+    buttons.forEach(button=>button.addEventListener('click',()=>{
+      const route=routes[button.dataset.route];if(!route)return;
+      buttons.forEach(item=>{const active=item===button;item.classList.toggle('is-active',active);item.setAttribute('aria-pressed',String(active));});
+      overline.textContent=route.overline;title.textContent=route.title;description.textContent=route.description;
+      stops.replaceChildren(...route.stops.map(([id,label,hint],i)=>{const a=document.createElement('a'),n=document.createElement('span'),b=document.createElement('b'),small=document.createElement('small'),arrow=document.createElement('i');a.href='#'+id;n.textContent='0'+(i+1);b.textContent=label;small.textContent=hint;arrow.textContent='↘';a.append(n,b,small,arrow);return a;}));
+    }));
+  }
+
   // Build Atlas: project connections are explicit content, not simulated live data.
   const atlas = document.querySelector('#build-atlas-interaction');
   if (atlas) {
