@@ -64,6 +64,49 @@
     }));
   }
 
+  // Build Quest: local decision simulator with trade-off explanations; no analytics or backend.
+  const quest=document.querySelector('#build-quest-app');
+  if(quest){
+    const stages=[
+      {question:"Your study tool's quiz generator fails the night before an exam. What do you do first?",context:'Users need a result now, but the root cause is not confirmed.',options:[
+        {id:'inspect',title:'Reproduce the failure',detail:'Inspect the error and isolate the failing step.',trail:'Inspect first',impact:'Evidence reduces guesswork, but users may remain blocked while you investigate.'},
+        {id:'fallback',title:'Ship a useful fallback',detail:'Offer a clear manual path while investigating.',trail:'Protect the user',impact:'You reduce immediate user pain; make the fallback limits clear.'},
+        {id:'rewrite',title:'Rewrite the whole flow',detail:'Replace the integration before more users hit it.',trail:'Replace the flow',impact:'A broad rewrite before diagnosis can introduce new failures.'}]},
+      {question:'You found the provider times out only on longer prompts. What is next?',context:'A quick fix could hide the symptom without solving the reliability issue.',options:[
+        {id:'timeout',title:'Set a timeout and explain failure',detail:'Give users a retry path and log a safe diagnostic.',trail:'Make failure legible',impact:'Users understand what happened, but a timeout alone does not fix the bottleneck.'},
+        {id:'retry',title:'Add bounded retries',detail:'Retry transient errors with a strict limit.',trail:'Retry carefully',impact:'Retries can recover transient errors; unbounded retries amplify load.'},
+        {id:'remove',title:'Disable the unreliable mode',detail:'Keep the stable path until the fix is verified.',trail:'Reduce blast radius',impact:'You reduce repeated failures, at the cost of temporarily removing a feature.'}]},
+      {question:'The patch seems fixed on your laptop. What earns the release?',context:'“It works for me” is a clue, not release evidence.',options:[
+        {id:'test',title:'Test normal and failure paths',detail:'Verify success, timeout, empty input and retry behavior.',trail:'Verify edge cases',impact:'You gather stronger evidence across realistic paths.'},
+        {id:'ship',title:'Ship to a small test group',detail:'Release gradually and watch for regressions.',trail:'Release gradually',impact:'A small rollout limits exposure if you can observe failures and roll back.'},
+        {id:'announce',title:'Announce the fix immediately',detail:'Tell users it is fixed and move on.',trail:'Communicate quickly',impact:'Fast communication helps, but unverified claims can damage trust.'}]}
+    ];
+    const picks=[];let step=0;const result=quest.querySelector('#quest-result');
+    const renderResult=()=>{
+      const chosen=stages.map((s,i)=>s.options.find(o=>o.id===picks[i])).filter(Boolean);if(chosen.length!==3)return;
+      result.dataset.complete='true';quest.querySelector('#quest-result-state').textContent='3 DECISIONS MADE';
+      const evidence=chosen.filter(o=>['inspect','test'].includes(o.id)).length,user=chosen.filter(o=>['fallback','timeout'].includes(o.id)).length,risk=chosen.filter(o=>['remove','ship'].includes(o.id)).length;
+      const profile=evidence>=2?'Evidence-led':user>=2?'User-first':risk>=2?'Risk-aware':'Trade-off explorer';
+      quest.querySelector('#quest-result-mark').textContent=profile==='Evidence-led'?'⌕':profile==='User-first'?'♡':profile==='Risk-aware'?'⛨':'↔';
+      quest.querySelector('#quest-result-title').textContent=profile+' builder';
+      quest.querySelector('#quest-result-copy').textContent='Your choices leaned '+profile.toLowerCase()+'. This reflects this scenario, not a personality diagnosis. Strong engineering means revisiting trade-offs when evidence changes.';
+      const trail=quest.querySelector('#quest-trail');trail.replaceChildren(...chosen.map((o,i)=>{const row=document.createElement('div'),n=document.createElement('span'),p=document.createElement('p');n.textContent='0'+(i+1);p.textContent=o.trail+' — '+o.impact;row.append(n,p);return row;}));
+      quest.querySelector('#quest-share').disabled=false;quest.querySelector('#quest-share-status').textContent='Your trail is ready to copy and share.';
+    };
+    const render=()=>{
+      const s=stages[step];quest.querySelector('#quest-step-label').textContent='INCIDENT / 0'+(step+1)+' OF 03';quest.querySelector('#quest-progress').textContent=picks.length+' decision'+(picks.length===1?'':'s');
+      quest.querySelector('#quest-question').textContent=s.question;quest.querySelector('#quest-context').textContent=s.context;
+      quest.querySelector('#quest-options').replaceChildren(...s.options.map((o,i)=>{const b=document.createElement('button'),n=document.createElement('span'),t=document.createElement('b'),d=document.createElement('small');b.type='button';b.dataset.choice=o.id;b.setAttribute('aria-pressed',String(picks[step]===o.id));n.textContent='0'+(i+1);t.textContent=o.title;d.textContent=o.detail;b.append(n,t,d);b.addEventListener('click',()=>{picks[step]=o.id;render();});return b;}));
+      quest.querySelector('#quest-back').disabled=step===0;quest.querySelector('#quest-next').disabled=!picks[step];quest.querySelector('#quest-next').textContent=step===2?'Reveal my build trail ↗':'Choose this path ↗';
+      if(picks.length===3)renderResult();
+    };
+    quest.querySelector('#quest-back').addEventListener('click',()=>{if(step>0){step--;render();}});
+    quest.querySelector('#quest-next').addEventListener('click',()=>{if(!picks[step])return;if(step<2){step++;render();}else renderResult();});
+    quest.querySelector('#quest-share').addEventListener('click',async()=>{if(picks.length!==3)return;const summary='My Build Quest trail: '+picks.map((p,i)=>'Q'+(i+1)+' '+stages[i].options.find(o=>o.id===p).trail).join(' / ')+' — try it at '+location.href.split('#')[0]+'#build-quest';try{if(navigator.clipboard&&isSecureContext)await navigator.clipboard.writeText(summary);else{const f=document.createElement('textarea');f.value=summary;f.readOnly=true;f.style.position='fixed';f.style.opacity='0';document.body.appendChild(f);f.select();const ok=document.execCommand('copy');f.remove();if(!ok)throw Error('copy failed');}quest.querySelector('#quest-share-status').textContent='Copied! Compare your choices with a friend.';}catch{quest.querySelector('#quest-share-status').textContent='Clipboard unavailable. Your choices: '+picks.join(' → ')+'.';}});
+    quest.querySelector('#quest-restart').addEventListener('click',()=>{picks.length=0;step=0;delete result.dataset.complete;quest.querySelector('#quest-result-state').textContent='IN PROGRESS';quest.querySelector('#quest-result-mark').textContent='↗';quest.querySelector('#quest-result-title').textContent='Make your first call.';quest.querySelector('#quest-result-copy').textContent='There is no universally perfect answer. The interesting part is what you optimize for and what risk you accept.';quest.querySelector('#quest-trail').replaceChildren(Object.assign(document.createElement('span'),{textContent:'Decision trail appears here.'}));quest.querySelector('#quest-share').disabled=true;quest.querySelector('#quest-share-status').textContent='Finish all three decisions to create a shareable summary.';render();});
+    render();
+  }
+
   // Build Atlas: project connections are explicit content, not simulated live data.
   const atlas = document.querySelector('#build-atlas-interaction');
   if (atlas) {
