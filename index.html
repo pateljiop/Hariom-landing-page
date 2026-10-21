@@ -82,6 +82,40 @@
           <div class="p-project-info"><div class="p-project-tags"><span>HTML / CSS / JS</span><span>PERSONAL SITE</span></div><h3>My developer portfolio</h3><p>A home for my projects, experiments and process. The goal: show how I think and what I can make, without pretending every experiment is a finished product.</p><div class="p-project-links"><a href="https://hariom-portfolio.pages.dev" target="_blank" rel="noreferrer">Open portfolio <span>↗</span></a><a href="https://github.com/pateljiop/Hariom-Professional-Portfolio" target="_blank" rel="noreferrer">View source <span>↗</span></a></div></div>
         </article>
       </div>
+
+      <section class="p-autopsy" id="project-autopsy" aria-labelledby="autopsy-heading">
+        <div class="p-autopsy-head"><div><span class="p-autopsy-eyebrow">PROJECT AUTOPSY / ENGINEERING NOTES</span><h3 id="autopsy-heading">What’s behind the build?</h3></div><p>Not just what a project does. The problem, the trade-offs, the evidence we can check, and what still needs work.</p></div>
+        <div class="p-autopsy-list">
+          <details class="p-autopsy-item" open>
+            <summary><span class="p-autopsy-number">01</span><span class="p-autopsy-name"><b>Haryomix</b><small>Student workspace · product reliability</small></span><span class="p-autopsy-toggle" aria-hidden="true">+</span></summary>
+            <div class="p-autopsy-content">
+              <div><span class="p-autopsy-label">THE PROBLEM</span><p>Study utilities can become scattered across separate sites and tools. The product idea is to make common student tasks easier to reach in one workspace.</p></div>
+              <div><span class="p-autopsy-label">THE DESIGN CHOICE</span><p>Keep the experience organized around tools and tasks, and avoid presenting a feature as working until its full flow succeeds.</p></div>
+              <div><span class="p-autopsy-label">EVIDENCE / LIMITS</span><p>Live site: open it and test each tool directly. Generation and provider integrations have required debugging during development, so current functionality must be checked feature by feature. This page does not claim every tool works.</p></div>
+              <a href="https://haryomix.eu.cc" target="_blank" rel="noreferrer">Test the live product ↗</a>
+            </div>
+          </details>
+          <details class="p-autopsy-item">
+            <summary><span class="p-autopsy-number">02</span><span class="p-autopsy-name"><b>Hariom AI</b><small>Local assistant · controlled actions</small></span><span class="p-autopsy-toggle" aria-hidden="true">+</span></summary>
+            <div class="p-autopsy-content">
+              <div><span class="p-autopsy-label">THE PROBLEM</span><p>A chat answer is not the same as safely completing a computer task. An agent needs boundaries around what it can change and a way to verify the result.</p></div>
+              <div><span class="p-autopsy-label">THE DESIGN CHOICE</span><p>Structure work as plan → approval → execution → verification, with explicit approval for risky operations and human approval before merging self-improvement changes.</p></div>
+              <div><span class="p-autopsy-label">EVIDENCE / LIMITS</span><p>The repository is the inspectable source of truth. This portfolio does not claim the agent is fully autonomous or production-ready; inspect the code, tests and current project status before drawing that conclusion.</p></div>
+              <a href="https://github.com/pateljiop/hariom-ai" target="_blank" rel="noreferrer">Inspect implementation ↗</a>
+            </div>
+          </details>
+          <details class="p-autopsy-item">
+            <summary><span class="p-autopsy-number">03</span><span class="p-autopsy-name"><b>Hariom’s personal site</b><small>Static web · honest interactions</small></span><span class="p-autopsy-toggle" aria-hidden="true">+</span></summary>
+            <div class="p-autopsy-content">
+              <div><span class="p-autopsy-label">THE PROBLEM</span><p>A portfolio can look polished while saying little about the person or linking to interactions that do nothing.</p></div>
+              <div><span class="p-autopsy-label">THE DESIGN CHOICE</span><p>Use lightweight HTML, CSS and JavaScript, project-specific visuals, native disclosure controls, and local interactions rather than pretending a demo is powered by an AI service.</p></div>
+              <div><span class="p-autopsy-label">EVIDENCE / LIMITS</span><p>The code is available in GitHub. Source-level checks have been performed, but live browser, device, accessibility and performance tests remain separate validation steps.</p></div>
+              <a href="https://github.com/pateljiop/Hariom-landing-page" target="_blank" rel="noreferrer">Inspect this site’s code ↗</a>
+            </div>
+          </details>
+        </div>
+        <p class="p-autopsy-footnote">Evidence rule: no invented performance numbers, no fabricated user outcomes, and no claim that an unverified feature is finished.</p>
+      </section>
       <p class="p-honesty"><span>✳</span> Concept visuals on this page are custom illustrations of the projects, not product screenshots. Project status and capabilities can change as development continues.</p>
     </section>
 
