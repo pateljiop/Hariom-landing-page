@@ -130,4 +130,38 @@
   window.addEventListener('resize', updateProgress);
   updateProgress();
 
+
+  // Live landing-page playground: business type and art direction are independent controls.
+  const playground = document.querySelector('#site-playground');
+  if (playground) {
+    const stage = playground.querySelector('.playground-stage');
+    const siteButtons = [...playground.querySelectorAll('.play-option')];
+    const energyButtons = [...playground.querySelectorAll('.energy-option')];
+    const copy = {
+      product: {brand:'NEXORA', eyebrow:'A BETTER WAY TO BUILD', first:'Ideas deserve', second:'better tools.', description:'A product experience that makes the value clear before the second scroll.', cta:'MAKE IT REAL', tag:"BUILT FOR<br>WHAT'S NEXT"},
+      brand: {brand:'GOODFORM', eyebrow:'OBJECTS FOR EVERY DAY', first:'Make room for', second:'good things.', description:'A brand world with its own point of view, built to turn browsing into belonging.', cta:'FIND YOUR THING', tag:'MADE WITH<br>INTENTION'},
+      service: {brand:'FORM / STUDIO', eyebrow:'THOUGHTFUL BY DESIGN', first:'Expertise, made', second:'impossible to miss.', description:'A clear story that turns what you know into why the right people should choose you.', cta:'START A PROJECT', tag:'BUILT AROUND<br>YOUR EXPERTISE'}
+    };
+    const updateStage = () => {
+      const data = copy[stage.dataset.site] || copy.product;
+      stage.querySelector('.stage-brand').innerHTML = data.brand + '<span>®</span>';
+      stage.querySelector('.stage-eyebrow').textContent = data.eyebrow;
+      stage.querySelector('.stage-title').innerHTML = data.first + '<br><em>' + data.second + '</em>';
+      stage.querySelector('.stage-description').textContent = data.description;
+      stage.querySelector('.stage-cta').innerHTML = data.cta + ' <span>↗</span>';
+      stage.querySelector('.stage-art-tag').innerHTML = data.tag;
+      const index = stage.dataset.site === 'product' ? '001' : stage.dataset.site === 'brand' ? '002' : '003';
+      stage.querySelector('.stage-bottom span').textContent = 'CONCEPT PREVIEW / ' + index;
+    };
+    siteButtons.forEach(button => button.addEventListener('click', () => {
+      stage.dataset.site = button.dataset.site;
+      siteButtons.forEach(item => { const active = item === button; item.classList.toggle('active', active); item.setAttribute('aria-pressed', String(active)); });
+      updateStage();
+    }));
+    energyButtons.forEach(button => button.addEventListener('click', () => {
+      stage.dataset.energy = button.dataset.energy;
+      energyButtons.forEach(item => { const active = item === button; item.classList.toggle('active', active); item.setAttribute('aria-pressed', String(active)); });
+    }));
+  }
+
 })();
