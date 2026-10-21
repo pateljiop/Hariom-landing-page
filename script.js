@@ -40,6 +40,29 @@
       if (!selected) return;
       document.body.dataset.landingTheme = id;
       document.body.classList.add('has-selected-world');
+      let worldSwitcher = document.querySelector('#world-switcher');
+      if (!worldSwitcher) {
+        worldSwitcher = document.createElement('button');
+        worldSwitcher.type = 'button';
+        worldSwitcher.id = 'world-switcher';
+        worldSwitcher.className = 'p-world-switcher';
+        worldSwitcher.innerHTML = '<span>H.</span> CHANGE WORLD <b>↗</b>';
+        worldSwitcher.setAttribute('aria-label','Change landing page style');
+        document.body.append(worldSwitcher);
+        worldSwitcher.addEventListener('click', () => {
+          entry.hidden = false;
+          entry.classList.remove('is-exiting');
+          chosen = null;
+          enterButton.disabled = true;
+          enterButton.dataset.chosen = '';
+          entryOptions.querySelectorAll('.p-entry-option').forEach(item => {
+            item.classList.remove('is-selected');
+            item.setAttribute('aria-pressed','false');
+          });
+          window.scrollTo({top:0,behavior:'smooth'});
+        });
+      }
+
       selected.click();
       entry.classList.add('is-exiting');
       window.setTimeout(() => { entry.hidden = true; document.querySelector('#home')?.scrollIntoView({behavior:'instant'}); }, 520);
