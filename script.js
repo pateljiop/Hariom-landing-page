@@ -103,4 +103,107 @@
     }));
   }
 
+
+  // Builder DNA: local-only quiz with a reproducible, shareable result URL.
+  const dna = document.querySelector('#builder-dna-app');
+  if (dna) {
+    const questions = [...dna.querySelectorAll('.p-dna-question')];
+    const answers = [null, null, null];
+    let step = 0;
+    const archetypes = {
+      spark: {title:'The Chaos Prototyper',symbol:'⚡',code:'DNA / SPARK',description:'You learn by making. Your superpower is turning “what if?” into something people can actually try. Your side quest: ship the tiny version before adding 17 more features.',traits:['IDEA → BUILD','HIGH MOMENTUM','ITERATE FAST'],share:'CHAOS PROTOTYPER'},
+      map: {title:'The Systems Cartographer',symbol:'⌘',code:'DNA / MAP',description:'You see the connections other people miss. You turn a pile of moving parts into a system that makes sense. Your side quest: start before the map becomes a whole universe.',traits:['SEE THE SYSTEM','STRUCTURE FIRST','CONNECT DOTS'],share:'SYSTEMS CARTOGRAPHER'},
+      break: {title:'The Bug Archaeologist',symbol:'⌕',code:'DNA / DEBUG',description:'You are not scared of the weird edge case. You dig until the real cause shows up. Your side quest: remember that “works on my machine” is a hypothesis, not proof.',traits:['QUESTION EVERYTHING','TRACE THE CAUSE','VERIFY TWICE'],share:'BUG ARCHAEOLOGIST'}
+    };
+    const resultPanel = dna.querySelector('#dna-result');
+    const showStep = () => {
+      questions.forEach((q,i) => { q.hidden = i !== step; });
+      dna.querySelector('#dna-progress-label').textContent = 'YOUR BUILD DNA / 0'+(step+1)+' OF 03';
+      dna.querySelector('#dna-progress-count').textContent = answers.filter(Boolean).length+'/3';
+      dna.querySelector('#dna-back').disabled = step === 0;
+      dna.querySelector('#dna-next').disabled = !answers[step];
+      dna.querySelector('#dna-next').innerHTML = step === 2 ? 'Reveal my type <span>✳</span>' : 'Lock it in <span>↗</span>';
+    };
+    const showResult = (type, updateUrl = true) => {
+      const a = archetypes[type];
+      if (!a) return;
+      dna.dataset.result = type;
+      dna.querySelector('#dna-result-code').textContent = a.code;
+      dna.querySelector('#dna-result-art span').textContent = a.symbol;
+      dna.querySelector('#dna-result-title').textContent = a.title;
+      dna.querySelector('#dna-result-description').textContent = a.description;
+      const traits = dna.querySelector('#dna-result-traits');
+      traits.replaceChildren(...a.traits.map(label => { const s=document.createElement('span'); s.textContent=label; return s; }));
+      dna.querySelector('#dna-share').disabled = false;
+      dna.querySelector('#dna-share-status').textContent = 'Result unlocked. Copy the card link and send it to your group chat.';
+      resultPanel.dataset.type = type;
+      if (updateUrl && window.history && window.history.replaceState) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('dna',type);
+        window.history.replaceState({},'',url.toString());
+      }
+      resultPanel.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
+    };
+    questions.forEach((question,index) => {
+      question.querySelectorAll('[data-value]').forEach(button => button.addEventListener('click',() => {
+        answers[index] = button.dataset.value;
+        question.querySelectorAll('[data-value]').forEach(option => {
+          const active=option===button;
+          option.setAttribute('aria-pressed',String(active));
+        });
+        showStep();
+      }));
+    });
+    dna.querySelector('#dna-back').addEventListener('click',() => { if(step>0){step--;showStep();} });
+    dna.querySelector('#dna-next').addEventListener('click',() => {
+      if(!answers[step]) return;
+      if(step<2){step++;showStep();return;}
+      const counts={spark:0,map:0,break:0};
+      answers.forEach(answer=>counts[answer]++);
+      const max=Math.max(...Object.values(counts));
+      const tied=Object.keys(counts).filter(key=>counts[key]===max);
+      // Deterministic tie-break based on the final answer, so identical answers always share the same result.
+      const type=tied.includes(answers[2])?answers[2]:tied[0];
+      showResult(type);
+    });
+    dna.querySelector('#dna-share').addEventListener('click',async() => {
+      const type=resultPanel.dataset.type;
+      if(!type) return;
+      const url=new URL(window.location.href);
+      url.searchParams.set('dna',type);
+      const text='My builder DNA is '+archetypes[type].title+'. What’s yours? '+url.toString();
+      try {
+        if(navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+        else {
+          const field=document.createElement('textarea');field.value=text;field.setAttribute('readonly','');field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();
+          const copied=document.execCommand('copy');field.remove();if(!copied) throw new Error('Clipboard unavailable');
+        }
+        dna.querySelector('#dna-share-status').textContent='Copied. Drop it in the group chat 👀';
+      } catch {
+        dna.querySelector('#dna-share-status').textContent='Copy blocked by this browser. Share this page URL instead: '+url.toString();
+      }
+    });
+    dna.querySelector('#dna-restart').addEventListener('click',() => {
+      answers.fill(null);step=0;
+      questions.forEach(q=>q.querySelectorAll('[data-value]').forEach(b=>b.setAttribute('aria-pressed','false')));
+      dna.removeAttribute('data-result');resultPanel.removeAttribute('data-type');
+      dna.querySelector('#dna-result-code').textContent='NOT GENERATED';
+      dna.querySelector('#dna-result-art span').textContent='?';
+      dna.querySelector('#dna-result-title').textContent='The plot twist is you.';
+      dna.querySelector('#dna-result-description').textContent='Answer three questions to reveal your builder type.';
+      dna.querySelector('#dna-result-traits').replaceChildren(...['CURIOUS','IN PROGRESS','UNCLASSIFIED'].map(label=>{const s=document.createElement('span');s.textContent=label;return s;}));
+      dna.querySelector('#dna-share').disabled=true;
+      dna.querySelector('#dna-share-status').textContent='Your result card will appear here.';
+      if(window.history && window.history.replaceState){const url=new URL(window.location.href);url.searchParams.delete('dna');window.history.replaceState({},'',url.toString());}
+      showStep();
+    });
+    const sharedType = new URLSearchParams(window.location.search).get('dna');
+    if (archetypes[sharedType]) {
+      showResult(sharedType,false);
+      dna.querySelector('#dna-result-share');
+      dna.querySelector('#dna-share-status').textContent='Someone shared this builder DNA. Take the quiz to find your own.';
+    }
+    showStep();
+  }
+
 })();
