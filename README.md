@@ -9,6 +9,7 @@ A personal website for Hariom Patel: BCA student, developer, and independent bui
 - Project showcase: Haryomix, Hariom AI, and the developer portfolio
 - Interactive Build Atlas connecting projects to the questions and principles behind them
 - Shareable Builder DNA mini-quiz with three archetypes, reproducible result links, and no backend
+- Build Quest: a three-decision product-reliability scenario with trade-off explanations and a copyable local decision trail
 - Project Autopsy case studies: problem, design choice, evidence, and limitations
 - Small interactive Build Lab with Focus, Explore, and Debug modes
 - A transparent build/verify/improve workflow
@@ -29,9 +30,10 @@ Then visit `http://localhost:8000`.
 
 - Update personal copy, project descriptions, contact details and URLs in `index.html`
 - Builder DNA is a playful self-reflection quiz, not a validated personality assessment; result links use the `?dna=` query parameter
+- Build Quest is a fictional decision simulator, not a scored engineering assessment; choices stay in the browser
 - Keep Project Autopsy evidence current; do not publish unverified results, fabricated metrics, or claims about unfinished features
 - Update design tokens, responsive layouts and visual treatments in `styles.css`
-- Update mobile navigation, reading progress and Build Lab state transitions in `script.js`
+- Update mobile navigation, reading progress, Build Lab, Builder DNA and Build Quest interactions in `script.js`
 - Keep project status honest. The project-card artwork is illustrative, not a screenshot or proof of a feature.
 - The Build Lab is a local interaction. It does not call an AI API.
 
