@@ -215,174 +215,67 @@
   }
 
   // Landing Studio: eighteen selectable visual directions, all using the same verified portfolio content.
-  const templateGrid=document.querySelector('#template-grid');
-  if(templateGrid){
-    const templates={
-      studio:{name:'The Independent Studio',label:'STUDIO',brand:'H / BUILDS',eyebrow:'INDEPENDENT BUILDER · PRAYAGRAJ',title:'I make ideas\\ndo something.',description:'Digital products, useful experiments, and small systems built with curiosity.',cta:'EXPLORE THE WORK ↗',footer:'HARIOM PATEL / SELECTED WORK',blurb:'A confident creative portfolio with bold typography, a clear point of view and one strong accent.'},
-      terminal:{name:'The Developer Terminal',label:'TERMINAL',brand:'hariom@builds:~
-  const atlas = document.querySelector('#build-atlas-interaction');
-  if (atlas) {
-    const entries = {
-      builder: {category:'START HERE / 00',title:'The builder is the connection.',description:'I like turning messy ideas into things people can try. Each project explores a different angle: useful tools, controlled automation, or showing the work honestly.',question:'Can I make an idea useful, understandable, and real?',link:'#projects',label:'Explore the projects'},
-      haryomix: {category:'PRODUCT / 01',title:'Make useful tools easier to reach.',description:'Haryomix explores a student-focused digital workspace: bringing study and productivity utilities together. Its scope should be judged by what actually works on the live site.',question:'Can one focused workspace reduce the friction of everyday study tasks?',link:'https://haryomix.eu.cc',label:'Visit Haryomix ↗'},
-      hariomai: {category:'AUTOMATION / 02',title:'Give automation guardrails.',description:'Hariom AI explores a Windows-first personal assistant with tool use, explicit approvals for risky actions, and verification after execution. The important part is controlled action—not just a convincing chat.',question:'How can an assistant act usefully while keeping the human in control?',link:'https://github.com/pateljiop/hariom-ai',label:'Inspect the repository ↗'},
-      portfolio: {category:'IDENTITY / 03',title:'Show the work behind the work.',description:'This page is itself an experiment: make the developer, decisions, projects, and unfinished edges visible without pretending to be an agency or a finished startup.',question:'Can a portfolio feel like a living workbench rather than a static résumé?',link:'https://github.com/pateljiop/Hariom-landing-page',label:'Explore this repository ↗'},
-      principle: {category:'METHOD / 04',title:'Build. Verify. Be honest.',description:'A feature is not finished because a button looks right. It should respond, handle edge cases, work on a phone, and clearly communicate its limits.',question:'What evidence shows that this feature works outside the mockup?',link:'#lab',label:'Try the Build Lab'}
+  // Landing Studio preview: derive options from the real HTML controls to avoid duplicated theme data.
+  const templateGrid = document.querySelector('#template-grid');
+  if (templateGrid) {
+    const buttons = [...templateGrid.querySelectorAll('[data-template]')];
+    const preview = document.querySelector('#template-preview');
+    const fields = {
+      count: document.querySelector('#template-count'),
+      label: document.querySelector('#template-preview-label'),
+      brand: document.querySelector('#template-brand'),
+      eyebrow: document.querySelector('#template-eyebrow'),
+      title: document.querySelector('#template-title'),
+      description: document.querySelector('#template-description'),
+      cta: document.querySelector('#template-cta'),
+      footer: document.querySelector('#template-footer'),
+      styleTitle: document.querySelector('#template-style-title'),
+      styleDescription: document.querySelector('#template-style-description')
     };
-    const buttons = [...atlas.querySelectorAll('[data-atlas]')];
-    buttons.forEach(button => button.addEventListener('click', () => {
-      const item = entries[button.dataset.atlas];
-      if (!item) return;
-      buttons.forEach(node => {
-        const active = node === button;
-        node.classList.toggle('active', active);
-        node.setAttribute('aria-pressed', String(active));
+    const concepts = {
+      studio: ['H / BUILDS','INDEPENDENT BUILDER · PRAYAGRAJ','I make ideas\\ndo something.','Digital products, useful experiments, and small systems built with curiosity.','EXPLORE THE WORK ↗','HARIOM BUILDS / SELECTED WORK','A confident creative portfolio with bold typography and one strong accent.'],
+      terminal: ['hariom@builds:~','SYSTEM READY · BUILD / TEST / SHIP','$ make ideas-work','Practical software, experiments and automation. Every change should earn its place.','OPEN PROJECTS ↗','SESSION COMPLETE / EXIT CODE 0','A developer-console direction with monospace type and command-line framing.'],
+      editorial: ['HARIOM / JOURNAL','INDEPENDENT BUILDER · FIELD NOTES','Ideas deserve a\nbetter story.','A thoughtful record of digital products, learning and the decisions behind the work.','READ THE WORK ↗','FIELD NOTES / VOL. 01','Typography-led editorial styling with a calmer, print-inspired rhythm.'],
+      brutalist: ['HARIOM BUILDS','NO AGENCY. JUST MAKING.','BUILD IT.\nMAKE IT REAL.','Projects, experiments and honest progress. No filler, no invented case studies.','SEE THE WORK ↗','BUILT IN PUBLIC / 2026','Hard edges, oversized type and bold high-contrast framing.'],
+      cinema: ['H / ORIGINALS','A BUILDER IN PROGRESS','Every build\nhas a story.','From rough idea to working software: explore the process behind each project.','ROLL THE STORY ↗','AN INDEPENDENT PRODUCTION','A cinematic, poster-inspired direction with dramatic depth and warm highlights.'],
+      minimal: ['HARIOM PATEL','DEVELOPER · BUILDER','Less noise.\nMore useful.','A small collection of real products and ideas, presented with clarity.','EXPLORE ↗','SELECTED WORK / 2026','Quiet luxury, generous whitespace and restrained decoration.'],
+      playful: ['HARIOM BUILDS ✳','CURIOUS BY DEFAULT','Make a thing.\nLearn a lot.','Small experiments, useful tools and the joy of figuring things out.','LET’S EXPLORE ↗','MADE WHILE LEARNING','Soft shapes, friendly details and a brighter, more playful feel.'],
+      retro: ['HARIOM.EXE','WELCOME BACK, BUILDER','Hello,\ninternet.','A retro-inspired window into projects, experiments and lessons learned.','START HERE ▶','SAVE POINT / PROJECTS','Nostalgic web styling, dashed borders and terminal-inspired typography.'],
+      swiss: ['H / BUILDS','INDEPENDENT PRACTICE / 2026','Ideas need\na system.','A structured view of products, process and the decisions that make software useful.','VIEW INDEX ↗','INDEX 01—04 / PROJECTS · NOTES','Precise grid alignment and a strong information hierarchy.'],
+      neon: ['HARIOM // LAB','EXPERIMENTAL SYSTEMS ONLINE','Curiosity\nafter dark.','AI experiments, automation and digital tools built at the edge of what I know.','ENTER THE LAB ↗','SIGNAL DETECTED · WORK IN PROGRESS','A dark technical atmosphere with electric accents.'],
+      nature: ['hariom builds things','GROW SLOW · BUILD WITH CARE','Useful things,\nmade thoughtfully.','A human-first approach to building tools, learning systems and digital experiences.','MEET THE WORK ↗','GROWN THROUGH CURIOSITY','Warm tones, tactile corners and a grounded visual voice.'],
+      dashboard: ['BUILD OS / OVERVIEW','WORKSPACE STATUS · ACTIVE','From idea\nto shipped.','A snapshot of projects, systems and experiments moving from concept to reality.','OPEN PROJECT BOARD ↗','PROJECTS / STATUS IS HONEST','A product dashboard aesthetic with compact labels and modular panels.'],
+      magazine: ['MADE / BY HARIOM','THE MAKER ISSUE · NO. 001','The internet\nis my workshop.','A visual collection of experiments, products and lessons from building in public.','FLIP THROUGH ↗','FEATURE STORY / INDEPENDENT BUILDER','Editorial typography and asymmetric magazine-like framing.'],
+      mono: ['HARIOM / FILE 001','BLACK · WHITE · WORK','Let the work\nspeak.','Useful products, clear decisions and honest progress—without the decoration.','OPEN THE FILE ↗','DOCUMENTED WORK / 001','Strict monochrome contrast and minimal ornament.'],
+      pixel: ['HARIOM.EXE','PLAYER 01 · WORLD LOADED','QUEST STARTED.\nBUILD MODE ON.','Explore projects like levels and follow the path from bug to build.','START EXPLORING ▶','SAVE POINT: PROJECTS','Arcade-like frames and pixel-inspired developer nostalgia.'],
+      future: ['H / SPATIAL WORKSHOP','DIMENSION 026 · DIGITAL OBJECTS','Build beyond\nthe screen.','A workshop for ideas, interfaces and small systems with a little more dimension.','EXPLORE THE SPACE ↗','SPATIAL THINKING · REAL PROJECTS','Layered depth, sculptural shapes and spatial visual cues.'],
+      office: ['HARIOM PATEL / PROFILE','WELCOME TO MY WORKSPACE','Step inside my\ndigital workspace.','Take a guided tour through my developer desk, project wall, tools and workbench.','START THE TOUR ↗','DESK · PROJECT WALL · WORKBENCH','A workspace-first composition inspired by a developer’s digital office.'],
+      netflix: ['H / ORIGINALS','A HARIOM BUILDS ORIGINAL SERIES','Ideas become\noriginals.','Every project has a story. Explore the builds, experiments and lessons behind each release.','▶ PLAY THE INTRO','SEASON 01 · REAL PROJECTS','A streaming-inspired cinematic portfolio, not affiliated with Netflix.']
+    };
+    const renderTemplate = id => {
+      const button = buttons.find(item => item.dataset.template === id);
+      const data = concepts[id];
+      if (!button || !data || !preview) return;
+      preview.className = 'p-template-preview theme-' + id;
+      buttons.forEach((item,index) => {
+        const active = item === button;
+        item.classList.toggle('is-active',active);
+        item.setAttribute('aria-pressed',String(active));
+        if (active && fields.count) fields.count.textContent = String(index+1).padStart(2,'0') + ' / 18';
       });
-      atlas.querySelector('#atlas-category').textContent = item.category;
-      atlas.querySelector('#atlas-title').textContent = item.title;
-      atlas.querySelector('#atlas-description').textContent = item.description;
-      atlas.querySelector('#atlas-question').textContent = item.question;
-      const link = atlas.querySelector('#atlas-link');
-      link.href = item.link;
-      link.textContent = item.label;
-      const arrow = document.createElement('span');
-      arrow.textContent = '↗';
-      link.append(' ', arrow);
-      if (item.link.startsWith('https://')) {
-        link.target = '_blank';
-        link.rel = 'noreferrer';
-      } else {
-        link.removeAttribute('target');
-        link.removeAttribute('rel');
-      }
-    }));
-  }
-
-
-  // Builder DNA: local-only quiz with a reproducible, shareable result URL.
-  const dna = document.querySelector('#builder-dna-app');
-  if (dna) {
-    const questions = [...dna.querySelectorAll('.p-dna-question')];
-    const answers = [null, null, null];
-    let step = 0;
-    const archetypes = {
-      spark: {title:'The Chaos Prototyper',symbol:'⚡',code:'DNA / SPARK',description:'You learn by making. Your superpower is turning “what if?” into something people can actually try. Your side quest: ship the tiny version before adding 17 more features.',traits:['IDEA → BUILD','HIGH MOMENTUM','ITERATE FAST'],share:'CHAOS PROTOTYPER'},
-      map: {title:'The Systems Cartographer',symbol:'⌘',code:'DNA / MAP',description:'You see the connections other people miss. You turn a pile of moving parts into a system that makes sense. Your side quest: start before the map becomes a whole universe.',traits:['SEE THE SYSTEM','STRUCTURE FIRST','CONNECT DOTS'],share:'SYSTEMS CARTOGRAPHER'},
-      break: {title:'The Bug Archaeologist',symbol:'⌕',code:'DNA / DEBUG',description:'You are not scared of the weird edge case. You dig until the real cause shows up. Your side quest: remember that “works on my machine” is a hypothesis, not proof.',traits:['QUESTION EVERYTHING','TRACE THE CAUSE','VERIFY TWICE'],share:'BUG ARCHAEOLOGIST'}
+      const index = buttons.indexOf(button);
+      if (fields.label) fields.label.textContent = String(index+1).padStart(2,'0') + ' / ' + button.querySelector('b').textContent.toUpperCase();
+      if (fields.brand) fields.brand.textContent = data[0];
+      if (fields.eyebrow) fields.eyebrow.textContent = data[1];
+      if (fields.title) fields.title.textContent = data[2];
+      if (fields.description) fields.description.textContent = data[3];
+      if (fields.cta) fields.cta.textContent = data[4];
+      if (fields.footer) fields.footer.textContent = data[5];
+      if (fields.styleTitle) fields.styleTitle.textContent = String(index+1).padStart(2,'0') + ' — ' + button.querySelector('b').textContent;
+      if (fields.styleDescription) fields.styleDescription.textContent = data[6];
     };
-    const resultPanel = dna.querySelector('#dna-result');
-    const showStep = () => {
-      questions.forEach((q,i) => { q.hidden = i !== step; });
-      dna.querySelector('#dna-progress-label').textContent = 'YOUR BUILD DNA / 0'+(step+1)+' OF 03';
-      dna.querySelector('#dna-progress-count').textContent = answers.filter(Boolean).length+'/3';
-      dna.querySelector('#dna-back').disabled = step === 0;
-      dna.querySelector('#dna-next').disabled = !answers[step];
-      dna.querySelector('#dna-next').innerHTML = step === 2 ? 'Reveal my type <span>✳</span>' : 'Lock it in <span>↗</span>';
-    };
-    const showResult = (type, updateUrl = true) => {
-      const a = archetypes[type];
-      if (!a) return;
-      dna.dataset.result = type;
-      dna.querySelector('#dna-result-code').textContent = a.code;
-      dna.querySelector('#dna-result-art span').textContent = a.symbol;
-      dna.querySelector('#dna-result-title').textContent = a.title;
-      dna.querySelector('#dna-result-description').textContent = a.description;
-      const traits = dna.querySelector('#dna-result-traits');
-      traits.replaceChildren(...a.traits.map(label => { const s=document.createElement('span'); s.textContent=label; return s; }));
-      dna.querySelector('#dna-share').disabled = false;
-      dna.querySelector('#dna-share-status').textContent = 'Result unlocked. Copy the card link and send it to your group chat.';
-      resultPanel.dataset.type = type;
-      if (updateUrl && window.history && window.history.replaceState) {
-        const url = new URL(window.location.href);
-        url.searchParams.set('dna',type);
-        window.history.replaceState({},'',url.toString());
-      }
-      resultPanel.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});
-    };
-    questions.forEach((question,index) => {
-      question.querySelectorAll('[data-value]').forEach(button => button.addEventListener('click',() => {
-        answers[index] = button.dataset.value;
-        question.querySelectorAll('[data-value]').forEach(option => {
-          const active=option===button;
-          option.setAttribute('aria-pressed',String(active));
-        });
-        showStep();
-      }));
-    });
-    dna.querySelector('#dna-back').addEventListener('click',() => { if(step>0){step--;showStep();} });
-    dna.querySelector('#dna-next').addEventListener('click',() => {
-      if(!answers[step]) return;
-      if(step<2){step++;showStep();return;}
-      const counts={spark:0,map:0,break:0};
-      answers.forEach(answer=>counts[answer]++);
-      const max=Math.max(...Object.values(counts));
-      const tied=Object.keys(counts).filter(key=>counts[key]===max);
-      // Deterministic tie-break based on the final answer, so identical answers always share the same result.
-      const type=tied.includes(answers[2])?answers[2]:tied[0];
-      showResult(type);
-    });
-    dna.querySelector('#dna-share').addEventListener('click',async() => {
-      const type=resultPanel.dataset.type;
-      if(!type) return;
-      const url=new URL(window.location.href);
-      url.searchParams.set('dna',type);
-      const text='My builder DNA is '+archetypes[type].title+'. What’s yours? '+url.toString();
-      try {
-        if(navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
-        else {
-          const field=document.createElement('textarea');field.value=text;field.setAttribute('readonly','');field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();
-          const copied=document.execCommand('copy');field.remove();if(!copied) throw new Error('Clipboard unavailable');
-        }
-        dna.querySelector('#dna-share-status').textContent='Copied. Drop it in the group chat 👀';
-      } catch {
-        dna.querySelector('#dna-share-status').textContent='Copy blocked by this browser. Share this page URL instead: '+url.toString();
-      }
-    });
-    dna.querySelector('#dna-restart').addEventListener('click',() => {
-      answers.fill(null);step=0;
-      questions.forEach(q=>q.querySelectorAll('[data-value]').forEach(b=>b.setAttribute('aria-pressed','false')));
-      dna.removeAttribute('data-result');resultPanel.removeAttribute('data-type');
-      dna.querySelector('#dna-result-code').textContent='NOT GENERATED';
-      dna.querySelector('#dna-result-art span').textContent='?';
-      dna.querySelector('#dna-result-title').textContent='The plot twist is you.';
-      dna.querySelector('#dna-result-description').textContent='Answer three questions to reveal your builder type.';
-      dna.querySelector('#dna-result-traits').replaceChildren(...['CURIOUS','IN PROGRESS','UNCLASSIFIED'].map(label=>{const s=document.createElement('span');s.textContent=label;return s;}));
-      dna.querySelector('#dna-share').disabled=true;
-      dna.querySelector('#dna-share-status').textContent='Your result card will appear here.';
-      if(window.history && window.history.replaceState){const url=new URL(window.location.href);url.searchParams.delete('dna');window.history.replaceState({},'',url.toString());}
-      showStep();
-    });
-    const sharedType = new URLSearchParams(window.location.search).get('dna');
-    if (archetypes[sharedType]) {
-      showResult(sharedType,false);
-      dna.querySelector('#dna-result-share');
-      dna.querySelector('#dna-share-status').textContent='Someone shared this builder DNA. Take the quiz to find your own.';
-    }
-    showStep();
-  }
-
-})();,eyebrow:'SYSTEM READY · NODE 026',title:'$ build\\n--something-real',description:'Code, tools, experiments. Run the idea, inspect the output, repeat.',cta:'$ ls ./projects ↗',footer:'EXIT CODE 0 · BUILD CONTINUES',blurb:'A command-line inspired interface for people who want to see the engineering first.'},
-      editorial:{name:'The Design Journal',label:'EDITORIAL',brand:'THE BUILD JOURNAL',eyebrow:'ISSUE Nº 026 / DEVELOPER NOTES',title:'A practice of\\nmaking things.',description:'An ongoing record of useful ideas, technical curiosity and the work between drafts.',cta:'READ THE WORK ↗',footer:'VOL. 01 — ALWAYS IN PROGRESS',blurb:'Large typography, generous whitespace and the feeling of a thoughtfully art-directed journal.'},
-      brutalist:{name:'The Digital Brutalist',label:'BRUTALIST',brand:'HARIOM®',eyebrow:'NO AGENCY. NO PRETEND. JUST BUILD.',title:'MAKE IT.\\nBREAK IT.\\nMAKE IT BETTER.',description:'Independent developer building real tools and learning in public.',cta:'LOOK AT THE BUILDS ↗',footer:'BUILT BY A HUMAN / WORK IN PROGRESS',blurb:'Hard edges, oversized type and unapologetic contrast for a high-impact first impression.'},
-      cinema:{name:'The Opening Credits',label:'CINEMATIC',brand:'HARIOM / ORIGINALS',eyebrow:'AN INDEPENDENT BUILDER PRESENTS',title:'Every build\\nstarts somewhere.',description:'A story of ideas becoming products—one experiment, one bug, one release at a time.',cta:'ROLL THE STORY ↗',footer:'CHAPTER 01 · THE BUILDER',blurb:'A film-poster-like hero with a dramatic focal point and a story-led path into the work.'},
-      minimal:{name:'The Quiet Portfolio',label:'MINIMAL',brand:'hariom.',eyebrow:'DEVELOPER / STUDENT / BUILDER',title:'Less noise.\\nMore useful.',description:'I build small, purposeful digital products and systems that solve real problems.',cta:'SELECTED WORK ↗',footer:'INDEPENDENTLY MADE · INDIA',blurb:'Calm spacing, restrained colour and carefully edited copy for a quiet, premium feel.'},
-      playful:{name:'The Playful Internet',label:'PLAYFUL',brand:'hey, internet! ✳',eyebrow:'CURIOSITY LEVEL: TOO HIGH',title:'Oops, I built\\nanother thing.',description:'A curious builder making tools, trying weird ideas and learning out loud.',cta:'COME PLAY ↗',footer:'MADE WITH CURIOSITY + TOO MUCH COFFEE',blurb:'Friendly shapes, bright accents and a less formal tone aimed at curious Gen Z visitors.'},
-      retro:{name:'The Retro Web',label:'RETRO WEB',brand:'★ HARIOM'S HOME PAGE ★',eyebrow:'WELCOME, INTERNET TRAVELLER!',title:'YOU FOUND\\nMY CORNER.',description:'Projects, experiments and notes from one developer's corner of the web.',cta:'ENTER THE SITE >>>',footer:'BEST VIEWED WITH CURIOSITY · WEB 1.0 SPIRIT',blurb:'A nostalgic web-ring mood with pixel details and intentionally playful interface language.'},
-      swiss:{name:'The Swiss System',label:'SWISS GRID',brand:'HP / DIGITAL PRACTICE',eyebrow:'INDEPENDENT PRACTICE / 2026',title:'Ideas need\\na system.',description:'A structured view of products, process and the decisions that make software useful.',cta:'VIEW INDEX ↗',footer:'INDEX 01—04 / PROJECTS · PROCESS · NOTES',blurb:'A disciplined grid, strong alignment and concise information hierarchy.'},
-      neon:{name:'The Neon Lab',label:'NEON LAB',brand:'HARIOM // LAB',eyebrow:'EXPERIMENTAL SYSTEMS ONLINE',title:'Curiosity\\nafter dark.',description:'AI experiments, automation and digital tools built at the edge of what I know.',cta:'ENTER THE LAB ↗',footer:'SIGNAL DETECTED · WORK IN PROGRESS',blurb:'A dark, technical atmosphere with neon accents for experimental and AI-focused work.'},
-      nature:{name:'The Organic Maker',label:'ORGANIC',brand:'hariom builds things',eyebrow:'GROW SLOW · BUILD WITH CARE',title:'Useful things,\\nmade thoughtfully.',description:'A human-first approach to building tools, learning systems and digital experiences.',cta:'MEET THE WORK ↗',footer:'GROWN THROUGH CURIOSITY · MADE IN INDIA',blurb:'Warm tones, soft corners and a grounded, human voice instead of a cold tech aesthetic.'},
-      dashboard:{name:'The Product Dashboard',label:'DASHBOARD',brand:'BUILD OS / OVERVIEW',eyebrow:'WORKSPACE STATUS · ACTIVE',title:'From idea\\nto shipped.',description:'A snapshot of projects, systems and experiments currently moving from concept to reality.',cta:'OPEN PROJECT BOARD ↗',footer:'3 ACTIVE PROJECTS · STATUS IS HONEST',blurb:'A product-like interface with compact labels and clear project-oriented navigation.'},
-      magazine:{name:'The Visual Magazine',label:'MAGAZINE',brand:'MADE / BY HARIOM',eyebrow:'THE MAKER ISSUE · NO. 001',title:'The internet\\nis my workshop.',description:'A visual collection of experiments, products and lessons from building in public.',cta:'FLIP THROUGH ↗',footer:'FEATURE STORY / THE INDEPENDENT BUILDER',blurb:'Magazine-inspired typography and editorial framing for a visual, narrative portfolio.'},
-      mono:{name:'The Monochrome File',label:'MONOCHROME',brand:'HARIOM / FILE 001',eyebrow:'BLACK · WHITE · WORK',title:'Let the work\\nspeak.',description:'No loud gradients. Just useful products, clear decisions and honest progress.',cta:'OPEN THE FILE ↗',footer:'DOCUMENTED WORK / NO DECORATION NEEDED',blurb:'Strict black-and-white contrast with minimal decoration and an evidence-first tone.'},
-      pixel:{name:'The Pixel World',label:'PIXEL WORLD',brand:'HARIOM.EXE',eyebrow:'PLAYER 01 · WORLD LOADED',title:'QUEST STARTED.\\nBUILD MODE ON.',description:'Explore projects like levels, collect ideas and follow the path from bug to build.',cta:'START EXPLORING ▶',footer:'SAVE POINT: PROJECTS / NO XP FARMING',blurb:'Game-like framing and pixel details for visitors who prefer exploration over a résumé.'},
-      future:{name:'The Spatial Workshop',label:'FUTURE CRAFT',brand:'H / SPATIAL WORKSHOP',eyebrow:'DIMENSION 026 · DIGITAL OBJECTS',title:'Build beyond\\nthe screen.',description:'A workshop for ideas, interfaces and small systems with a little more dimension.',cta:'EXPLORE THE SPACE ↗',footer:'SPATIAL THINKING · REAL PROJECTS',blurb:'Layered depth, sculptural shapes and a spatial-computing mood without requiring heavy 3D assets.'},
-      office:{name:'The Office Tour',label:'OFFICE TOUR',brand:'HARIOM PATEL / PROFILE',eyebrow:'WELCOME TO MY WORKSPACE · TAKE A LOOK AROUND',title:'Step inside my\\ndigital workspace.',description:'Take a guided tour through my developer desk, project wall, tools and the workbench where ideas turn into real projects.',cta:'START THE TOUR ↗',footer:'DESK · PROJECT WALL · WORKBENCH · CONTACT',blurb:'An interactive virtual office walkthrough: a welcome desk, workspace overview, project wall, tools shelf and a workbench, designed to feel like stepping into a developer’s office rather than viewing a corporate profile.'},
-      netflix:{name:'The Builder Series',label:'NETFLIX SERIES',brand:'H / ORIGINALS',eyebrow:'A HARIOM BUILDS ORIGINAL SERIES',title:'Ideas become\\noriginals.',description:'Every project has a story. Explore the builds, experiments and lessons behind each release.',cta:'▶ PLAY THE INTRO',footer:'SEASON 01 · PROJECTS THAT ARE REAL',blurb:'A streaming-inspired cinematic portfolio with a featured title, episode-like project journeys and a dark visual atmosphere. Inspired by streaming layouts, not affiliated with Netflix.'}
-    };
-    const buttons=[...templateGrid.querySelectorAll('[data-template]')],preview=document.querySelector('#template-preview');
-    const fields={count:document.querySelector('#template-count'),label:document.querySelector('#template-preview-label'),brand:document.querySelector('#template-brand'),eyebrow:document.querySelector('#template-eyebrow'),title:document.querySelector('#template-title'),description:document.querySelector('#template-description'),cta:document.querySelector('#template-cta'),footer:document.querySelector('#template-footer'),styleTitle:document.querySelector('#template-style-title'),styleDescription:document.querySelector('#template-style-description')};
-    const renderTemplate=id=>{const t=templates[id];if(!t)return;preview.className='p-template-preview theme-'+id;buttons.forEach((b,i)=>{const active=b.dataset.template===id;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active));if(active)fields.count.textContent=String(i+1).padStart(2,'0')+' / 18';});fields.label.textContent=String(buttons.findIndex(b=>b.dataset.template===id)+1).padStart(2,'0')+' / '+t.label;for(const key of ['brand','eyebrow','description','footer','styleDescription'])fields[key].textContent=key==='styleDescription'?t.blurb:t[key];fields.title.textContent=t.title.replace(/\\n/g,'\\n');fields.cta.textContent=t.cta;fields.styleTitle.textContent=String(buttons.findIndex(b=>b.dataset.template===id)+1).padStart(2,'0')+' — '+t.name;};
-    buttons.forEach(button=>button.addEventListener('click',()=>renderTemplate(button.dataset.template)));
+    buttons.forEach(button => button.addEventListener('click',() => renderTemplate(button.dataset.template)));
+    renderTemplate('studio');
   }
 
   // Build Atlas: project connections are explicit content, not simulated live data.
