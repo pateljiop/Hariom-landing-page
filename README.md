@@ -8,6 +8,7 @@ A personal website for Hariom Patel: BCA student, developer, and independent bui
 - About / working principles
 - Project showcase: Haryomix, Hariom AI, and the developer portfolio
 - Interactive Build Atlas connecting projects to the questions and principles behind them
+- Project Autopsy case studies: problem, design choice, evidence, and limitations
 - Small interactive Build Lab with Focus, Explore, and Debug modes
 - A transparent build/verify/improve workflow
 - Notes connected to actual projects and repositories
@@ -26,6 +27,7 @@ Then visit `http://localhost:8000`.
 ## Customize
 
 - Update personal copy, project descriptions, contact details and URLs in `index.html`
+- Keep Project Autopsy evidence current; do not publish unverified results, fabricated metrics, or claims about unfinished features
 - Update design tokens, responsive layouts and visual treatments in `styles.css`
 - Update mobile navigation, reading progress and Build Lab state transitions in `script.js`
 - Keep project status honest. The project-card artwork is illustrative, not a screenshot or proof of a feature.
@@ -38,11 +40,13 @@ This pass was informed by a curated look at personal developer portfolio referen
 - [yashovardhan/developer-portfolio](https://github.com/yashovardhan/developer-portfolio) — a lightweight interactive personal-site starter
 - [Evavic44/portfolio-ideas](https://github.com/Evavic44/portfolio-ideas) — a curated directory of portfolio examples
 - [GitHub developer portfolio topic](https://github.com/topics/developer-portfolio-website)
+- [JasonStys/portfolio-case-study-site](https://github.com/JasonStys/portfolio-case-study-site) — evidence-first case studies, verification, and explicit limitations
+- [zkblk/case-study-forge](https://github.com/zkblk/case-study-forge) — case-study structure that discourages invented metrics
 - [vaibhavmahindru/portfolio-v2.0](https://github.com/vaibhavmahindru/portfolio-v2.0) — interactive system graph, terminal and GitHub activity patterns (reference only)
 - [hyeonsangjeon/Repolis](https://github.com/hyeonsangjeon/Repolis) — an unusual way to turn repository metadata into an explorable world (reference only)
 - [utkarsh5026/me](https://github.com/utkarsh5026/me) — code-editor-style portfolio with Git history and project navigation (reference only)
 
-The Build Atlas is an original, lightweight project map inspired by the broader idea of interactive project graphs: visitors select nodes to explore project intent, shared principles, and real links. The design emphasizes inspectable work, a clear personal point of view, honest project status, original CSS-built illustrations, responsive behavior, keyboard access, and reduced-motion support. It does not copy a complete site or proprietary visual assets.
+The Build Atlas is an original, lightweight project map inspired by the broader idea of interactive project graphs: visitors select nodes to explore project intent, shared principles, and real links. Project Autopsy follows evidence-first case-study patterns found in engineering portfolios: problem, decision, verification, and limitations. Both features are lightweight and use native HTML/CSS/JavaScript; neither fabricates live data. The design emphasizes inspectable work, a clear personal point of view, honest project status, original CSS-built illustrations, responsive behavior, keyboard access, and reduced-motion support. It does not copy a complete site or proprietary visual assets.
 
 ## Validation status
 
