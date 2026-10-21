@@ -117,4 +117,17 @@
     });
   }
 
+
+  const progressBar = document.querySelector('.scroll-progress span');
+  const updateProgress = () => {
+    if (!progressBar) return;
+    const doc = document.documentElement;
+    const available = doc.scrollHeight - window.innerHeight;
+    const percentage = available > 0 ? (window.scrollY / available) * 100 : 0;
+    progressBar.style.width = Math.min(100, Math.max(0, percentage)) + '%';
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
 })();
