@@ -8,6 +8,7 @@ A personal website for Hariom Patel: BCA student, developer, and independent bui
 - About / working principles
 - Project showcase: Haryomix, Hariom AI, and the developer portfolio
 - Interactive Build Atlas connecting projects to the questions and principles behind them
+- Shareable Builder DNA mini-quiz with three archetypes, reproducible result links, and no backend
 - Project Autopsy case studies: problem, design choice, evidence, and limitations
 - Small interactive Build Lab with Focus, Explore, and Debug modes
 - A transparent build/verify/improve workflow
@@ -27,6 +28,7 @@ Then visit `http://localhost:8000`.
 ## Customize
 
 - Update personal copy, project descriptions, contact details and URLs in `index.html`
+- Builder DNA is a playful self-reflection quiz, not a validated personality assessment; result links use the `?dna=` query parameter
 - Keep Project Autopsy evidence current; do not publish unverified results, fabricated metrics, or claims about unfinished features
 - Update design tokens, responsive layouts and visual treatments in `styles.css`
 - Update mobile navigation, reading progress and Build Lab state transitions in `script.js`
@@ -46,7 +48,7 @@ This pass was informed by a curated look at personal developer portfolio referen
 - [hyeonsangjeon/Repolis](https://github.com/hyeonsangjeon/Repolis) — an unusual way to turn repository metadata into an explorable world (reference only)
 - [utkarsh5026/me](https://github.com/utkarsh5026/me) — code-editor-style portfolio with Git history and project navigation (reference only)
 
-The Build Atlas is an original, lightweight project map inspired by the broader idea of interactive project graphs: visitors select nodes to explore project intent, shared principles, and real links. Project Autopsy follows evidence-first case-study patterns found in engineering portfolios: problem, decision, verification, and limitations. Both features are lightweight and use native HTML/CSS/JavaScript; neither fabricates live data. The design emphasizes inspectable work, a clear personal point of view, honest project status, original CSS-built illustrations, responsive behavior, keyboard access, and reduced-motion support. It does not copy a complete site or proprietary visual assets.
+The Build Atlas is an original, lightweight project map inspired by the broader idea of interactive project graphs: visitors select nodes to explore project intent, shared principles, and real links. Project Autopsy follows evidence-first case-study patterns found in engineering portfolios: problem, decision, verification, and limitations. Both features are lightweight and use native HTML/CSS/JavaScript; neither fabricates live data. Builder DNA adds a three-question quiz and a reproducible share URL, without collecting answers or sending them to a server. The design emphasizes inspectable work, a clear personal point of view, honest project status, original CSS-built illustrations, responsive behavior, keyboard access, and reduced-motion support. It does not copy a complete site or proprietary visual assets.
 
 ## Validation status
 
