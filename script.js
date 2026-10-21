@@ -96,7 +96,7 @@
     const render=()=>{
       const s=stages[step];quest.querySelector('#quest-step-label').textContent='INCIDENT / 0'+(step+1)+' OF 03';quest.querySelector('#quest-progress').textContent=picks.length+' decision'+(picks.length===1?'':'s');
       quest.querySelector('#quest-question').textContent=s.question;quest.querySelector('#quest-context').textContent=s.context;
-      quest.querySelector('#quest-options').replaceChildren(...s.options.map((o,i)=>{const b=document.createElement('button'),n=document.createElement('span'),t=document.createElement('b'),d=document.createElement('small');b.type='button';b.dataset.choice=o.id;b.setAttribute('aria-pressed',String(picks[step]===o.id));n.textContent='0'+(i+1);t.textContent=o.title;d.textContent=o.detail;b.append(n,t,d);b.addEventListener('click',()=>{picks[step]=o.id;render();});return b;}));
+      quest.querySelector('#quest-options').replaceChildren(...s.options.map((o,i)=>{const b=document.createElement('button'),n=document.createElement('span'),t=document.createElement('b'),d=document.createElement('small');b.type='button';b.dataset.choice=o.id;b.setAttribute('aria-pressed',String(picks[step]===o.id));n.textContent='0'+(i+1);t.textContent=o.title;d.textContent=o.detail;b.append(n,t,d);b.addEventListener('click',()=>{picks[step]=o.id;picks.length=step+1;render();});return b;}));
       quest.querySelector('#quest-back').disabled=step===0;quest.querySelector('#quest-next').disabled=!picks[step];quest.querySelector('#quest-next').textContent=step===2?'Reveal my build trail ↗':'Choose this path ↗';
       if(picks.length===3)renderResult();
     };
@@ -105,6 +105,21 @@
     quest.querySelector('#quest-share').addEventListener('click',async()=>{if(picks.length!==3)return;const summary='My Build Quest trail: '+picks.map((p,i)=>'Q'+(i+1)+' '+stages[i].options.find(o=>o.id===p).trail).join(' / ')+' — try it at '+location.href.split('#')[0]+'#build-quest';try{if(navigator.clipboard&&isSecureContext)await navigator.clipboard.writeText(summary);else{const f=document.createElement('textarea');f.value=summary;f.readOnly=true;f.style.position='fixed';f.style.opacity='0';document.body.appendChild(f);f.select();const ok=document.execCommand('copy');f.remove();if(!ok)throw Error('copy failed');}quest.querySelector('#quest-share-status').textContent='Copied! Compare your choices with a friend.';}catch{quest.querySelector('#quest-share-status').textContent='Clipboard unavailable. Your choices: '+picks.join(' → ')+'.';}});
     quest.querySelector('#quest-restart').addEventListener('click',()=>{picks.length=0;step=0;delete result.dataset.complete;quest.querySelector('#quest-result-state').textContent='IN PROGRESS';quest.querySelector('#quest-result-mark').textContent='↗';quest.querySelector('#quest-result-title').textContent='Make your first call.';quest.querySelector('#quest-result-copy').textContent='There is no universally perfect answer. The interesting part is what you optimize for and what risk you accept.';quest.querySelector('#quest-trail').replaceChildren(Object.assign(document.createElement('span'),{textContent:'Decision trail appears here.'}));quest.querySelector('#quest-share').disabled=true;quest.querySelector('#quest-share-status').textContent='Finish all three decisions to create a shareable summary.';render();});
     render();
+  }
+
+  // Quick Jump command palette: keyboard-accessible navigation, no external dependencies.
+  const command=document.querySelector('#command-palette');
+  if(command){
+    const search=command.querySelector('#command-search'),items=[...command.querySelectorAll('[role="option"]')];
+    const open=()=>{if(!command.open)command.showModal();search.value='';filter('');search.focus();};
+    const close=()=>{if(command.open)command.close();};
+    const filter=value=>{const term=value.trim().toLowerCase();let first=null;items.forEach(item=>{const show=(item.textContent+' '+item.dataset.command).toLowerCase().includes(term);item.hidden=!show;if(show&&!first)first=item;});if(first)first.setAttribute('tabindex','0');items.filter(item=>item!==first).forEach(item=>item.setAttribute('tabindex','-1'));};
+    document.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();open();}if(event.key==='Escape'&&command.open)close();});
+    search.addEventListener('input',()=>filter(search.value));
+    search.addEventListener('keydown',event=>{if(event.key==='ArrowDown'){event.preventDefault();items.find(item=>!item.hidden)?.focus();}if(event.key==='Enter'){const first=items.find(item=>!item.hidden);if(first)first.click();}});
+    items.forEach(item=>item.addEventListener('click',()=>close()));
+    command.querySelector('#command-close').addEventListener('click',close);
+    command.addEventListener('click',event=>{if(event.target===command)close();});
   }
 
   // Build Atlas: project connections are explicit content, not simulated live data.
