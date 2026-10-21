@@ -72,4 +72,49 @@
     if (editionNumber) editionNumber.textContent = mood === 'signal' ? '1' : mood === 'form' ? '2' : '3';
   }));
 
+
+  // Project brief builder: preview answers locally and prepare a mail draft only on submit.
+  const briefForm = document.querySelector('#project-brief');
+  if (briefForm) {
+    const fields = Object.fromEntries(['business','goal','style','website','budget','details'].map((name) => [name, briefForm.elements.namedItem(name)]));
+    const title = document.querySelector('#brief-preview-title');
+    const goalPreview = document.querySelector('#brief-preview-goal');
+    const stylePreview = document.querySelector('#brief-preview-style');
+    const shortStyle = (value) => {
+      if (!value) return 'Open to ideas';
+      if (value.startsWith('Signal')) return 'Signal / Bold';
+      if (value.startsWith('Form')) return 'Form / Editorial';
+      if (value.startsWith('Play')) return 'Play / Expressive';
+      return 'Open to ideas';
+    };
+    const refreshBrief = () => {
+      const business = fields.business.value.trim();
+      if (title) title.innerHTML = business ? escapeBrief(business) + '<br><em>takes shape.</em>' : 'A new idea<br><em>takes shape.</em>';
+      if (goalPreview) goalPreview.textContent = fields.goal.value || 'Not chosen yet';
+      if (stylePreview) stylePreview.textContent = shortStyle(fields.style.value);
+    };
+    const escapeBrief = (value) => value.replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    Object.values(fields).forEach((field) => field.addEventListener('input', refreshBrief));
+    briefForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!briefForm.reportValidity()) return;
+      const lines = [
+        'Hi Hariom,',
+        '',
+        'I would like to discuss a website project.',
+        '',
+        'What I am building: ' + fields.business.value.trim(),
+        'Main goal: ' + fields.goal.value,
+        'Visual direction: ' + fields.style.value,
+        fields.website.value.trim() ? 'Current website: ' + fields.website.value.trim() : '',
+        fields.budget.value ? 'Budget range: ' + fields.budget.value : '',
+        fields.details.value.trim() ? 'Additional details: ' + fields.details.value.trim() : '',
+        '',
+        'Please let me know the next step.',
+      ].filter(Boolean);
+      const subject = 'Website project enquiry — ' + fields.business.value.trim();
+      window.location.href = 'mailto:hariompatel73@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+    });
+  }
+
 })();
