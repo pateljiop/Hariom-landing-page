@@ -7,6 +7,7 @@ A standalone, responsive landing page designed to demonstrate how thoughtful pos
 - Dark editorial visual system with acid-lime contrast and oversized typography
 - CSS-built hero mockup and three original concept directions
 - Four-point value strip focused on clarity, action, distinction and responsive design
+- **Interactive business-specific playground:** switch between digital product, brand/commerce and service-business concepts, then change Electric / Editorial / Playful art direction; preview updates instantly
 - **Interactive Art Direction Lab:** switch the same mockup between Signal, Form and Play visual systems
 - Three service offers with scope-oriented deliverables (no invented prices)
 - Process section, FAQ accordions, clear contact CTA
@@ -57,6 +58,7 @@ Additional references added in the second research pass:
 ### Additional implementation from the second pass
 
 - A local-only project brief builder with live summary and art-direction selection
+- A second live playground that combines business type + visual energy into distinct copy, color, typography and abstract art
 - The brief becomes a pre-filled email draft only after the visitor presses submit; the site does not transmit or store form responses
 - Scroll progress indicator and keyboard skip link
 - Visible keyboard focus styling
