@@ -1,4 +1,56 @@
 (() => {
+
+  // Luxury entry room: choose a direction, then apply it to the whole portfolio.
+  const entry = document.querySelector('#landing-entry');
+  const entryOptions = document.querySelector('#entry-options');
+  const enterButton = document.querySelector('#entry-enter');
+  const defaultButton = document.querySelector('#entry-default');
+  const gallery = document.querySelector('#template-grid');
+  if (entry && entryOptions && enterButton && gallery) {
+    const styleButtons = [...gallery.querySelectorAll('[data-template]')];
+    let chosen = null;
+    styleButtons.forEach(button => {
+      const option = document.createElement('button');
+      option.type = 'button';
+      option.className = 'p-entry-option';
+      option.dataset.launchTemplate = button.dataset.template;
+      const number = button.querySelector('span')?.textContent || '';
+      const name = button.querySelector('b')?.textContent || button.dataset.template;
+      const description = button.querySelector('small')?.textContent || 'Explore this direction';
+      option.innerHTML = '<span class="p-entry-option-no">' + number + '</span><span class="p-entry-option-copy"><b></b><small></small></span><span class="p-entry-option-arrow">↗</span>';
+      option.querySelector('b').textContent = name;
+      option.querySelector('small').textContent = description;
+      option.addEventListener('click', () => {
+        chosen = button.dataset.template;
+        entryOptions.querySelectorAll('.p-entry-option').forEach(item => {
+          const active = item === option;
+          item.classList.toggle('is-selected', active);
+          item.setAttribute('aria-pressed', String(active));
+        });
+        enterButton.disabled = false;
+        enterButton.querySelector('span').textContent = '↗';
+        enterButton.dataset.chosen = chosen;
+      });
+      option.setAttribute('aria-pressed', 'false');
+      entryOptions.append(option);
+    });
+    const launch = id => {
+      if (!id) return;
+      const selected = styleButtons.find(button => button.dataset.template === id);
+      if (!selected) return;
+      document.body.dataset.landingTheme = id;
+      document.body.classList.add('has-selected-world');
+      selected.click();
+      entry.classList.add('is-exiting');
+      window.setTimeout(() => { entry.hidden = true; document.querySelector('#home')?.scrollIntoView({behavior:'instant'}); }, 520);
+    };
+    enterButton.addEventListener('click', () => launch(chosen));
+    defaultButton?.addEventListener('click', () => launch('studio'));
+    document.addEventListener('keydown', event => {
+      if (!entry.hidden && event.key === 'Escape') { /* keep the selection deliberate */ event.preventDefault(); }
+    });
+  }
+
   const menuButton = document.querySelector('.p-menu');
   const nav = document.querySelector('.p-links');
   if (menuButton && nav) {
