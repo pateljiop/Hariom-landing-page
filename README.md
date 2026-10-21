@@ -47,6 +47,22 @@ Reference repositories/directories reviewed for patterns:
 
 The synthesis focuses on general design principles: fast message comprehension, clear hierarchy, one primary action, benefit-led sections, mobile responsiveness, a coherent visual system, progressive interaction, transparent offers, and FAQs that remove purchase uncertainty. This project does **not** copy another repository's complete page, assets, or proprietary text; all page copy and CSS-built concept visuals here were authored for this project.
 
+
+Additional references added in the second research pass:
+- [getFrontend/react-app-brainmaster](https://github.com/getFrontend/react-app-brainmaster) — bento composition, feature narrative and motion ideas
+- [trinkui/trinkui](https://github.com/trinkui/trinkui) — accessible component patterns, focus-visible handling, responsive sections and reduced-motion awareness
+- [arnobt78/Portfolio-Landing-Page-1-NextJS-Frontend](https://github.com/arnobt78/Portfolio-Landing-Page-1-NextJS-Frontend) — structured storytelling, project showcase and metadata patterns
+- [GitHub bento-grid topic](https://github.com/topics/bento-grid) — discovery of alternative grid and portfolio compositions
+
+### Additional implementation from the second pass
+
+- A local-only project brief builder with live summary and art-direction selection
+- The brief becomes a pre-filled email draft only after the visitor presses submit; the site does not transmit or store form responses
+- Scroll progress indicator and keyboard skip link
+- Visible keyboard focus styling
+- JSON-LD Person metadata for search engines
+- More explicit service-scope explanations and FAQ answers
+
 ## Honest presentation
 
 The showcase cards are original concept studies, not client case studies. No fake client logos, testimonials, performance metrics, or guaranteed conversion claims are used.
