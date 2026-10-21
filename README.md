@@ -7,6 +7,7 @@ A personal website for Hariom Patel: BCA student, developer, and independent bui
 - Personal introduction and illustrated developer workspace
 - About / working principles
 - Project showcase: Haryomix, Hariom AI, and the developer portfolio
+- Interactive Build Atlas connecting projects to the questions and principles behind them
 - Small interactive Build Lab with Focus, Explore, and Debug modes
 - A transparent build/verify/improve workflow
 - Notes connected to actual projects and repositories
@@ -37,8 +38,11 @@ This pass was informed by a curated look at personal developer portfolio referen
 - [yashovardhan/developer-portfolio](https://github.com/yashovardhan/developer-portfolio) — a lightweight interactive personal-site starter
 - [Evavic44/portfolio-ideas](https://github.com/Evavic44/portfolio-ideas) — a curated directory of portfolio examples
 - [GitHub developer portfolio topic](https://github.com/topics/developer-portfolio-website)
+- [vaibhavmahindru/portfolio-v2.0](https://github.com/vaibhavmahindru/portfolio-v2.0) — interactive system graph, terminal and GitHub activity patterns (reference only)
+- [hyeonsangjeon/Repolis](https://github.com/hyeonsangjeon/Repolis) — an unusual way to turn repository metadata into an explorable world (reference only)
+- [utkarsh5026/me](https://github.com/utkarsh5026/me) — code-editor-style portfolio with Git history and project navigation (reference only)
 
-The design emphasizes inspectable work, a clear personal point of view, honest project status, original CSS-built illustrations, responsive behavior, keyboard access, and reduced-motion support. It does not copy a complete site or proprietary visual assets.
+The Build Atlas is an original, lightweight project map inspired by the broader idea of interactive project graphs: visitors select nodes to explore project intent, shared principles, and real links. The design emphasizes inspectable work, a clear personal point of view, honest project status, original CSS-built illustrations, responsive behavior, keyboard access, and reduced-motion support. It does not copy a complete site or proprietary visual assets.
 
 ## Validation status
 
