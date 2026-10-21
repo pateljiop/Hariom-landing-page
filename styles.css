@@ -242,3 +242,110 @@ body[data-landing-theme] .p-hero{transition:background .5s}.p-entry[hidden]~.p-s
 @media(max-width:900px){.p-entry-main{grid-template-columns:1fr;gap:30px;min-height:auto;padding-top:34px}.p-entry-copy h1{font-size:clamp(49px,10vw,76px)}.p-entry-bottom{margin-top:30px}.p-entry-options{grid-template-columns:repeat(3,minmax(0,1fr));max-height:none}.p-entry-selector{max-width:700px;width:100%;margin:auto}.p-entry-orbit{left:70%;top:5%;width:280px}.p-entry-orbit-b{width:380px}}
 @media(max-width:520px){.p-entry-top,.p-entry-footer{padding:16px 18px}.p-entry-top>span:nth-child(2){font-size:7px;letter-spacing:.07em}.p-entry-edition{display:none}.p-entry-main{padding:30px 16px 24px}.p-entry-copy h1{font-size:clamp(43px,12vw,60px);margin:20px 0 16px}.p-entry-description{font-size:13px}.p-entry-options{grid-template-columns:repeat(2,minmax(0,1fr));max-height:35vh}.p-entry-option{min-height:60px;padding:8px 7px;grid-template-columns:17px minmax(0,1fr) 10px}.p-entry-option-copy b{font-size:10px}.p-entry-option-copy small{font-size:7px}.p-entry-footer>span:nth-child(2){display:none}.p-entry-footer button{font-size:7px}}
 @media(prefers-reduced-motion:reduce){.p-entry-orbit-b,.p-entry.is-exiting{animation:none}.p-entry-option,.p-entry-enter{transition:none}}
+
+/* --- Selected worlds: page-wide art direction, not just a preview palette --- */
+.p-world-switcher{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;align-items:center;gap:9px;padding:11px 13px;border:1px solid var(--line);background:var(--panel);color:var(--paper);font:9px 'DM Mono',monospace;letter-spacing:.08em;box-shadow:0 10px 35px #0002;cursor:pointer}.p-world-switcher span{font:700 15px 'Space Grotesk',sans-serif;color:var(--acid)}.p-world-switcher b{color:var(--acid)}.p-world-switcher:hover{transform:translateY(-2px)}
+body[data-landing-theme] .p-nav{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(16px);border-color:var(--line)}
+body[data-landing-theme] .p-hero{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 83% 43%,color-mix(in srgb,var(--acid) 13%,transparent),transparent 42%),var(--bg);transition:background .5s}
+body[data-landing-theme] .p-hero:after{content:attr(data-world-label);position:absolute;right:3%;bottom:3%;z-index:-1;font:700 clamp(65px,13vw,200px)/.8 'Space Grotesk',sans-serif;letter-spacing:-.09em;color:color-mix(in srgb,var(--paper) 3%,transparent);pointer-events:none}
+body[data-landing-theme] .p-hero-grid{position:relative;z-index:1}
+body[data-landing-theme] .p-workspace{transition:transform .5s,border-radius .5s,box-shadow .5s;box-shadow:0 22px 80px color-mix(in srgb,var(--acid) 10%,transparent)}
+body[data-landing-theme] .p-project-card{transition:transform .3s,border-color .3s,box-shadow .3s;background:var(--panel);border-color:var(--line)}
+body[data-landing-theme] .p-project-card:hover{transform:translateY(-5px);box-shadow:0 18px 50px color-mix(in srgb,var(--acid) 10%,transparent)}
+body[data-landing-theme] .p-section-label{color:var(--muted)}
+body[data-landing-theme] .p-btn-primary{background:var(--acid);color:var(--bg);border-color:var(--acid)}
+body[data-landing-theme] .p-marquee{border-color:var(--line)}
+/* 01 Studio: balanced creative composition */
+body[data-landing-theme="studio"] .p-hero-grid{grid-template-columns:1.08fr .92fr;gap:clamp(30px,6vw,100px)}
+body[data-landing-theme="studio"] .p-workspace{transform:rotate(1deg)}
+/* 02 Terminal: mono-led engineering console */
+body[data-landing-theme="terminal"]{--display:'DM Mono',monospace;--body:'DM Mono',monospace}
+body[data-landing-theme="terminal"] .p-hero-grid{grid-template-columns:1fr .9fr}
+body[data-landing-theme="terminal"] .p-hero-copy h1{font-family:'DM Mono',monospace;font-size:clamp(35px,5vw,70px);letter-spacing:-.08em}
+body[data-landing-theme="terminal"] .p-workspace{border-radius:4px;transform:perspective(900px) rotateY(-4deg)}
+body[data-landing-theme="terminal"] .p-project-card{border-radius:4px}
+/* 03 Editorial: oversized serif-free magazine typography */
+body[data-landing-theme="editorial"] .p-hero-copy h1,body[data-landing-theme="editorial"] .p-template-heading h2{font-family:Georgia,serif;font-weight:400;letter-spacing:-.065em}
+body[data-landing-theme="editorial"] .p-hero-grid{grid-template-columns:1.2fr .8fr}
+body[data-landing-theme="editorial"] .p-workspace{border-radius:0;transform:rotate(-2deg)}
+body[data-landing-theme="editorial"] .p-project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+/* 04 Brutalist: hard edges, thick rules and oversized type */
+body[data-landing-theme="brutalist"] .p-hero-copy h1{font-size:clamp(48px,8vw,112px);font-weight:900;letter-spacing:-.1em;text-transform:uppercase}
+body[data-landing-theme="brutalist"] .p-nav,body[data-landing-theme="brutalist"] .p-project-card,body[data-landing-theme="brutalist"] .p-workspace{border:2px solid var(--paper);border-radius:0;box-shadow:6px 6px 0 var(--acid)}
+body[data-landing-theme="brutalist"] .p-btn-primary{border-radius:0;text-transform:uppercase;font-weight:800}
+/* 05 Cinematic: poster-like hero and deep shadows */
+body[data-landing-theme="cinema"] .p-hero{background:radial-gradient(ellipse at 78% 35%,#49321e 0%,#14110f 38%,#08090b 78%)}
+body[data-landing-theme="cinema"] .p-hero-copy h1{font-size:clamp(52px,7.4vw,104px);text-shadow:0 12px 45px #0008}
+body[data-landing-theme="cinema"] .p-workspace{transform:perspective(1000px) rotateY(-8deg) rotateX(2deg);border-color:#a88a5b;border-radius:5px}
+body[data-landing-theme="cinema"] .p-project-card{border-radius:5px;overflow:hidden}
+/* 06 Minimal: whitespace, hairlines, understated controls */
+body[data-landing-theme="minimal"] .p-hero{background:var(--bg)}
+body[data-landing-theme="minimal"] .p-hero-grid{grid-template-columns:1.2fr .8fr;gap:10vw}
+body[data-landing-theme="minimal"] .p-hero-copy h1{font-weight:400;font-size:clamp(44px,6.5vw,84px)}
+body[data-landing-theme="minimal"] .p-workspace{box-shadow:none;border-radius:2px;transform:none}
+body[data-landing-theme="minimal"] .p-project-card{border-radius:2px;box-shadow:none}
+/* 07 Playful: soft shapes and bounce */
+body[data-landing-theme="playful"] .p-workspace{border-radius:28px;transform:rotate(3deg);box-shadow:12px 14px 0 color-mix(in srgb,var(--acid) 28%,transparent)}
+body[data-landing-theme="playful"] .p-core-shape{border-radius:38% 62% 56% 44%}
+body[data-landing-theme="playful"] .p-project-card{border-radius:22px}
+body[data-landing-theme="playful"] .p-btn-primary{border-radius:999px}
+/* 08 Retro web: terminal green phosphor and pixel-like borders */
+body[data-landing-theme="retro"]{--display:'DM Mono',monospace;--body:'DM Mono',monospace}
+body[data-landing-theme="retro"] .p-hero-copy h1{font-family:'DM Mono',monospace;text-shadow:3px 0 #ff5de4,-3px 0 #52f7d4}
+body[data-landing-theme="retro"] .p-workspace,body[data-landing-theme="retro"] .p-project-card{border:2px dashed var(--acid);border-radius:0}
+body[data-landing-theme="retro"] .p-project-card:hover{transform:translateY(-4px) rotate(-.5deg)}
+/* 09 Swiss grid: strict alignment and strong typographic hierarchy */
+body[data-landing-theme="swiss"] .p-hero-grid{grid-template-columns:1fr 1fr;gap:4vw}
+body[data-landing-theme="swiss"] .p-hero-copy h1{font-weight:700;letter-spacing:-.09em}
+body[data-landing-theme="swiss"] .p-project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line)}
+body[data-landing-theme="swiss"] .p-project-card{border-radius:0}
+/* 10 Neon lab: electric glow, experimental framing */
+body[data-landing-theme="neon"] .p-hero{background:radial-gradient(ellipse at 75% 45%,#19294c 0%,#090b12 62%)}
+body[data-landing-theme="neon"] .p-workspace{box-shadow:0 0 55px #72c5ff1c,0 0 0 1px #72c5ff55;border-radius:12px}
+body[data-landing-theme="neon"] .p-core-shape{box-shadow:0 0 45px #72c5ff55}
+body[data-landing-theme="neon"] .p-project-card{box-shadow:inset 0 0 0 1px #72c5ff12}
+/* 11 Organic: forest palette, tactile cards */
+body[data-landing-theme="nature"] .p-hero{background:radial-gradient(ellipse at 80% 30%,#294332 0%,#111b15 62%)}
+body[data-landing-theme="nature"] .p-workspace{border-radius:28px 5px 28px 5px;transform:rotate(-1.5deg)}
+body[data-landing-theme="nature"] .p-project-card{border-radius:20px 4px 20px 4px}
+/* 12 Dashboard: utility-first, data-panel composition */
+body[data-landing-theme="dashboard"] .p-hero-grid{grid-template-columns:.8fr 1.2fr}
+body[data-landing-theme="dashboard"] .p-workspace{transform:none;border-radius:10px;box-shadow:0 25px 70px #0006}
+body[data-landing-theme="dashboard"] .p-project-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+body[data-landing-theme="dashboard"] .p-project-card{border-radius:8px}
+/* 13 Magazine: asymmetric feature card */
+body[data-landing-theme="magazine"] .p-hero-grid{grid-template-columns:1.15fr .85fr}
+body[data-landing-theme="magazine"] .p-hero-copy h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(50px,7vw,96px)}
+body[data-landing-theme="magazine"] .p-workspace{border-radius:0 0 70px 0;transform:rotate(2deg)}
+body[data-landing-theme="magazine"] .p-project-card:first-child{grid-column:span 2}
+/* 14 Monochrome: stark contrast, no colorful effects */
+body[data-landing-theme="mono"]{--acid:#222222}
+body[data-landing-theme="mono"] .p-hero{background:linear-gradient(135deg,#f7f7f4,#e5e5df)}
+body[data-landing-theme="mono"] .p-workspace{filter:grayscale(1);border-radius:0;box-shadow:12px 12px 0 #222}
+body[data-landing-theme="mono"] .p-project-card{border-radius:0;filter:grayscale(1)}
+/* 15 Pixel world: arcade-like frames */
+body[data-landing-theme="pixel"]{--display:'DM Mono',monospace;--body:'DM Mono',monospace}
+body[data-landing-theme="pixel"] .p-hero-copy h1{font-family:'DM Mono',monospace;font-size:clamp(35px,5vw,64px);line-height:1.2}
+body[data-landing-theme="pixel"] .p-workspace,body[data-landing-theme="pixel"] .p-project-card,body[data-landing-theme="pixel"] .p-btn-primary{border-radius:0;border:2px solid var(--acid);box-shadow:5px 5px 0 #07070b}
+/* 16 Future craft: spatial glass and layered depth */
+body[data-landing-theme="future"] .p-hero{background:radial-gradient(ellipse at 78% 40%,#2a2b53 0%,#080b12 62%)}
+body[data-landing-theme="future"] .p-workspace{transform:perspective(900px) rotateY(-12deg) rotateX(4deg);border-radius:18px;backdrop-filter:blur(18px);box-shadow:25px 25px 0 #b7a5ff0c,0 25px 90px #0008}
+body[data-landing-theme="future"] .p-core-shape{border-radius:50%;box-shadow:0 0 80px #b7a5ff25}
+/* 17 Office Tour: workspace first, guided rooms and office-card composition */
+body[data-landing-theme="office"] .p-hero{background:linear-gradient(135deg,#101722,#152536 55%,#182e34)}
+body[data-landing-theme="office"] .p-hero-grid{grid-template-columns:.8fr 1.2fr}
+body[data-landing-theme="office"] .p-hero-copy h1{font-size:clamp(43px,6vw,80px);letter-spacing:-.075em}
+body[data-landing-theme="office"] .p-workspace{transform:perspective(1000px) rotateY(-9deg);border-radius:10px;border-color:#42627b;box-shadow:18px 20px 0 #070e16}
+body[data-landing-theme="office"] .p-workspace:after{content:'WORKSPACE  /  PROJECT WALL  /  BUILD LAB';display:block;padding:12px 16px;background:#17283a;color:#9dcdf4;font:9px 'DM Mono',monospace;letter-spacing:.12em}
+body[data-landing-theme="office"] .p-project-card{border-radius:10px;border-color:#34495d}
+/* 18 Netflix Series: featured-title drama and episode-row cards */
+body[data-landing-theme="netflix"]{--acid:#e50914;--bg:#080808;--panel:#171717;--paper:#f7f7f7;--muted:#b9b9b9;--line:#333}
+body[data-landing-theme="netflix"] .p-hero{background:linear-gradient(90deg,#080808 0%,#080808e8 44%,#08080835 100%),radial-gradient(ellipse at 78% 30%,#561319,#080808 65%)}
+body[data-landing-theme="netflix"] .p-hero-copy h1{font-size:clamp(52px,8vw,112px);font-weight:800;letter-spacing:-.08em}
+body[data-landing-theme="netflix"] .p-workspace{transform:none;border-radius:3px;border-color:#57242a;box-shadow:0 25px 70px #000}
+body[data-landing-theme="netflix"] .p-workspace-top{background:#e50914;color:white}
+body[data-landing-theme="netflix"] .p-project-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+body[data-landing-theme="netflix"] .p-project-card{border-radius:3px;overflow:hidden}
+body[data-landing-theme="netflix"] .p-project-visual{filter:saturate(.72) contrast(1.12)}
+body[data-landing-theme="netflix"] .p-project-card:hover{transform:scale(1.025);z-index:2}
+@media(max-width:760px){body[data-landing-theme] .p-hero-grid,body[data-landing-theme="office"] .p-hero-grid,body[data-landing-theme="dashboard"] .p-hero-grid{grid-template-columns:1fr;gap:34px}body[data-landing-theme="netflix"] .p-project-grid,body[data-landing-theme="swiss"] .p-project-grid,body[data-landing-theme="editorial"] .p-project-grid{grid-template-columns:1fr}body[data-landing-theme="magazine"] .p-project-card:first-child{grid-column:auto}body[data-landing-theme="dashboard"] .p-project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
