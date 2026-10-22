@@ -669,7 +669,7 @@ body.has-selected-world .p-nav,body.has-selected-world .p-footer{transition:back
 .p-world-module-netflix .p-world-module-card:first-child{flex-basis:clamp(300px,40vw,480px);min-height:390px;background:linear-gradient(145deg,color-mix(in srgb,var(--acid) 30%,var(--panel)),var(--panel) 65%)}
 .p-world-module-netflix .p-world-module-card:first-child h3{font-size:clamp(25px,3vw,38px)}
 .p-world-module-netflix .p-world-card-index{font-size:10px}
-.p-world-module-netflix .p-world-module-card a{display:inline-flex;padding:10px 14px;background:var(--acid);color:#fff;border:0}
+.p-world-module-netflix .p-world-module-card a{display:inline-flex;padding:10px 14px;background:var(--acid);color:var(--bg);border:0}
 .p-world-module-terminal{max-width:1040px;border:1px solid var(--world-line);padding:28px;margin:32px auto 70px;background:var(--panel)}
 .p-world-module-terminal .p-world-module-head{display:block;border-bottom:1px solid var(--world-line);padding-bottom:22px}
 .p-world-module-terminal .p-world-module-label:before{content:'●  ●  ●';letter-spacing:.55em;margin-right:22px;color:var(--acid)}
