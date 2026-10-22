@@ -56,6 +56,7 @@
     .p-office-dock a:hover,.p-office-dock a:focus-visible{background:rgba(132,211,204,.13);border-color:rgba(132,211,204,.28);outline:none;transform:translateY(-1px)}
     .p-office-dock a:focus-visible{outline:2px solid #8ce0c9;outline-offset:2px}
     body[data-landing-theme="office"]{scroll-behavior:smooth}
+    @media(prefers-reduced-motion:reduce){body[data-landing-theme="office"]{scroll-behavior:auto}.p-office-dock a{transition:none}}
     @media(max-width:700px){body[data-landing-theme="office"] main>section{border-radius:12px;margin-top:14px;margin-bottom:14px;padding-left:16px;padding-right:16px}.p-3d-office-world{height:100dvh!important}.p-office-dock{left:12px;right:12px;bottom:max(10px,env(safe-area-inset-bottom));transform:none;max-width:none;justify-content:flex-start;border-radius:14px}.p-office-dock-label{display:none}.p-office-dock a{padding:10px 11px}.p-office-dock a span{font-size:12px}}
     .p-3d-stage[data-theme="terminal"]{background:radial-gradient(ellipse at 50% 75%,#163a2a 0%,#07120f 68%);border-color:#286344}
     .p-3d-stage[data-theme="editorial"],.p-3d-stage[data-theme="magazine"]{background:linear-gradient(135deg,#292019,#100e0d 72%);border-color:#7d6143}
