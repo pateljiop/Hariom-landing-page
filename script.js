@@ -392,4 +392,61 @@
     showStep();
   }
 
+
+  // Dedicated world modules: distinct project index and interaction per themed page.
+  const worldPage = document.body.dataset.landingTheme;
+  if (worldPage && document.querySelector('.p-hero') && !document.querySelector('.p-world-module')) {
+    const worldModules = {
+      studio:{label:'THE STUDIO DESK',title:'A little less talk.<br><span>A little more shipped.</span>',intro:'A live index of the way I work: pick a project, inspect the work, then follow the evidence.',items:[['01','Haryomix','A student workspace experiment.','https://haryomix.eu.cc'],['02','Hariom AI','A local-first agent with approval gates.','https://github.com/pateljiop/hariom-ai'],['03','Portfolio','The home for my work and process.','https://hariom-portfolio.pages.dev']]},
+      terminal:{label:'~/WORKSPACE/STATUS',title:'$ ls <span>./projects</span>',intro:'Choose a command to inspect a real project. These links open the actual work; no fake terminal execution.',items:[['$ cat haryomix.md','Haryomix','Student workspace · live site','https://haryomix.eu.cc'],['$ git open hariom-ai','Hariom AI','Python · controlled agent workflow','https://github.com/pateljiop/hariom-ai'],['$ open portfolio','Portfolio','Personal site · source available','https://hariom-portfolio.pages.dev']]},
+      editorial:{label:'FIELD NOTES / 001',title:'The work behind<br><span>the work.</span>',intro:'A short editorial index: product ideas, implementation decisions and what still needs improvement.',items:[['NOTE 01','Make it useful','Build for a real task before adding decoration.','https://haryomix.eu.cc'],['NOTE 02','Keep humans in control','Approval and verification belong in agent workflows.','https://github.com/pateljiop/hariom-ai'],['NOTE 03','Show the evidence','A repository is more convincing than a big claim.','https://github.com/pateljiop']]},
+      brutalist:{label:'NO FLUFF / PROJECT INDEX',title:'PROOF OVER<br><span>PROMISES.</span>',intro:'No fake metrics. No imaginary clients. Just projects you can open and inspect.',items:[['01 / LIVE','Haryomix','Open the live product.','https://haryomix.eu.cc'],['02 / SOURCE','Hariom AI','Inspect the implementation.','https://github.com/pateljiop/hariom-ai'],['03 / SOURCE','Portfolio','See the portfolio source.','https://github.com/pateljiop/Hariom-Professional-Portfolio']]},
+      cinema:{label:'NOW SHOWING / FEATURED BUILDS',title:'Every build has<br><span>a second act.</span>',intro:'A small slate of projects in different stages. Select a title to visit the actual work.',items:[['FEATURE 01','Haryomix','A workspace for student tools.','https://haryomix.eu.cc'],['FEATURE 02','Hariom AI','An experiment in controlled computer action.','https://github.com/pateljiop/hariom-ai'],['FEATURE 03','Developer Portfolio','A home for experiments and process.','https://hariom-portfolio.pages.dev']]},
+      minimal:{label:'SELECTED WORK / 2026',title:'Three things.<br><span>Still becoming.</span>',intro:'A quiet index of current work. Open a project for the details.',items:[['01','Haryomix','Student workspace.','https://haryomix.eu.cc'],['02','Hariom AI','Local assistant.','https://github.com/pateljiop/hariom-ai'],['03','Portfolio','Personal site.','https://hariom-portfolio.pages.dev']]},
+      playful:{label:'THE BUILD PLAYGROUND',title:'Curious? Click<br><span>something.</span>',intro:'Pick a project card, jump into the build and explore how it works.',items:[['✳ 01','Haryomix','Study tools and workspace ideas.','https://haryomix.eu.cc'],['✳ 02','Hariom AI','A personal agent in progress.','https://github.com/pateljiop/hariom-ai'],['✳ 03','Portfolio','My corner of the internet.','https://hariom-portfolio.pages.dev']]},
+      retro:{label:'HARIOM.EXE / FILE DIRECTORY',title:'OPEN FILE:<br><span>PROJECTS.DIR</span>',intro:'A retro-style directory of real destinations. Select any file to open it.',items:[['FILE_001.EXE','Haryomix','RUN: open live workspace','https://haryomix.eu.cc'],['FILE_002.PY','Hariom AI','RUN: inspect repository','https://github.com/pateljiop/hariom-ai'],['FILE_003.HTML','Portfolio','RUN: open personal site','https://hariom-portfolio.pages.dev']]},
+      swiss:{label:'INDEX / 01—03',title:'A system for<br><span>making things.</span>',intro:'Three projects, clearly indexed. The links lead to the actual product or source.',items:[['01 / PRODUCT','Haryomix','Student workspace experiment.','https://haryomix.eu.cc'],['02 / ENGINEERING','Hariom AI','Controlled local agent.','https://github.com/pateljiop/hariom-ai'],['03 / WEB','Portfolio','Personal development site.','https://hariom-portfolio.pages.dev']]},
+      neon:{label:'SIGNAL / ACTIVE PROJECTS',title:'Pick a signal.<br><span>Trace the source.</span>',intro:'Experimental products and tools. Follow the link to see the real implementation.',items:[['SIGNAL_01','Haryomix','Product experiment detected.','https://haryomix.eu.cc'],['SIGNAL_02','Hariom AI','Agent systems in development.','https://github.com/pateljiop/hariom-ai'],['SIGNAL_03','Portfolio','Public build log and identity.','https://hariom-portfolio.pages.dev']]},
+      nature:{label:'GROWING / CURRENT BUILDS',title:'Small steps.<br><span>Useful things.</span>',intro:'These projects grow through testing, feedback and steady iteration.',items:[['SEED 01','Haryomix','A useful place for student tools.','https://haryomix.eu.cc'],['SEED 02','Hariom AI','A careful approach to automation.','https://github.com/pateljiop/hariom-ai'],['SEED 03','Portfolio','A living record of learning.','https://hariom-portfolio.pages.dev']]},
+      dashboard:{label:'WORKSPACE / PROJECT OVERVIEW',title:'Project <span>control panel.</span>',intro:'A compact overview with direct links. Status labels describe the type of work, not fabricated performance metrics.',items:[['PRODUCT','Haryomix','Student workspace · live URL','https://haryomix.eu.cc'],['ENGINEERING','Hariom AI','Local agent · source repository','https://github.com/pateljiop/hariom-ai'],['PERSONAL','Portfolio','Web portfolio · live URL','https://hariom-portfolio.pages.dev']]},
+      magazine:{label:'THE MAKER ISSUE / NO. 001',title:'Inside the<br><span>builder’s notebook.</span>',intro:'Three stories from the workbench—product thinking, agent engineering and the personal web.',items:[['COVER STORY','Haryomix','Designing around student tasks.','https://haryomix.eu.cc'],['THE DEEP DIVE','Hariom AI','Why approvals matter in agent systems.','https://github.com/pateljiop/hariom-ai'],['THE PROFILE','Portfolio','Projects, process and progress.','https://hariom-portfolio.pages.dev']]},
+      mono:{label:'FILE 001 / SELECTED WORK',title:'Nothing to hide.<br><span>Inspect the work.</span>',intro:'Minimal interface. Real destinations. Follow any project to its live page or repository.',items:[['01','Haryomix','Live product.','https://haryomix.eu.cc'],['02','Hariom AI','Open-source repository.','https://github.com/pateljiop/hariom-ai'],['03','Portfolio','Live personal site.','https://hariom-portfolio.pages.dev']]},
+      pixel:{label:'QUEST BOARD / WORLD 01',title:'Choose your<br><span>next quest.</span>',intro:'Three destinations. Pick a quest and jump into the real project.',items:[['QUEST 01','Explore Haryomix','Visit the student workspace.','https://haryomix.eu.cc'],['QUEST 02','Inspect Hariom AI','Read the agent source.','https://github.com/pateljiop/hariom-ai'],['QUEST 03','Visit Portfolio','Explore the maker’s home base.','https://hariom-portfolio.pages.dev']]},
+      future:{label:'SPATIAL WORKSHOP / OBJECT INDEX',title:'Ideas with<br><span>some dimension.</span>',intro:'A spatial-feeling index of real work. Select an object to open its destination.',items:[['OBJECT 01','Haryomix','Student workspace experiment.','https://haryomix.eu.cc'],['OBJECT 02','Hariom AI','Personal agent systems.','https://github.com/pateljiop/hariom-ai'],['OBJECT 03','Portfolio','A living development space.','https://hariom-portfolio.pages.dev']]},
+      office:{label:'WORKSPACE TOUR / SELECT A ZONE',title:'Welcome to my<br><span>digital workbench.</span>',intro:'Explore four zones in the workspace. Select a zone to reveal what belongs there; use the links to open the real projects.',items:[['01','The Desk','My day-to-day workflow: plan, build, test and improve.','#about'],['02','Project Wall','Haryomix and Hariom AI, the two main builds.','#projects'],['03','The Lab','Experiments, tools and engineering notes.','#lab'],['04','The Library','Notes, references and learning log.','#notes']]},
+      netflix:{label:'HARIOM BUILDS ORIGINALS / SEASON 01',title:'A portfolio of<br><span>ongoing stories.</span>',intro:'Choose a title from the current season. Each episode opens a real project, not a fake video player.',items:[['S01 · E01','Haryomix: The Workspace','A student product experiment.','https://haryomix.eu.cc'],['S01 · E02','Hariom AI: Human in the Loop','An agent with approval gates.','https://github.com/pateljiop/hariom-ai'],['S01 · E03','The Personal Web','Building a home for the work.','https://hariom-portfolio.pages.dev']]}
+    };
+    const data = worldModules[worldPage];
+    if (data) {
+      const section = document.createElement('section');
+      section.className = 'p-world-module p-world-module-' + worldPage;
+      section.id = 'world-feature';
+      section.innerHTML = '<div class="p-world-module-head"><p class="p-world-module-label"></p><h2></h2><p class="p-world-module-intro"></p></div><div class="p-world-module-grid"></div><p class="p-world-module-status" aria-live="polite"></p>';
+      section.querySelector('.p-world-module-label').textContent = data.label;
+      section.querySelector('h2').innerHTML = data.title;
+      section.querySelector('.p-world-module-intro').textContent = data.intro;
+      const grid = section.querySelector('.p-world-module-grid');
+      data.items.forEach((item,index) => {
+        const card = document.createElement('article');
+        card.className = 'p-world-module-card';
+        const eyebrow = document.createElement('span'); eyebrow.className='p-world-card-index'; eyebrow.textContent=item[0];
+        const title = document.createElement('h3'); title.textContent=item[1];
+        const description = document.createElement('p'); description.textContent=item[2];
+        const link = document.createElement('a'); link.href=item[3]; link.textContent=worldPage==='office'?'Explore zone ↗':'Open project ↗';
+        if(item[3].startsWith('http')){link.target='_blank';link.rel='noreferrer';}
+        else {link.addEventListener('click',()=>{section.querySelector('.p-world-module-status').textContent='Opening '+item[1]+' zone below.';});}
+        card.append(eyebrow,title,description,link); grid.append(card);
+      });
+      document.querySelector('.p-hero').insertAdjacentElement('afterend',section);
+      if (worldPage === 'office') {
+        section.querySelectorAll('.p-world-module-card').forEach((card,index)=>{
+          card.setAttribute('tabindex','0');card.setAttribute('role','button');card.setAttribute('aria-pressed','false');
+          const activate=()=>{section.querySelectorAll('.p-world-module-card').forEach(other=>{other.classList.remove('is-active');other.setAttribute('aria-pressed','false');});card.classList.add('is-active');card.setAttribute('aria-pressed','true');section.querySelector('.p-world-module-status').textContent=data.items[index][1]+': '+data.items[index][2];};
+          card.addEventListener('click',event=>{if(event.target.closest('a'))return;activate();});
+          card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
+        });
+      }
+    }
+  }
+
 })();
