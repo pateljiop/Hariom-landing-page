@@ -104,7 +104,7 @@
     const floor = new THREE.Mesh(new THREE.PlaneGeometry(30,30),floorMat);
     floor.rotation.x=-Math.PI/2; floor.position.y=-.08; floor.receiveShadow=true; scene.add(floor);
     const grid = new THREE.GridHelper(16,32,office?0x789ba1:(theme==="minimal"||theme==="swiss"?0xb9b5ae:config.color),office?0x9ab3b3:(theme==="minimal"||theme==="swiss"?0xd6d2ca:0x26313b));
-    grid.position.y=-.065; grid.material.transparent=true; grid.material.opacity=office?.22:(theme==="minimal"||theme==="swiss"?.2:.32); scene.add(grid);
+    grid.position.y=-.065; grid.material.transparent=true; grid.material.opacity=office ? .22 : ((theme==="minimal" || theme==="swiss") ? .2 : .32); scene.add(grid);
     const mat=(c,metal=.2,rough=.34)=>new THREE.MeshStandardMaterial({color:c,metalness:metal,roughness:rough});
     const mainMat=mat(config.color,.45,.25), accentMat=mat(config.accent,.3,.3), darkMat=mat(office?0x29465a:0x202c3a,.25,.48);
     const root=new THREE.Group(); scene.add(root);
@@ -197,7 +197,7 @@
       // Build a distinct environment for each art direction, not just a floating sculpture.
       const environment = new THREE.Group(); scene.add(environment);
       const envBox = (x,y,z,sx,sy,sz,material) => mesh(geo.box,material,x,y,z,sx,sy,sz,environment);
-      const envRing = (r,tube,material,x,y,z,rx=0,rz=0) => ring(r,tube,material,x,y,z,rx,rz);
+      const envRing = (r,tube,material,x,y,z,rx=0,rz=0) => { const o=mesh(new THREE.TorusGeometry(r,tube,12,72),material,x,y,z,1,1,1,environment); o.rotation.x=rx; o.rotation.z=rz; return o; };
       const paleMat = mat(theme==="minimal"||theme==="swiss"?0xfaf9f5:config.accent,.08,.72);
       switch(theme) {
         case "studio":
