@@ -126,10 +126,23 @@
       const limb=(x,y,length,material)=>{const pivot=new THREE.Group();pivot.position.set(x,y,0);person.add(pivot);mesh(new THREE.CapsuleGeometry(.095,length*.42,4,8),material,0,-length*.42,0,1,1,1,pivot);return pivot;};
       const armL=limb(-.31,1.48,.56,shirt),armR=limb(.31,1.48,.56,shirt);
       const legL=limb(-.14,.92,.67,pants),legR=limb(.14,.92,.67,pants);
-      mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,-.14,.08,.06,1,1,1,person);
-      mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,.14,.08,.06,1,1,1,person);
+      // Shoes are parented to the leg pivots so the feet follow the stride.
+      mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,0,-.66,.12,1,1,1,legL);
+      mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,0,-.66,.12,1,1,1,legR);
       const shadow=mesh(new THREE.CircleGeometry(.42,32),new THREE.MeshBasicMaterial({color:0x435c63,transparent:true,opacity:.22}),0,.012,0,1.1,1,1,person);shadow.rotation.x=-Math.PI/2;
-      movers.push(t=>{const stride=Math.sin(t*5.2);person.position.x=1.45+Math.sin(t*.48)*1.05;person.position.z=1.15+Math.cos(t*.48)*.32;person.rotation.y=Math.cos(t*.48)>0?Math.PI:0;legL.rotation.x=stride*.48;legR.rotation.x=-stride*.48;armL.rotation.x=-stride*.35;armR.rotation.x=stride*.35;person.position.y=Math.abs(stride)*.035;});
+      movers.push(t=>{
+        // Walk continuously along the office aisle, turning with the direction of travel.
+        const phase=t*.48, direction=Math.cos(phase), stride=Math.sin(t*5.2);
+        person.position.x=1.45+Math.sin(phase)*1.05;
+        person.position.z=1.15+Math.cos(phase)*.18;
+        person.rotation.y=direction>=0?Math.PI/2:-Math.PI/2;
+        legL.rotation.x=stride*.52;
+        legR.rotation.x=-stride*.52;
+        armL.rotation.x=-stride*.38;
+        armR.rotation.x=stride*.38;
+        person.position.y=Math.abs(stride)*.035;
+        person.rotation.z=-direction*.035;
+      });
       // Chair and desk accessories make the room read as a small designed workspace.
       const chair=mesh(new THREE.CylinderGeometry(.38,.4,.12,20),darkMat,.95,.52,-.1);mesh(new THREE.BoxGeometry(.12,.72,.12),darkMat,.95,.22,-.1);mesh(new THREE.BoxGeometry(.7,.7,.1),shirt,.95,.91,-.2);
       for(let i=0;i<4;i++)mesh(new THREE.BoxGeometry(.05,.5,.05),wood,-2.7+i*.15,.28,1.7);
