@@ -28,6 +28,20 @@
     .p-3d-stage.p-3d-ready .p-3d-loading{display:none}
     .p-3d-office{height:clamp(280px,38vw,440px);background:linear-gradient(180deg,#c6e5f1 0%,#e7f0e9 62%,#c2a985 62%,#9b8064 100%);border-color:#a4c4d1}
     .p-3d-office .p-3d-label{color:#234c60}.p-3d-office .p-3d-live{color:#176b51}
+    .p-3d-stage[data-theme="terminal"]{background:radial-gradient(ellipse at 50% 75%,#163a2a 0%,#07120f 68%);border-color:#286344}
+    .p-3d-stage[data-theme="editorial"],.p-3d-stage[data-theme="magazine"]{background:linear-gradient(135deg,#292019,#100e0d 72%);border-color:#7d6143}
+    .p-3d-stage[data-theme="brutalist"]{background:linear-gradient(145deg,#4a2518,#17110f 72%);border-color:#a64c2c}
+    .p-3d-stage[data-theme="cinema"],.p-3d-stage[data-theme="netflix"]{background:radial-gradient(ellipse at 50% 20%,#45131f,#10070d 72%);border-color:#6e1c2a}
+    .p-3d-stage[data-theme="minimal"],.p-3d-stage[data-theme="swiss"]{background:linear-gradient(145deg,#f7f6f2,#deddd8);border-color:#c9c6bf}
+    .p-3d-stage[data-theme="minimal"] .p-3d-label,.p-3d-stage[data-theme="swiss"] .p-3d-label{color:#393a38}
+    .p-3d-stage[data-theme="playful"]{background:radial-gradient(ellipse at 35% 35%,#542343,#20101e 72%);border-color:#a74782}
+    .p-3d-stage[data-theme="retro"]{background:linear-gradient(180deg,#55281c,#28130f 65%,#1c100e);border-color:#b76531}
+    .p-3d-stage[data-theme="neon"]{background:radial-gradient(ellipse at 50% 60%,#102b43,#030911 70%);border-color:#1c8f8a}
+    .p-3d-stage[data-theme="nature"]{background:linear-gradient(180deg,#1d3024,#101c15 70%);border-color:#52784a}
+    .p-3d-stage[data-theme="dashboard"]{background:linear-gradient(135deg,#102a43,#07111d 70%);border-color:#316eaa}
+    .p-3d-stage[data-theme="mono"]{background:linear-gradient(135deg,#292929,#090909 70%);border-color:#777}
+    .p-3d-stage[data-theme="pixel"]{background-color:#111b09;background-image:linear-gradient(#a9ed2920 1px,transparent 1px),linear-gradient(90deg,#a9ed2920 1px,transparent 1px);background-size:18px 18px;border-color:#83a52c}
+    .p-3d-stage[data-theme="future"]{background:radial-gradient(ellipse at 50% 50%,#123c59,#050d19 72%);border-color:#347da1}
     @media(max-width:600px){.p-3d-stage{height:260px;min-height:260px}.p-3d-office{height:300px}}
     @media(prefers-reduced-motion:reduce){.p-3d-stage canvas{opacity:.92}}
   `;
