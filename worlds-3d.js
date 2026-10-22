@@ -31,6 +31,7 @@
     .p-3d-office-world{position:fixed!important;inset:0!important;z-index:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;border:0!important;border-radius:0!important;pointer-events:none!important;overflow:hidden!important;background:linear-gradient(180deg,#a9d5e7 0%,#e4ece5 48%,#c5a883 100%)!important}
     .p-3d-office-world canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
     body.personal-site[data-landing-theme="office"]{background:transparent!important}
+    body[data-landing-theme="office"] main,body[data-landing-theme="office"] footer{position:relative;z-index:1}
     body[data-landing-theme="office"] main>section{position:relative;background:linear-gradient(135deg,rgba(9,18,27,.82),rgba(12,25,34,.60))!important;border:1px solid rgba(209,235,237,.19);border-radius:16px;backdrop-filter:blur(12px);box-shadow:0 22px 70px rgba(3,12,18,.22);margin-top:24px;margin-bottom:24px;padding-left:clamp(18px,3vw,38px);padding-right:clamp(18px,3vw,38px)}
     body[data-landing-theme="office"] .p-hero{background:linear-gradient(135deg,rgba(9,18,27,.84),rgba(12,25,34,.62))!important}
     body[data-landing-theme="office"] .p-nav{background:rgba(8,16,24,.78)!important;border-color:rgba(210,236,238,.18)!important}
