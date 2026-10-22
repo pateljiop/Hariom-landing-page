@@ -18,6 +18,15 @@
   host.appendChild(mount);
   if (!office) host.classList.add("p-has-3d");
 
+  // A small, accessible room directory connects the 3D set to real page sections.
+  if (office) {
+    const dock = document.createElement("nav");
+    dock.className = "p-office-dock";
+    dock.setAttribute("aria-label", "Explore the office");
+    dock.innerHTML = '<span class="p-office-dock-label">EXPLORE THE SPACE</span><a href="#projects"><span aria-hidden="true">▣</span> Projects</a><a href="#lab"><span aria-hidden="true">⌘</span> Build lab</a><a href="#notes"><span aria-hidden="true">▤</span> Notes</a><a href="#about"><span aria-hidden="true">◉</span> About</a><a href="#contact"><span aria-hidden="true">↗</span> Contact</a>';
+    document.body.appendChild(dock);
+  }
+
   const css = document.createElement("style");
   css.textContent = `
     .p-has-3d{position:relative!important;overflow:hidden}
@@ -39,7 +48,15 @@
     body[data-landing-theme="office"] .p-footer{background:rgba(7,15,22,.86)!important;border-color:rgba(210,236,238,.18)!important}
     body[data-landing-theme="office"] .p-world-switcher{background:rgba(9,18,27,.88)!important;border-color:rgba(210,236,238,.24)!important;backdrop-filter:blur(14px)}
     body[data-landing-theme="office"] .p-section-label{color:#b7d2dc}
-    @media(max-width:700px){body[data-landing-theme="office"] main>section{border-radius:12px;margin-top:14px;margin-bottom:14px;padding-left:16px;padding-right:16px}.p-3d-office-world{height:100dvh!important}}
+    .p-office-dock{position:fixed;z-index:20;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:5px;max-width:calc(100vw - 24px);padding:8px;border:1px solid rgba(207,231,235,.22);border-radius:18px;background:rgba(7,15,23,.88);box-shadow:0 14px 42px rgba(0,0,0,.3);backdrop-filter:blur(18px);color:#eaf4f4;font:500 11px/1.2 'DM Sans',sans-serif;white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+    .p-office-dock::-webkit-scrollbar{display:none}
+    .p-office-dock-label{padding:0 9px;color:#9ebbc4;font:9px/1.2 'DM Mono',monospace;letter-spacing:.1em}
+    .p-office-dock a{display:inline-flex;align-items:center;gap:6px;padding:10px 12px;border:1px solid transparent;border-radius:11px;color:inherit;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+    .p-office-dock a span{color:#8ce0c9;font-size:13px}
+    .p-office-dock a:hover,.p-office-dock a:focus-visible{background:rgba(132,211,204,.13);border-color:rgba(132,211,204,.28);outline:none;transform:translateY(-1px)}
+    .p-office-dock a:focus-visible{outline:2px solid #8ce0c9;outline-offset:2px}
+    body[data-landing-theme="office"]{scroll-behavior:smooth}
+    @media(max-width:700px){body[data-landing-theme="office"] main>section{border-radius:12px;margin-top:14px;margin-bottom:14px;padding-left:16px;padding-right:16px}.p-3d-office-world{height:100dvh!important}.p-office-dock{left:12px;right:12px;bottom:max(10px,env(safe-area-inset-bottom));transform:none;max-width:none;justify-content:flex-start;border-radius:14px}.p-office-dock-label{display:none}.p-office-dock a{padding:10px 11px}.p-office-dock a span{font-size:12px}}
     .p-3d-stage[data-theme="terminal"]{background:radial-gradient(ellipse at 50% 75%,#163a2a 0%,#07120f 68%);border-color:#286344}
     .p-3d-stage[data-theme="editorial"],.p-3d-stage[data-theme="magazine"]{background:linear-gradient(135deg,#292019,#100e0d 72%);border-color:#7d6143}
     .p-3d-stage[data-theme="brutalist"]{background:linear-gradient(145deg,#4a2518,#17110f 72%);border-color:#a64c2c}
@@ -335,6 +352,19 @@
       if(!alive)return;
       raf=requestAnimationFrame(animate);
       const t=performance.now()*.001;
+      if(office && !reduceMotion){
+        // Let the camera travel gently across the workspace as the visitor scrolls.
+        const maxScroll=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+        const progress=Math.min(1,Math.max(0,window.scrollY/maxScroll));
+        const eased=progress*progress*(3-2*progress);
+        camera.position.x=-.7+eased*1.4;
+        camera.position.y=5.05-Math.sin(progress*Math.PI)*.22;
+        camera.position.z=17.5-progress*1.15;
+        camera.lookAt(-.45+eased*.9,2.15,0);
+      } else if(office) {
+        camera.position.set(0,5.2,17.5);
+        camera.lookAt(0,2.2,0);
+      }
       if(!office){root.rotation.y=reduceMotion?-.12:Math.sin(t*.25)*.24;root.rotation.x=reduceMotion?0:Math.sin(t*.35)*.035;}
       movers.forEach(fn=>fn(reduceMotion?0:t));
       if(!office && !reduceMotion){root.position.y=.15+Math.sin(t*.8)*.07;}
