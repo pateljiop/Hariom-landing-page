@@ -66,7 +66,7 @@ const pages = [
             await page.waitForFunction(() => {
               const stage = document.querySelector(".p-3d-stage");
               return stage?.classList.contains("p-3d-ready") && stage.querySelector("canvas");
-            }, { timeout: 18000 });
+            }, null, { timeout: 18000 });
           } catch {
             failures.push(`${item.path}: 3D canvas did not reach ready state`);
           }
