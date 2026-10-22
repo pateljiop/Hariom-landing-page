@@ -6,17 +6,17 @@
   const theme = body.dataset.landingTheme || "studio";
   const office = theme === "office";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const host = document.querySelector(".p-workspace") || document.querySelector(".p-hero");
+  const host = office ? document.body : (document.querySelector(".p-workspace") || document.querySelector(".p-hero"));
   if (!host) return;
 
   const mount = document.createElement("div");
-  mount.className = "p-3d-stage" + (office ? " p-3d-office" : "");
+  mount.className = "p-3d-stage" + (office ? " p-3d-office p-3d-office-world" : "");
   mount.dataset.theme = theme;
   mount.setAttribute("role", "img");
   mount.setAttribute("aria-label", office ? "Animated 3D office with a walking character" : "Interactive animated 3D model for the " + theme + " portfolio theme");
   mount.innerHTML = '<div class="p-3d-label"><span>3D / ' + theme.toUpperCase() + '</span><span class="p-3d-live">● LIVE SCENE</span></div><div class="p-3d-loading" aria-hidden="true">BUILDING SCENE…</div>';
   host.appendChild(mount);
-  host.classList.add("p-has-3d");
+  if (!office) host.classList.add("p-has-3d");
 
   const css = document.createElement("style");
   css.textContent = `
@@ -28,6 +28,18 @@
     .p-3d-stage.p-3d-ready .p-3d-loading{display:none}
     .p-3d-office{height:clamp(280px,38vw,440px);background:linear-gradient(180deg,#c6e5f1 0%,#e7f0e9 62%,#c2a985 62%,#9b8064 100%);border-color:#a4c4d1}
     .p-3d-office .p-3d-label{color:#234c60}.p-3d-office .p-3d-live{color:#176b51}
+    .p-3d-office-world{position:fixed!important;inset:0!important;z-index:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;border:0!important;border-radius:0!important;pointer-events:none!important;overflow:hidden!important;background:linear-gradient(180deg,#a9d5e7 0%,#e4ece5 48%,#c5a883 100%)!important}
+    .p-3d-office-world canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
+    body.personal-site[data-landing-theme="office"]{background:transparent!important}
+    body[data-landing-theme="office"] main,body[data-landing-theme="office"] footer{position:relative;z-index:1}
+    body[data-landing-theme="office"] main>section{position:relative;background:linear-gradient(135deg,rgba(9,18,27,.82),rgba(12,25,34,.60))!important;border:1px solid rgba(209,235,237,.19);border-radius:16px;backdrop-filter:blur(12px);box-shadow:0 22px 70px rgba(3,12,18,.22);margin-top:24px;margin-bottom:24px;padding-left:clamp(18px,3vw,38px);padding-right:clamp(18px,3vw,38px)}
+    body[data-landing-theme="office"] .p-hero{background:linear-gradient(135deg,rgba(9,18,27,.84),rgba(12,25,34,.62))!important}
+    body[data-landing-theme="office"] .p-nav{background:rgba(8,16,24,.78)!important;border-color:rgba(210,236,238,.18)!important}
+    body[data-landing-theme="office"] .p-workspace{visibility:hidden;box-shadow:none!important;border:0!important;background:transparent!important}
+    body[data-landing-theme="office"] .p-footer{background:rgba(7,15,22,.86)!important;border-color:rgba(210,236,238,.18)!important}
+    body[data-landing-theme="office"] .p-world-switcher{background:rgba(9,18,27,.88)!important;border-color:rgba(210,236,238,.24)!important;backdrop-filter:blur(14px)}
+    body[data-landing-theme="office"] .p-section-label{color:#b7d2dc}
+    @media(max-width:700px){body[data-landing-theme="office"] main>section{border-radius:12px;margin-top:14px;margin-bottom:14px;padding-left:16px;padding-right:16px}.p-3d-office-world{height:100dvh!important}}
     .p-3d-stage[data-theme="terminal"]{background:radial-gradient(ellipse at 50% 75%,#163a2a 0%,#07120f 68%);border-color:#286344}
     .p-3d-stage[data-theme="editorial"],.p-3d-stage[data-theme="magazine"]{background:linear-gradient(135deg,#292019,#100e0d 72%);border-color:#7d6143}
     .p-3d-stage[data-theme="brutalist"]{background:linear-gradient(145deg,#4a2518,#17110f 72%);border-color:#a64c2c}
@@ -82,9 +94,9 @@
     const sceneColor = scenePalettes[theme] ?? scenePalettes.studio;
     scene.background = new THREE.Color(sceneColor);
     scene.fog = new THREE.Fog(sceneColor, 8, theme === "office" ? 22 : 26);
-    const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 80);
-    camera.position.set(0, office ? 3.1 : 2.4, office ? 9.2 : 8.3);
-    camera.lookAt(0, office ? 1.15 : 0.2, 0);
+    const camera = new THREE.PerspectiveCamera(office ? 46 : 36, 1, 0.1, 100);
+    camera.position.set(0, office ? 5.2 : 2.4, office ? 17.5 : 8.3);
+    camera.lookAt(0, office ? 2.2 : 0.2, 0);
     const renderer = new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:"low-power"});
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
     renderer.shadowMap.enabled = true;
@@ -126,53 +138,101 @@
     }
     const movers=[];
     if (office) {
-      // Walkable miniature office: desk, monitor, plant, windows and a rigged procedural character.
-      const wallMat=mat(0xe7efec,.05,.92), wood=mat(0x9c7757,.05,.72), glass= new THREE.MeshStandardMaterial({color:0x8fc5dc,roughness:.18,metalness:.15,transparent:true,opacity:.7});
-      mesh(new THREE.BoxGeometry(7,.12,4.5),wood,0,0,0,1,1,1,root);
-      for(let i=0;i<3;i++){
-        mesh(new THREE.BoxGeometry(1.25,2.05,.08),glass,-2.2+i*2.2,2.35,-2.05);
-        mesh(new THREE.BoxGeometry(.07,2.15,.12),darkMat,-2.2+i*2.2,2.35,-1.98);
+      // A full-room miniature office that stays behind every section of the page.
+      const wallMat=mat(0xe5edf0,.04,.94), wood=mat(0x9b7656,.05,.72);
+      const glass=new THREE.MeshStandardMaterial({color:0x8fc9df,roughness:.18,metalness:.12,transparent:true,opacity:.72});
+      const frame=mat(0x314b5b,.28,.48), plantGreen=mat(0x3e9b6d,.04,.8);
+      // Room shell and broad daylight windows.
+      mesh(new THREE.BoxGeometry(14,.16,11),wood,0,-.12,0,1,1,1,root);
+      mesh(new THREE.BoxGeometry(14,6,.16),wallMat,0,2.9,-4.7);
+      mesh(new THREE.BoxGeometry(.16,6,10),wallMat,-6.9,2.9,.1);
+      mesh(new THREE.BoxGeometry(.16,6,10),wallMat,6.9,2.9,.1);
+      mesh(new THREE.BoxGeometry(14,.18,11),mat(0xc6d0cf,.02,.95),0,5.9,0);
+      for(let i=0;i<4;i++){
+        const x=-4.65+i*3.1;
+        mesh(new THREE.BoxGeometry(2.7,2.45,.05),glass,x,3.65,-4.58);
+        mesh(new THREE.BoxGeometry(.09,2.62,.12),frame,x-1.38,3.65,-4.5);
+        mesh(new THREE.BoxGeometry(.09,2.62,.12),frame,x+1.38,3.65,-4.5);
+        mesh(new THREE.BoxGeometry(2.82,.09,.12),frame,x,4.96,-4.5);
+        mesh(new THREE.BoxGeometry(2.82,.09,.12),frame,x,2.34,-4.5);
+        mesh(new THREE.BoxGeometry(.07,2.45,.12),frame,x,3.65,-4.49);
       }
-      mesh(new THREE.BoxGeometry(2.2,.13,.9),wood,-1.25,1.05,-.65);
-      mesh(new THREE.BoxGeometry(.12,.98,.12),darkMat,-2, .5,-.65);
-      mesh(new THREE.BoxGeometry(.12,.98,.12),darkMat,-.5,.5,-.65);
-      mesh(new THREE.BoxGeometry(.85,.55,.07),darkMat,-1.25,1.43,-.85);
-      mesh(new THREE.BoxGeometry(.72,.42,.025),glass,-1.25,1.44,-.8);
-      mesh(new THREE.CylinderGeometry(.08,.12,.45,12),mat(0x5e9e70),.05,.22,-.8);
-      for(let i=0;i<5;i++){const leaf=mesh(new THREE.ConeGeometry(.09,.34,7),mat(i%2?0x2b966c:0x65b879),.05+Math.cos(i*1.25)*.15,.48+Math.sin(i*1.25)*.1,-.8);leaf.rotation.z=Math.cos(i*1.25)*.65;}
-      // A simple low-poly human rig with pivoted limbs, animated stride and arm swing.
-      const person=new THREE.Group();scene.add(person);person.position.set(1.45,0,1.2);
-      const skin=mat(0xb97d5b,.05,.65), shirt=mat(0x245d70,.12,.55), pants=mat(0x273447,.12,.6), shoes=mat(0xf0d5ad,.08,.6);
+      // Soft ceiling beams and warm office lights.
+      for(let i=0;i<5;i++){
+        mesh(new THREE.BoxGeometry(.12,.12,10),wood,-5.6+i*2.8,5.78,.1);
+        const lamp=mesh(new THREE.BoxGeometry(1.25,.06,.34),mat(0xfff1c6,.04,.28),-4.2+i*2.1,5.66,-.6);
+        const glow=new THREE.PointLight(0xffe4ad,.28,6);glow.position.set(-4.2+i*2.1,5.2,-.6);scene.add(glow);
+        movers.push(t=>{glow.intensity=.24+Math.sin(t*.8+i)*.025;});
+      }
+      // Main desk and a working monitor, keyboard, mug and desk lamp.
+      mesh(new THREE.BoxGeometry(3.6,.16,1.45),wood,-2.35,1.22,-.1);
+      for(const x of [-3.85,-.85])for(const z of [-.62,.42])mesh(new THREE.BoxGeometry(.12,1.2,.12),darkMat,x,.6,z);
+      mesh(new THREE.BoxGeometry(1.5,.9,.1),darkMat,-2.35,1.82,-.53);
+      mesh(new THREE.BoxGeometry(1.36,.75,.025),glass,-2.35,1.83,-.46);
+      mesh(new THREE.BoxGeometry(1.18,.04,.02),mat(0x4cdec0,.15,.3),-2.35,1.9,-.43);
+      mesh(new THREE.BoxGeometry(.85,.035,.32),mat(0x263440,.18,.55),-2.3,1.34,.08);
+      for(let i=0;i<8;i++)mesh(new THREE.BoxGeometry(.075,.012,.025),mat(0x9db8c1,.12,.55),-2.62+i*.09,1.365,.09);
+      mesh(new THREE.CylinderGeometry(.1,.12,.2,16),mat(0xf1e8d7,.04,.25),-1.15,1.39,.1);
+      const lampArm=mesh(new THREE.CylinderGeometry(.035,.035,.68,10),frame,-.7,1.64,-.18);lampArm.rotation.z=-.38;
+      mesh(new THREE.ConeGeometry(.22,.26,12),mat(0xd9b47b,.18,.38),-.58,1.98,-.18,1,1,1,root).rotation.z=Math.PI;
+      const deskLight=new THREE.PointLight(0xffc978,.35,3);deskLight.position.set(-.58,1.85,-.1);scene.add(deskLight);
+      // Bookshelf with books and a trailing plant on the right wall.
+      mesh(new THREE.BoxGeometry(1.55,3.4,.35),wood,5.55,1.7,-3.35);
+      for(let i=0;i<4;i++)mesh(new THREE.BoxGeometry(1.35,.09,.45),darkMat,5.55,.55+i*.82,-3.08);
+      const bookMats=[mat(0x477d8b,.02,.8),mat(0xc58c57,.02,.8),mat(0x4e9c77,.02,.8),mat(0x52657f,.02,.8)];
+      for(let row=0;row<3;row++)for(let i=0;i<5;i++){
+        const b=mesh(new THREE.BoxGeometry(.16,.38+(i%2)*.12,.2),bookMats[(i+row)%bookMats.length],4.98+i*.23,.78+row*.82,-3.08);
+        b.rotation.z=(i%2?-.04:.035);
+      }
+      mesh(new THREE.CylinderGeometry(.16,.2,.36,12),mat(0xb77c58,.02,.8),4.75,.32,-1.7);
+      for(let i=0;i<6;i++){
+        const leaf=mesh(new THREE.ConeGeometry(.12,.62,7),i%2?plantGreen:mat(0x65b879,.02,.82),4.75+Math.cos(i*1.05)*.22,.72+Math.sin(i*1.05)*.16,-1.7);
+        leaf.rotation.z=Math.cos(i*1.05)*.55;
+      }
+      // Meeting table and two chairs make the rest of the office visible behind the content.
+      mesh(new THREE.CylinderGeometry(1.25,1.3,.14,32),wood,2.45,.9,-2.05);
+      mesh(new THREE.CylinderGeometry(.12,.18,.85,12),darkMat,2.45,.42,-2.05);
+      for(let i=0;i<3;i++){
+        const a=i*Math.PI*2/3;
+        const x=2.45+Math.cos(a)*1.55,z=-2.05+Math.sin(a)*1.15;
+        mesh(new THREE.BoxGeometry(.72,.13,.66),darkMat,x,.54,z);
+        mesh(new THREE.BoxGeometry(.7,.7,.12),frame,x,.94,z-.24);
+        mesh(new THREE.CylinderGeometry(.045,.05,.45,8),darkMat,x,.28,z);
+      }
+      // Procedural walking character, rigged at the hips and shoulders.
+      const person=new THREE.Group();scene.add(person);person.position.set(1.3,0,2.5);
+      const skin=mat(0xb97d5b,.05,.65),shirt=mat(0x245d70,.12,.55),pants=mat(0x273447,.12,.6),shoes=mat(0xf0d5ad,.08,.6);
       mesh(new THREE.CapsuleGeometry(.25,.52,5,10),shirt,0,1.25,0,1,1,1,person);
       mesh(new THREE.SphereGeometry(.23,18,14),skin,0,1.93,0,1,1,1,person);
       mesh(new THREE.CylinderGeometry(.025,.035,.22,8),skin,0,1.68,.02,1,1,1,person);
       const limb=(x,y,length,material)=>{const pivot=new THREE.Group();pivot.position.set(x,y,0);person.add(pivot);mesh(new THREE.CapsuleGeometry(.095,length*.42,4,8),material,0,-length*.42,0,1,1,1,pivot);return pivot;};
       const armL=limb(-.31,1.48,.56,shirt),armR=limb(.31,1.48,.56,shirt);
       const legL=limb(-.14,.92,.67,pants),legR=limb(.14,.92,.67,pants);
-      // Shoes are parented to the leg pivots so the feet follow the stride.
       mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,0,-.66,.12,1,1,1,legL);
       mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,0,-.66,.12,1,1,1,legR);
       const shadow=mesh(new THREE.CircleGeometry(.42,32),new THREE.MeshBasicMaterial({color:0x435c63,transparent:true,opacity:.22}),0,.012,0,1.1,1,1,person);shadow.rotation.x=-Math.PI/2;
       movers.push(t=>{
-        // Walk continuously along the office aisle, turning with the direction of travel.
-        const phase=t*.48, direction=Math.cos(phase), stride=Math.sin(t*5.2);
-        person.position.x=1.45+Math.sin(phase)*1.05;
-        person.position.z=1.15+Math.cos(phase)*.18;
+        const phase=t*.32, stride=Math.sin(t*5.2), direction=Math.cos(phase);
+        person.position.x=Math.sin(phase)*3.6;
+        person.position.z=2.45+Math.cos(phase*.72)*.38;
         person.rotation.y=direction>=0?Math.PI/2:-Math.PI/2;
-        legL.rotation.x=stride*.52;
-        legR.rotation.x=-stride*.52;
-        armL.rotation.x=-stride*.38;
-        armR.rotation.x=stride*.38;
+        legL.rotation.x=stride*.52;legR.rotation.x=-stride*.52;
+        armL.rotation.x=-stride*.38;armR.rotation.x=stride*.38;
         person.position.y=Math.abs(stride)*.035;
         person.rotation.z=-direction*.035;
       });
-      // Chair and desk accessories make the room read as a small designed workspace.
-      const chair=mesh(new THREE.CylinderGeometry(.38,.4,.12,20),darkMat,.95,.52,-.1);mesh(new THREE.BoxGeometry(.12,.72,.12),darkMat,.95,.22,-.1);mesh(new THREE.BoxGeometry(.7,.7,.1),shirt,.95,.91,-.2);
-      for(let i=0;i<4;i++)mesh(new THREE.BoxGeometry(.05,.5,.05),wood,-2.7+i*.15,.28,1.7);
-      mesh(new THREE.BoxGeometry(.7,.5,.04),wallMat,2.7,1.3,-1.95);
-      mesh(new THREE.BoxGeometry(1.5,.08,.45),wood,1.8,.5,-1.15);
-      const mug=mesh(new THREE.CylinderGeometry(.1,.09,.18,16),mat(0xf4eee5,.05,.2),2,.64,-1.1);
-      movers.push(t=>{mug.rotation.y=Math.sin(t*1.2)*.08;});
+      // Subtle animated screens and a plant sway add life to the whole room.
+      const screenGlow=mesh(new THREE.BoxGeometry(1.28,.04,.02),mat(0x62e5ce,.15,.25),-2.35,2.04,-.43);
+      movers.push(t=>{screenGlow.material.emissive.setHex(0x164b43);screenGlow.material.emissiveIntensity=.25+Math.sin(t*1.8)*.1;});
+      // Long aisle runner and floor guides make the space feel walkable.
+      mesh(new THREE.BoxGeometry(2.8,.025,5.4),mat(0x718c8e,.02,.9),.35,-.015,1.25);
+      for(let i=0;i<8;i++)mesh(new THREE.BoxGeometry(.035,.012,.28),mat(0xd8e4dc,.02,.9),.35,-.001,-1.05+i*.62);
+      // Ambient dust motes drift through the room.
+      for(let i=0;i<36;i++){
+        const x=((i*17)%13-6)*.72,y=1.1+(i%6)*.68,z=((i*11)%9-4)*.72;
+        const dot=mesh(new THREE.SphereGeometry(.018+(i%3)*.008,8,8),i%4?accentMat:mainMat,x,y,z);
+        movers.push(t=>{dot.position.x=x+Math.sin(t*.22+i)*.16;dot.position.y=y+Math.sin(t*.7+i)*.12;});
+      }
     } else {
       // Theme-specific, procedural hero sculpture — each theme gets a distinct silhouette.
       switch(config.shape){
