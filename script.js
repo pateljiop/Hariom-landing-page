@@ -1,48 +1,62 @@
 (() => {
 
-  // Luxury entry room: choose a direction, then apply it to the whole portfolio.
+  // The selector is intentionally self-contained; it must not depend on a hidden gallery.
   const entry = document.querySelector('#landing-entry');
   const entryOptions = document.querySelector('#entry-options');
   const enterButton = document.querySelector('#entry-enter');
   const defaultButton = document.querySelector('#entry-default');
-  const gallery = document.querySelector('#template-grid');
-  if (entry && entryOptions && enterButton && gallery) {
-    const styleButtons = [...gallery.querySelectorAll('[data-template]')];
+  const worlds = [
+    ['studio', 'Independent Studio', 'A considered, premium portfolio'],
+    ['terminal', 'Developer Terminal', 'Code, logs and technical details'],
+    ['editorial', 'Editorial', 'Typography-led, art-directed layout'],
+    ['brutalist', 'Brutalist', 'Bold grids and raw geometry'],
+    ['cinema', 'Cinema', 'Cinematic frames and storytelling'],
+    ['minimal', 'Minimal', 'Quiet, precise and focused'],
+    ['playful', 'Playful', 'Colorful shapes and lively motion'],
+    ['retro', 'Retro', 'Warm nostalgia and vintage cues'],
+    ['swiss', 'Swiss Grid', 'Structured typography and order'],
+    ['neon', 'Neon Nights', 'High contrast and luminous accents'],
+    ['nature', 'Nature', 'Organic forms and earthy tones'],
+    ['dashboard', 'Dashboard', 'Data-rich product interface'],
+    ['magazine', 'Magazine', 'Editorial covers and feature stories'],
+    ['mono', 'Monochrome', 'Black, white and sharp contrast'],
+    ['pixel', 'Pixel World', 'Pixel-inspired digital playground'],
+    ['future', 'Future Lab', 'Experimental, forward-looking interface'],
+    ['office', 'Office Tour', 'Explore a developer workspace'],
+    ['netflix', 'Streaming Stories', 'A streaming-service-inspired layout']
+  ];
+  if (entry && entryOptions && enterButton) {
     let chosen = null;
-    styleButtons.forEach(button => {
+    worlds.forEach(([id, name, description], index) => {
       const option = document.createElement('button');
       option.type = 'button';
       option.className = 'p-entry-option';
-      option.dataset.launchTemplate = button.dataset.template;
-      const number = button.querySelector('span')?.textContent || '';
-      const name = button.querySelector('b')?.textContent || button.dataset.template;
-      const description = button.querySelector('small')?.textContent || 'Explore this direction';
-      option.innerHTML = '<span class="p-entry-option-no">' + number + '</span><span class="p-entry-option-copy"><b></b><small></small></span><span class="p-entry-option-arrow">↗</span>';
+      option.dataset.launchTemplate = id;
+      option.innerHTML = '<span class="p-entry-option-no"></span><span class="p-entry-option-copy"><b></b><small></small></span><span class="p-entry-option-arrow">↗</span>';
+      option.querySelector('.p-entry-option-no').textContent = String(index + 1).padStart(2, '0');
       option.querySelector('b').textContent = name;
       option.querySelector('small').textContent = description;
       option.addEventListener('click', () => {
-        chosen = button.dataset.template;
+        chosen = id;
         entryOptions.querySelectorAll('.p-entry-option').forEach(item => {
           const active = item === option;
           item.classList.toggle('is-selected', active);
           item.setAttribute('aria-pressed', String(active));
         });
         enterButton.disabled = false;
-        enterButton.querySelector('span').textContent = '↗';
         enterButton.dataset.chosen = chosen;
       });
       option.setAttribute('aria-pressed', 'false');
       entryOptions.append(option);
     });
     const launch = id => {
-      if (!id || !styleButtons.some(button => button.dataset.template === id)) return;
-      // Each selection is a real, dedicated HTML page with its own theme and hero content.
+      if (!worlds.some(([worldId]) => worldId === id)) return;
       window.location.href = 'worlds/' + encodeURIComponent(id) + '.html';
     };
     enterButton.addEventListener('click', () => launch(chosen));
     defaultButton?.addEventListener('click', () => launch('studio'));
     document.addEventListener('keydown', event => {
-      if (!entry.hidden && event.key === 'Escape') { /* keep the selection deliberate */ event.preventDefault(); }
+      if (!entry.hidden && event.key === 'Escape') event.preventDefault();
     });
   }
 
