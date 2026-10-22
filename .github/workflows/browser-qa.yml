@@ -1,0 +1,45 @@
+name: Browser QA
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feature/3d-walking-office]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-and-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Static repository QA
+        run: |
+          python3 qa-check.py
+          python3 -m py_compile qa-check.py
+          node --check script.js
+          node --check worlds-3d.js
+          git diff --check
+
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Run real browser checks
+        run: node tests/browser-qa.cjs
