@@ -11,6 +11,7 @@
 
   const mount = document.createElement("div");
   mount.className = "p-3d-stage" + (office ? " p-3d-office" : "");
+  mount.dataset.theme = theme;
   mount.setAttribute("role", "img");
   mount.setAttribute("aria-label", office ? "Animated 3D office with a walking character" : "Interactive animated 3D model for the " + theme + " portfolio theme");
   mount.innerHTML = '<div class="p-3d-label"><span>3D / ' + theme.toUpperCase() + '</span><span class="p-3d-live">● LIVE SCENE</span></div><div class="p-3d-loading" aria-hidden="true">BUILDING SCENE…</div>';
@@ -57,8 +58,16 @@
   import("https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js").then(THREE => {
     if (!mount.isConnected) return;
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(office ? 0xc6e5f1 : 0x0b1015);
-    scene.fog = new THREE.Fog(office ? 0xc6e5f1 : 0x0b1015, 8, 22);
+    const scenePalettes = {
+      studio:0x10170d, terminal:0x06120e, editorial:0x201a17, brutalist:0x21140f,
+      cinema:0x100711, minimal:0xf0f0ed, playful:0x281126, retro:0x29140c,
+      swiss:0xf1eee8, neon:0x050d18, nature:0x142019, dashboard:0x081625,
+      magazine:0x24170f, mono:0x101010, pixel:0x111b09, future:0x071526,
+      office:0xc6e5f1, netflix:0x17080a
+    };
+    const sceneColor = scenePalettes[theme] ?? scenePalettes.studio;
+    scene.background = new THREE.Color(sceneColor);
+    scene.fog = new THREE.Fog(sceneColor, 8, theme === "office" ? 22 : 26);
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 80);
     camera.position.set(0, office ? 3.1 : 2.4, office ? 9.2 : 8.3);
     camera.lookAt(0, office ? 1.15 : 0.2, 0);
@@ -80,8 +89,8 @@
     const floorMat = new THREE.MeshStandardMaterial({color:office?0xb99b79:0x111923,roughness:.86,metalness:.08});
     const floor = new THREE.Mesh(new THREE.PlaneGeometry(30,30),floorMat);
     floor.rotation.x=-Math.PI/2; floor.position.y=-.08; floor.receiveShadow=true; scene.add(floor);
-    const grid = new THREE.GridHelper(16,32,office?0x789ba1:config.color,office?0x9ab3b3:0x26313b);
-    grid.position.y=-.065; grid.material.transparent=true; grid.material.opacity=office?.22:.32; scene.add(grid);
+    const grid = new THREE.GridHelper(16,32,office?0x789ba1:(theme==="minimal"||theme==="swiss"?0xb9b5ae:config.color),office?0x9ab3b3:(theme==="minimal"||theme==="swiss"?0xd6d2ca:0x26313b));
+    grid.position.y=-.065; grid.material.transparent=true; grid.material.opacity=office?.22:(theme==="minimal"||theme==="swiss"?.2:.32); scene.add(grid);
     const mat=(c,metal=.2,rough=.34)=>new THREE.MeshStandardMaterial({color:c,metalness:metal,roughness:rough});
     const mainMat=mat(config.color,.45,.25), accentMat=mat(config.accent,.3,.3), darkMat=mat(office?0x29465a:0x202c3a,.25,.48);
     const root=new THREE.Group(); scene.add(root);
@@ -170,6 +179,69 @@
         case "pixels": for(let i=0;i<12;i++){const x=(i%4-1.5)*.42,y=(Math.floor(i/4)-1)*.42;mesh(geo.box,i%3?mainMat:accentMat,x,y+.35,0,.3,.3,.3);}break;
         case "crystal": mesh(geo.octa,mainMat,0,.3,0,.95,1.4,.85);mesh(geo.octa,accentMat,.55,.35,.2,.38,.58,.38);ring(1.2,.025,accentMat,0,.3,0,.9,.2);break;
         case "reels": for(let i=0;i<3;i++){const reel=mesh(geo.cylinder,i===1?accentMat:mainMat,-.75+i*.75,.25,0,.32,1.2,.32);reel.rotation.z=.25*(i-1);for(let j=0;j<5;j++)mesh(new THREE.SphereGeometry(.07,8,8),darkMat,-.75+i*.75,.25+(j-2)*.22,.3,.7,.7,.7);}break;
+      }
+      // Build a distinct environment for each art direction, not just a floating sculpture.
+      const environment = new THREE.Group(); scene.add(environment);
+      const envBox = (x,y,z,sx,sy,sz,material) => mesh(geo.box,material,x,y,z,sx,sy,sz,environment);
+      const envRing = (r,tube,material,x,y,z,rx=0,rz=0) => ring(r,tube,material,x,y,z,rx,rz);
+      const paleMat = mat(theme==="minimal"||theme==="swiss"?0xfaf9f5:config.accent,.08,.72);
+      switch(theme) {
+        case "studio":
+          envRing(2.35,.035,accentMat,-2,.85,-1.3,.18,.12);
+          envBox(-2.15,.55,-1.2,.08,1.1,.08,darkMat); envBox(2.15,.55,-1.2,.08,1.1,.08,darkMat);
+          envBox(0,1.85,-1.8,3.8,.06,.08,accentMat); break;
+        case "terminal":
+          for(let i=0;i<5;i++){envBox(-2.5+i*.18,.3+i*.36,-1.4,.045,.22,.045,mainMat);envBox(1.65+i*.16,.2+i*.26,-1.25,.04,.18,.04,accentMat);}
+          envBox(-1.7,1.7,-1.8,1.8,.04,.04,mainMat); envBox(1.5,1.25,-1.8,1.1,.04,.04,accentMat); break;
+        case "editorial":
+          for(let i=0;i<4;i++){envBox(-2.3+i*.16,.48+i*.04,-1.1,.09,.95+i*.08,.48,i%2?accentMat:mainMat);}
+          envBox(2,1.05,-1.2,.04,2,.04,accentMat); envBox(2.35,.35,-1.2,.04,.7,.04,mainMat); break;
+        case "brutalist":
+          envBox(-2.1,.8,-1.5,.72,1.6,.65,darkMat);envBox(2.05,.55,-1.2,.9,1.1,.8,mainMat);
+          envBox(-1.2,1.7,-1.8,1.7,.12,.7,accentMat);envBox(1.25,.16,-1.7,1.4,.3,.55,darkMat); break;
+        case "cinema":
+          envBox(0,1.3,-2.1,3.7,2.25,.12,darkMat);
+          envBox(0,1.3,-2,2.8,1.45,.035,mainMat);
+          for(let i=0;i<5;i++){envBox(-2+i,0.18,-.9,.48,.36,.42,darkMat);}
+          envRing(1.8,.035,accentMat,0,1.2,-.7,Math.PI/2,0); break;
+        case "minimal":
+          envBox(-2.3,.75,-1.4,.08,1.5,.08,darkMat);envBox(2.3,.75,-1.4,.08,1.5,.08,darkMat);
+          envBox(0,1.55,-1.4,4.7,.06,.08,paleMat); break;
+        case "playful":
+          for(let i=0;i<7;i++){const b=envBox(-2.8+i*.9,.12+(i%3)*.18,-1.3,.25,.25,.25,i%2?accentMat:mainMat);b.rotation.set(i*.2,i*.3,i*.18);}
+          envRing(.48,.12,accentMat,2,.95,-.8,.7,.2);break;
+        case "retro":
+          envBox(0,.45,-2,4.8,.05,.05,accentMat);
+          for(let i=0;i<7;i++)envBox(-2.5+i*.8,.08,-1.8,.025,.9,.025,mainMat);
+          envRing(2.15,.025,accentMat,0,.25,-1.4,Math.PI/2,0);break;
+        case "swiss":
+          for(let i=0;i<6;i++){envBox(-2.4+i*.8,.04,-1.5,.018,2.5,.018,darkMat);envBox(0,.15+i*.3,-1.5,4.8,.018,.018,darkMat);}
+          envBox(-1.75,1.35,-1.3,.65,.65,.04,mainMat);break;
+        case "neon":
+          for(let i=0;i<8;i++){const h=.5+(i*37%13)*.11;envBox(-3+i*.85,h/2,-1.7,.48,h,.25,i%3?darkMat:mainMat);envBox(-3+i*.85,h+.08,-1.7,.32,.035,.27,accentMat);}
+          envRing(2.1,.04,accentMat,0,1.25,-1.1,.5,.2);break;
+        case "nature":
+          for(let i=0;i<5;i++){const x=-2.8+i*1.4;envBox(x,.55,-1.5,.12,1.1,.12,darkMat);const crown=mesh(new THREE.ConeGeometry(.52,1.05,7),i%2?mainMat:accentMat,x,1.35,-1.5,1,1,1,environment);crown.rotation.z=(i%2?.1:-.1);}
+          envRing(1.8,.025,accentMat,0,.3,-.9,.7,.15);break;
+        case "dashboard":
+          for(let i=0;i<6;i++){envBox(-2.5+i*.85,.35+(i%4)*.18,-1.3,.48,.7+(i%4)*.36,.16,i%2?accentMat:mainMat);}
+          envBox(0,1.9,-1.5,4.8,.035,.035,accentMat);break;
+        case "magazine":
+          envBox(-2.2,.95,-1.45,.06,1.9,.06,accentMat);envBox(2.2,.95,-1.45,.06,1.9,.06,accentMat);
+          envBox(0,1.85,-1.45,4.4,.06,.06,mainMat);envBox(0,.15,-1.45,4.4,.06,.06,mainMat);break;
+        case "mono":
+          for(let i=0;i<4;i++){const wire=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(.55,.55,.55)),new THREE.LineBasicMaterial({color:config.color}));wire.position.set(-2+i*1.3,.5,-1.3);environment.add(wire);}
+          envRing(1.9,.018,accentMat,0,.6,-1.2,Math.PI/2,.2);break;
+        case "pixel":
+          for(let i=0;i<18;i++){const x=(i%6-2.5)*.72,y=.15+Math.floor(i/6)*.55;envBox(x,y,-1.5,.28,.28,.28,i%4===0?accentMat:mainMat);}
+          break;
+        case "future":
+          for(let i=0;i<5;i++){const p=mesh(geo.octa,i%2?accentMat:mainMat,-2.4+i*1.2,.35+(i%2)*.35,-1.3,.28,.6,.28,environment);p.rotation.y=i*.4;}
+          envRing(2.3,.018,accentMat,0,1,-1.2,.9,.25);break;
+        case "netflix":
+          envBox(0,1.2,-2,4.1,2.1,.08,darkMat);
+          for(let i=0;i<3;i++){const reel=mesh(geo.cylinder,mainMat,-1.1+i*1.1,.55,-1.5,.22,.7,.22,environment);reel.rotation.z=.16*(i-1);}
+          envRing(1.9,.03,accentMat,0,.9,-.9,Math.PI/2,.15);break;
       }
       // Orbiting motes create depth without stealing attention from the page.
       for(let i=0;i<28;i++){
