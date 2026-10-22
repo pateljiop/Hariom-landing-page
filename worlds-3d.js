@@ -18,6 +18,14 @@
   host.appendChild(mount);
   if (!office) host.classList.add("p-has-3d");
 
+  // A virtual-office HUD lets visitors tour the room and meet the employee.
+  if (office) {
+    const hud = document.createElement("div");
+    hud.className = "p-office-hud";
+    hud.innerHTML = '<div class="p-office-brand"><span class="p-office-brand-mark">H.</span><div><strong>HARIOM BUILDS</strong><small>VIRTUAL OFFICE · LIVE TOUR</small></div><span class="p-office-live"><i></i> OPEN</span></div><div class="p-office-employee"><span class="p-office-avatar">H</span><div><strong>Hariom <em>· Employee</em></strong><small data-office-status>Walking around the workspace</small></div><span class="p-office-presence">● ONLINE</span></div><div class="p-office-zone-card" aria-live="polite"><small data-office-zone-label>WORKSPACE OVERVIEW</small><strong data-office-zone-title>Welcome to my office</strong><p data-office-zone-copy>Choose a zone below or tap a glowing marker in the room to explore.</p><a data-office-zone-link href="#projects">Explore projects ↗</a></div><nav class="p-office-controls" aria-label="Explore virtual office"><span class="p-office-controls-title">EXPLORE OFFICE</span><button type="button" data-office-zone="overview" aria-pressed="true"><span>⌂</span> Overview</button><button type="button" data-office-zone="desk" aria-pressed="false"><span>▣</span> Developer desk</button><button type="button" data-office-zone="projects" aria-pressed="false"><span>▤</span> Project wall</button><button type="button" data-office-zone="library" aria-pressed="false"><span>▥</span> Bookshelf</button><button type="button" data-office-zone="meeting" aria-pressed="false"><span>◉</span> Meeting area</button><button type="button" data-office-zone="employee" aria-pressed="false"><span>↗</span> Meet employee</button></nav><span class="p-office-hint">TIP · CLICK A GLOWING MARKER TO VISIT A ZONE</span>';
+    document.body.appendChild(hud);
+  }
+
   const css = document.createElement("style");
   css.textContent = `
     .p-has-3d{position:relative!important;overflow:hidden}
@@ -28,7 +36,7 @@
     .p-3d-stage.p-3d-ready .p-3d-loading{display:none}
     .p-3d-office{height:clamp(280px,38vw,440px);background:linear-gradient(180deg,#c6e5f1 0%,#e7f0e9 62%,#c2a985 62%,#9b8064 100%);border-color:#a4c4d1}
     .p-3d-office .p-3d-label{color:#234c60}.p-3d-office .p-3d-live{color:#176b51}
-    .p-3d-office-world{position:fixed!important;inset:0!important;z-index:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;border:0!important;border-radius:0!important;pointer-events:none!important;overflow:hidden!important;background:linear-gradient(180deg,#a9d5e7 0%,#e4ece5 48%,#c5a883 100%)!important}
+    .p-3d-office-world{position:fixed!important;inset:0!important;z-index:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;border:0!important;border-radius:0!important;pointer-events:auto!important;overflow:hidden!important;background:linear-gradient(180deg,#a9d5e7 0%,#e4ece5 48%,#c5a883 100%)!important}
     .p-3d-office-world canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
     body.personal-site[data-landing-theme="office"]{background:transparent!important}
     body[data-landing-theme="office"] main,body[data-landing-theme="office"] footer{position:relative;z-index:1}
@@ -39,7 +47,34 @@
     body[data-landing-theme="office"] .p-footer{background:rgba(7,15,22,.86)!important;border-color:rgba(210,236,238,.18)!important}
     body[data-landing-theme="office"] .p-world-switcher{background:rgba(9,18,27,.88)!important;border-color:rgba(210,236,238,.24)!important;backdrop-filter:blur(14px)}
     body[data-landing-theme="office"] .p-section-label{color:#b7d2dc}
-    @media(max-width:700px){body[data-landing-theme="office"] main>section{border-radius:12px;margin-top:14px;margin-bottom:14px;padding-left:16px;padding-right:16px}.p-3d-office-world{height:100dvh!important}}
+    .p-office-hud{position:fixed;z-index:25;inset:18px 18px 20px;pointer-events:none;color:#f0f7f6;font-family:'DM Sans',sans-serif}
+    .p-office-brand,.p-office-employee,.p-office-zone-card,.p-office-controls{pointer-events:auto;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);background:rgba(7,18,26,.84);border:1px solid rgba(199,229,231,.2);box-shadow:0 18px 55px rgba(0,0,0,.22)}
+    .p-office-brand{position:absolute;top:0;left:0;display:flex;align-items:center;gap:11px;padding:12px 15px;border-radius:16px}
+    .p-office-brand-mark{display:grid;place-items:center;width:39px;height:39px;border-radius:12px;background:#b8f2dc;color:#12372f;font:700 19px 'Space Grotesk',sans-serif}
+    .p-office-brand strong,.p-office-employee strong{display:block;font-size:11px;letter-spacing:.1em}
+    .p-office-brand small,.p-office-employee small{display:block;margin-top:4px;color:#a6c2c7;font:9px 'DM Mono',monospace;letter-spacing:.06em}
+    .p-office-live{margin-left:10px;padding:6px 8px;border-radius:9px;background:#173a33;color:#a8f0d2;font:9px 'DM Mono',monospace}
+    .p-office-live i{display:inline-block;width:6px;height:6px;margin-right:4px;border-radius:50%;background:#7cf0bb;box-shadow:0 0 10px #7cf0bb}
+    .p-office-employee{position:absolute;top:0;right:0;display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:16px}
+    .p-office-avatar{display:grid;place-items:center;width:37px;height:37px;border-radius:50%;background:linear-gradient(135deg,#e5c69b,#9a6847);color:#2d2119;font-weight:700}
+    .p-office-employee strong{letter-spacing:0}.p-office-employee strong em{font-weight:400;color:#a6c2c7;font-style:normal}
+    .p-office-presence{margin-left:8px;color:#8ce6bd;font:9px 'DM Mono',monospace;white-space:nowrap}
+    .p-office-zone-card{position:absolute;left:0;top:78px;width:min(310px,30vw);padding:19px;border-radius:18px}
+    .p-office-zone-card>small{color:#8ce6bd;font:9px 'DM Mono',monospace;letter-spacing:.14em}
+    .p-office-zone-card>strong{display:block;margin-top:9px;font:600 21px/1.15 'Space Grotesk',sans-serif}
+    .p-office-zone-card p{margin:9px 0 14px;color:#bfd0d3;font-size:12px;line-height:1.55}
+    .p-office-zone-card a{display:inline-block;color:#a8f0d2;text-decoration:none;font-size:11px;border-bottom:1px solid #477f70;padding-bottom:3px}
+    .p-office-controls{position:absolute;bottom:0;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:5px;max-width:calc(100vw - 36px);padding:8px;border-radius:17px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+    .p-office-controls::-webkit-scrollbar{display:none}
+    .p-office-controls-title{padding:0 9px;color:#9ebbc4;font:9px 'DM Mono',monospace;letter-spacing:.1em}
+    .p-office-controls button{display:inline-flex;align-items:center;gap:7px;padding:11px 13px;border:1px solid transparent;border-radius:11px;background:transparent;color:#e7f2f1;font:500 11px 'DM Sans',sans-serif;cursor:pointer;transition:background .2s,border-color .2s}
+    .p-office-controls button span{color:#8ce6bd;font-size:14px}
+    .p-office-controls button:hover,.p-office-controls button:focus-visible,.p-office-controls button[aria-pressed="true"]{background:rgba(132,211,204,.14);border-color:rgba(132,211,204,.3);outline:none}
+    .p-office-controls button:focus-visible{outline:2px solid #8ce6bd;outline-offset:2px}
+    .p-office-hint{position:absolute;bottom:76px;left:50%;transform:translateX(-50%);color:rgba(235,247,246,.76);font:9px 'DM Mono',monospace;letter-spacing:.08em;text-shadow:0 2px 6px #07121a;white-space:nowrap}
+    body[data-landing-theme="office"]{scroll-behavior:smooth}
+    @media(prefers-reduced-motion:reduce){body[data-landing-theme="office"]{scroll-behavior:auto}.p-office-controls button{transition:none}}
+    @media(max-width:700px){body[data-landing-theme="office"] main>section{border-radius:12px;margin-top:14px;margin-bottom:14px;padding-left:16px;padding-right:16px}.p-3d-office-world{height:100dvh!important}.p-office-hud{inset:10px 10px 12px}.p-office-brand{padding:8px 10px}.p-office-brand-mark{width:32px;height:32px}.p-office-brand strong{font-size:9px}.p-office-brand small{font-size:7px}.p-office-live{display:none}.p-office-employee{top:55px;right:0;padding:7px 9px;gap:7px}.p-office-avatar{width:29px;height:29px}.p-office-employee strong{font-size:10px}.p-office-employee small{font-size:8px}.p-office-presence{display:none}.p-office-zone-card{top:103px;width:min(230px,66vw);padding:13px}.p-office-zone-card>strong{font-size:17px}.p-office-zone-card p{font-size:11px;margin-bottom:9px}.p-office-controls{left:0;right:0;bottom:0;transform:none;max-width:none;justify-content:flex-start;border-radius:14px;padding:6px}.p-office-controls-title{display:none}.p-office-controls button{padding:10px 11px;font-size:10px}.p-office-hint{display:none}}
     .p-3d-stage[data-theme="terminal"]{background:radial-gradient(ellipse at 50% 75%,#163a2a 0%,#07120f 68%);border-color:#286344}
     .p-3d-stage[data-theme="editorial"],.p-3d-stage[data-theme="magazine"]{background:linear-gradient(135deg,#292019,#100e0d 72%);border-color:#7d6143}
     .p-3d-stage[data-theme="brutalist"]{background:linear-gradient(145deg,#4a2518,#17110f 72%);border-color:#a64c2c}
@@ -137,6 +172,16 @@
       const o=mesh(new THREE.TorusGeometry(radius,tube,12,72),m,x,y,z);o.rotation.x=rx;o.rotation.z=rz;return o;
     }
     const movers=[];
+    let employee=null, employeeLegs=null, employeeArms=null;
+    let employeeGoal={x:1.3,z:2.5}, employeeRouteIndex=0, employeeRouteClock=0;
+    const officeZones={
+      overview:{camera:[0,5.2,17.5],look:[0,2.2,0],employee:[1.3,2.5],label:"WORKSPACE OVERVIEW",title:"Welcome to my office",copy:"Choose a zone below or tap a glowing marker in the room to explore.",link:"#projects",status:"Walking around the workspace"},
+      desk:{camera:[-2.5,3.7,8.8],look:[-2.1,1.55,-.2],employee:[-1.25,1.2],label:"ZONE 01 · BUILD DESK",title:"Where ideas become code",copy:"The daily workstation for planning, coding, testing and shipping real projects.",link:"#lab",status:"Heading to the developer desk"},
+      projects:{camera:[0,4.2,5.2],look:[0,3.1,-4.25],employee:[-.6,1.8],label:"ZONE 02 · PROJECT WALL",title:"Projects in progress",copy:"A closer look at the products, experiments and tools being built.",link:"#projects",status:"Checking the project wall"},
+      library:{camera:[5.1,3.7,5.3],look:[5.1,1.7,-3],employee:[4.35,-.6],label:"ZONE 03 · BOOKSHELF",title:"Ideas and references",copy:"A small library of references, notes and inspiration behind the work.",link:"#notes",status:"Visiting the bookshelf"},
+      meeting:{camera:[4,3.6,4.6],look:[2.5,1,-2],employee:[3.6,-1.8],label:"ZONE 04 · MEETING AREA",title:"Plan. Review. Improve.",copy:"The collaboration space for mapping out ideas and reviewing what comes next.",link:"#about",status:"Walking to the meeting area"},
+      employee:{camera:[1.4,3.1,8.8],look:[1.3,1.35,2.5],employee:[1.3,2.5],label:"MEET THE EMPLOYEE",title:"Hey, I’m Hariom",copy:"Developer, builder and the person behind this workspace. Pick a zone to see what I’m working on.",link:"#contact",status:"Ready to say hello"}
+    };
     if (office) {
       // A full-room miniature office that stays behind every section of the page.
       const wallMat=mat(0xe5edf0,.04,.94), wood=mat(0x9b7656,.05,.72);
@@ -200,26 +245,32 @@
         mesh(new THREE.CylinderGeometry(.045,.05,.45,8),darkMat,x,.28,z);
       }
       // Procedural walking character, rigged at the hips and shoulders.
-      const person=new THREE.Group();scene.add(person);person.position.set(1.3,0,2.5);
+      // Procedural employee with badge, articulated limbs and waypoint-based walking.
+      employee=new THREE.Group();scene.add(employee);employee.position.set(1.3,0,2.5);
       const skin=mat(0xb97d5b,.05,.65),shirt=mat(0x245d70,.12,.55),pants=mat(0x273447,.12,.6),shoes=mat(0xf0d5ad,.08,.6);
-      mesh(new THREE.CapsuleGeometry(.25,.52,5,10),shirt,0,1.25,0,1,1,1,person);
-      mesh(new THREE.SphereGeometry(.23,18,14),skin,0,1.93,0,1,1,1,person);
-      mesh(new THREE.CylinderGeometry(.025,.035,.22,8),skin,0,1.68,.02,1,1,1,person);
-      const limb=(x,y,length,material)=>{const pivot=new THREE.Group();pivot.position.set(x,y,0);person.add(pivot);mesh(new THREE.CapsuleGeometry(.095,length*.42,4,8),material,0,-length*.42,0,1,1,1,pivot);return pivot;};
+      mesh(new THREE.CapsuleGeometry(.25,.52,5,10),shirt,0,1.25,0,1,1,1,employee);
+      mesh(new THREE.SphereGeometry(.23,18,14),skin,0,1.93,0,1,1,1,employee);
+      mesh(new THREE.CylinderGeometry(.025,.035,.22,8),skin,0,1.68,.02,1,1,1,employee);
+      mesh(new THREE.BoxGeometry(.1,.22,.035),mat(0x8ce6bd,.08,.4),-.02,1.38,.245,1,1,1,employee);
+      mesh(new THREE.BoxGeometry(.16,.13,.04),mat(0xf1e7d0,.05,.5),.12,1.27,.245,1,1,1,employee);
+      const limb=(x,y,length,material)=>{const pivot=new THREE.Group();pivot.position.set(x,y,0);employee.add(pivot);mesh(new THREE.CapsuleGeometry(.095,length*.42,4,8),material,0,-length*.42,0,1,1,1,pivot);return pivot;};
       const armL=limb(-.31,1.48,.56,shirt),armR=limb(.31,1.48,.56,shirt);
       const legL=limb(-.14,.92,.67,pants),legR=limb(.14,.92,.67,pants);
-      mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,0,-.66,.12,1,1,1,legL);
-      mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,0,-.66,.12,1,1,1,legR);
-      const shadow=mesh(new THREE.CircleGeometry(.42,32),new THREE.MeshBasicMaterial({color:0x435c63,transparent:true,opacity:.22}),0,.012,0,1.1,1,1,person);shadow.rotation.x=-Math.PI/2;
+      mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,0,-.66,.12,1,1,1,legL);mesh(new THREE.BoxGeometry(.19,.1,.34),shoes,0,-.66,.12,1,1,1,legR);
+      const shadow=mesh(new THREE.CircleGeometry(.42,32),new THREE.MeshBasicMaterial({color:0x435c63,transparent:true,opacity:.22}),0,.012,0,1.1,1,1,employee);shadow.rotation.x=-Math.PI/2;
+      employeeLegs={left:legL,right:legR};employeeArms={left:armL,right:armR};
+      const walkPath=[{x:1.3,z:2.5},{x:-1.2,z:2.45},{x:-3.5,z:2.1},{x:-3.65,z:.8},{x:-1.5,z:.7},{x:1,z:.65},{x:3.8,z:.7},{x:4.5,z:1.8},{x:1.3,z:2.5}];
       movers.push(t=>{
-        const phase=t*.32, stride=Math.sin(t*5.2), direction=Math.cos(phase);
-        person.position.x=Math.sin(phase)*3.6;
-        person.position.z=2.45+Math.cos(phase*.72)*.38;
-        person.rotation.y=direction>=0?Math.PI/2:-Math.PI/2;
-        legL.rotation.x=stride*.52;legR.rotation.x=-stride*.52;
-        armL.rotation.x=-stride*.38;armR.rotation.x=stride*.38;
-        person.position.y=Math.abs(stride)*.035;
-        person.rotation.z=-direction*.035;
+        const zone=officeZones[mount.dataset.officeZone||"overview"]||officeZones.overview;
+        if((mount.dataset.officeZone||"overview")==="overview"){if(t-employeeRouteClock>3.8){employeeRouteIndex=(employeeRouteIndex+1)%walkPath.length;employeeRouteClock=t;}employeeGoal=walkPath[employeeRouteIndex];}
+        else employeeGoal={x:zone.employee[0],z:zone.employee[1]};
+        const dx=employeeGoal.x-employee.position.x,dz=employeeGoal.z-employee.position.z,dist=Math.hypot(dx,dz),walking=dist>.12;
+        if(walking){const step=Math.min(dist,.022);employee.position.x+=dx/dist*step;employee.position.z+=dz/dist*step;employee.rotation.y=Math.atan2(dx,dz);}
+        const stride=walking?Math.sin(t*9):Math.sin(t*1.5)*.04;
+        employeeLegs.left.rotation.x=walking?stride*.52:stride;employeeLegs.right.rotation.x=walking?-stride*.52:-stride;
+        employeeArms.left.rotation.x=walking?-stride*.38:Math.sin(t*1.1)*.025;employeeArms.right.rotation.x=walking?stride*.38:-Math.sin(t*1.1)*.025;
+        employee.position.y=walking?Math.abs(stride)*.035:Math.sin(t*1.8)*.008;employee.rotation.z=walking?-Math.sin(t*9)*.025:0;
+        const status=document.querySelector("[data-office-status]");if(status)status.textContent=walking?"Walking to the next workspace zone":zone.status;
       });
       // Subtle animated screens and a plant sway add life to the whole room.
       const screenGlow=mesh(new THREE.BoxGeometry(1.28,.04,.02),mat(0x62e5ce,.15,.25),-2.35,2.04,-.43);
@@ -227,6 +278,16 @@
       // Long aisle runner and floor guides make the space feel walkable.
       mesh(new THREE.BoxGeometry(2.8,.025,5.4),mat(0x718c8e,.02,.9),.35,-.015,1.25);
       for(let i=0;i<8;i++)mesh(new THREE.BoxGeometry(.035,.012,.28),mat(0xd8e4dc,.02,.9),.35,-.001,-1.05+i*.62);
+      // Glowing, clickable markers turn desks and shared areas into navigation.
+      const officeHotspots=[],hotspotMat=new THREE.MeshStandardMaterial({color:0x8ce6bd,emissive:0x2b9b7c,emissiveIntensity:1.4,roughness:.25}),hotspotCore=new THREE.MeshBasicMaterial({color:0xd7fff0});
+      const addHotspot=(id,x,y,z)=>{const group=new THREE.Group();group.position.set(x,y,z);group.userData.officeZone=id;scene.add(group);const ring=new THREE.Mesh(new THREE.TorusGeometry(.22,.025,8,32),hotspotMat);ring.rotation.x=Math.PI/2;group.add(ring);const core=new THREE.Mesh(new THREE.SphereGeometry(.065,12,8),hotspotCore);core.position.y=.03;group.add(core);group.add(new THREE.Mesh(new THREE.SphereGeometry(.42,10,8),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false})));officeHotspots.push(group);movers.push(t=>{group.position.y=y+Math.sin(t*2.1+x)*.055;group.rotation.y=t*.35;ring.scale.setScalar(1+Math.sin(t*2.2+x)*.08);});};
+      addHotspot("desk",-2.35,2.55,-.05);addHotspot("projects",0,3.15,-4.28);addHotspot("library",5.35,2.6,-2.8);addHotspot("meeting",2.45,1.85,-2.05);addHotspot("employee",1.3,2.55,2.5);
+      const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
+      const selectOfficeZone=id=>{if(!officeZones[id])return;mount.dataset.officeZone=id;const zone=officeZones[id],hud=document.querySelector(".p-office-hud");if(!hud)return;hud.querySelector("[data-office-zone-label]").textContent=zone.label;hud.querySelector("[data-office-zone-title]").textContent=zone.title;hud.querySelector("[data-office-zone-copy]").textContent=zone.copy;hud.querySelector("[data-office-zone-link]").href=zone.link;hud.querySelectorAll("[data-office-zone]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.officeZone===id)));};
+      document.querySelectorAll("[data-office-zone]").forEach(button=>button.addEventListener("click",()=>selectOfficeZone(button.dataset.officeZone)));
+      renderer.domElement.style.cursor="grab";
+      renderer.domElement.addEventListener("pointermove",event=>{const rect=renderer.domElement.getBoundingClientRect();pointer.x=((event.clientX-rect.left)/rect.width)*2-1;pointer.y=-((event.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(pointer,camera);renderer.domElement.style.cursor=raycaster.intersectObjects(officeHotspots,true).length?"pointer":"grab";});
+      renderer.domElement.addEventListener("click",event=>{const rect=renderer.domElement.getBoundingClientRect();pointer.x=((event.clientX-rect.left)/rect.width)*2-1;pointer.y=-((event.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(pointer,camera);const hit=raycaster.intersectObjects(officeHotspots,true)[0];if(!hit)return;let target=hit.object;while(target&&!target.userData.officeZone)target=target.parent;if(target)selectOfficeZone(target.userData.officeZone);});
       // Ambient dust motes drift through the room.
       for(let i=0;i<36;i++){
         const x=((i*17)%13-6)*.72,y=1.1+(i%6)*.68,z=((i*11)%9-4)*.72;
@@ -335,6 +396,12 @@
       if(!alive)return;
       raf=requestAnimationFrame(animate);
       const t=performance.now()*.001;
+      if(office){
+        const zone=officeZones[mount.dataset.officeZone||"overview"]||officeZones.overview;
+        const targetPosition=new THREE.Vector3(...zone.camera),targetLook=new THREE.Vector3(...zone.look);
+        if(reduceMotion)camera.position.copy(targetPosition);else camera.position.lerp(targetPosition,.035);
+        camera.lookAt(targetLook);
+      }
       if(!office){root.rotation.y=reduceMotion?-.12:Math.sin(t*.25)*.24;root.rotation.x=reduceMotion?0:Math.sin(t*.35)*.035;}
       movers.forEach(fn=>fn(reduceMotion?0:t));
       if(!office && !reduceMotion){root.position.y=.15+Math.sin(t*.8)*.07;}
