@@ -22,6 +22,7 @@
     ['mono', 'Monochrome', 'Black, white and sharp contrast'],
     ['pixel', 'Pixel World', 'Pixel-inspired digital playground'],
     ['future', 'Future Lab', 'Experimental, forward-looking interface'],
+    ['blueprint', 'Blueprint Workshop', 'Technical drawings and build plans'],
     ['office', 'Office Tour', 'Explore a developer workspace'],
     ['netflix', 'Streaming Stories', 'A streaming-service-inspired layout']
   ];
@@ -214,6 +215,7 @@
       title: document.querySelector('#template-title'),
       description: document.querySelector('#template-description'),
       cta: document.querySelector('#template-cta'),
+      openWorld: document.querySelector('#template-open-world'),
       footer: document.querySelector('#template-footer'),
       styleTitle: document.querySelector('#template-style-title'),
       styleDescription: document.querySelector('#template-style-description')
@@ -247,7 +249,7 @@
         const active = item === button;
         item.classList.toggle('is-active',active);
         item.setAttribute('aria-pressed',String(active));
-        if (active && fields.count) fields.count.textContent = String(index+1).padStart(2,'0') + ' / 18';
+        if (active && fields.count) fields.count.textContent = String(index+1).padStart(2,'0') + ' / ' + String(buttons.length).padStart(2,'0');
       });
       const index = buttons.indexOf(button);
       if (fields.label) fields.label.textContent = String(index+1).padStart(2,'0') + ' / ' + button.querySelector('b').textContent.toUpperCase();
@@ -255,7 +257,8 @@
       if (fields.eyebrow) fields.eyebrow.textContent = data[1];
       if (fields.title) fields.title.textContent = data[2];
       if (fields.description) fields.description.textContent = data[3];
-      if (fields.cta) fields.cta.textContent = data[4];
+      if (fields.cta) { fields.cta.textContent = data[4]; fields.cta.href = 'worlds/' + id + '.html'; }
+      if (fields.openWorld) fields.openWorld.href = 'worlds/' + id + '.html';
       if (fields.footer) fields.footer.textContent = data[5];
       if (fields.styleTitle) fields.styleTitle.textContent = String(index+1).padStart(2,'0') + ' — ' + button.querySelector('b').textContent;
       if (fields.styleDescription) fields.styleDescription.textContent = data[6];
