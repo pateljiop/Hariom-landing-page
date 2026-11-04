@@ -11,7 +11,7 @@ A personal website for Hariom Patel: BCA student, developer, and independent bui
 - Shareable Builder DNA mini-quiz with three archetypes, reproducible result links, and no backend
 - Build Quest: a three-decision product-reliability scenario with trade-off explanations and a copyable local decision trail
 - Visitor-specific three-stop portfolio routes for recruiters, developers and curious explorers, inspired by the reference portfolio profile selector
-- Landing Studio with 18 selectable art directions, including Office Tour and a Netflix-inspired series layout, a live interactive preview and links back to real project content
+- Landing Studio with 19 selectable art directions, a live interactive preview, and a full page for each direction. The new Blueprint Workshop uses technical drawing-board layouts, measured annotations and project schematics while keeping the same real project links
 - Quick Jump command palette with searchable section navigation using Ctrl/⌘ + K
 - Project Autopsy case studies: problem, design choice, evidence, and limitations
 - Small interactive Build Lab with Focus, Explore, and Debug modes
@@ -35,9 +35,9 @@ Then visit `http://localhost:8000`.
 - Builder DNA is a playful self-reflection quiz, not a validated personality assessment; result links use the `?dna=` query parameter
 - Build Quest is a fictional decision simulator, not a scored engineering assessment; choices stay in the browser
 - Keep Project Autopsy evidence current; do not publish unverified results, fabricated metrics, or claims about unfinished features
-- Update design tokens, responsive layouts and visual treatments in `styles.css`
-- Update mobile navigation, reading progress, Build Lab, Builder DNA, Build Quest, Quick Jump, visitor routes and Landing Studio template selection in `script.js`
-- Keep project status honest. The project-card artwork is illustrative, not a screenshot or proof of a feature.
+- Update design tokens, responsive layouts and visual treatments in `styles.css`; the Blueprint Workshop has its own page-level tokens and drawing-board components
+- Update mobile navigation, reading progress, Build Lab, Builder DNA, Build Quest, Quick Jump, visitor routes, the 19-world entry selector and Landing Studio live preview in `script.js`
+- Keep project status honest. The project-card artwork is illustrative, not a screenshot or proof of a feature. The Blueprint Workshop SVG is an explanatory schematic, not live architecture telemetry.
 - The Build Lab is a local interaction. It does not call an AI API.
 
 ## Research and design principles
@@ -57,4 +57,9 @@ The Build Atlas is an original, lightweight project map inspired by the broader 
 
 ## Validation status
 
-Static source checks were performed after implementation for required sections, duplicate IDs, in-page anchors, asset links, and key interaction code. No live deployment, real-device browser session, automated accessibility audit, or Lighthouse/PageSpeed run has been completed. This is a working branch, not a claim of verified production readiness.
+The `qa-check.py` source check validates the homepage and all 19 themed pages, selector/page parity, preview hooks, duplicate IDs, in-page anchors, local assets, landmarks, and required responsive/reduced-motion styles. Run `python3 qa-check.py` and `node --check script.js` from the repository root. No live deployment, real-device browser session, automated accessibility audit, or Lighthouse/PageSpeed run has been completed. This remains a working branch, not a claim of verified production readiness.
+
+
+## New concept: Blueprint Workshop
+
+Blueprint Workshop is a technical drawing-board direction rather than another palette swap: navy drafting paper, fine construction grids, dimension marks, amber reference points, and an isometric project schematic. Its drawing index links directly to Haryomix, Hariom AI, and the personal portfolio. The diagram is labelled as explanatory rather than live telemetry, and the page keeps project capabilities and status deliberately factual. It is selectable in both the entry chooser and the Landing Studio preview; the preview can open the dedicated `worlds/blueprint.html` page.
