@@ -85,7 +85,7 @@ for page in html_files:
         if "../script.js" not in parser.assets: ERRORS.append(f"{rel}: missing ../script.js")
         if not re.search(r'href="\.\./index\.html#landing-(?:studio|entry)"', raw):
             ERRORS.append(f"{rel}: missing world selector return link")
-        if not re.search(r"<main\\b", raw): ERRORS.append(f"{rel}: missing main landmark")
+        if not re.search(r"<main\b", raw): ERRORS.append(f"{rel}: missing main landmark")
 
 if world_names != EXPECTED_WORLDS:
     ERRORS.append(f"world pages mismatch; missing {sorted(EXPECTED_WORLDS-world_names)}, extra {sorted(world_names-EXPECTED_WORLDS)}")
@@ -95,12 +95,12 @@ css = (ROOT / "styles.css").read_text(encoding="utf-8") if (ROOT / "styles.css")
 readme = (ROOT / "README.md").read_text(encoding="utf-8") if (ROOT / "README.md").exists() else ""
 if "const worlds = [" in js:
     block = js.split("const worlds = [", 1)[1].split("];", 1)[0]
-    entry_worlds = set(re.findall(r"\\['([a-z-]+)'", block))
+    entry_worlds = set(re.findall(r"\['([a-z-]+)'", block))
     if entry_worlds != EXPECTED_WORLDS: ERRORS.append("script.js: entry selector does not match the 19 page IDs")
 else: ERRORS.append("script.js: missing entry selector")
 if "const concepts = {" in js:
     block = js.split("const concepts = {", 1)[1].split("};", 1)[0]
-    preview_worlds = set(re.findall(r"^\\s*([a-z-]+): \\[", block, re.M))
+    preview_worlds = set(re.findall(r"^\s*([a-z-]+): \[", block, re.M))
     if preview_worlds != EXPECTED_WORLDS: ERRORS.append("script.js: live preview concept map does not match the 19 page IDs")
 else: ERRORS.append("script.js: missing preview concept map")
 for selector in (".p-template-layout", ".p-template-grid", ".p-template-preview", ".theme-blueprint",
