@@ -24,7 +24,8 @@
     ['future', 'Future Lab', 'Experimental, forward-looking interface'],
     ['blueprint', 'Blueprint Workshop', 'Technical drawings and build plans'],
     ['office', 'Office Tour', 'Explore a developer workspace'],
-    ['netflix', 'Streaming Stories', 'A streaming-service-inspired layout']
+    ['netflix', 'Streaming Stories', 'A streaming-service-inspired layout'],
+    ['museum', 'Maker’s Museum', 'A curated exhibition of real projects']
   ];
   if (entry && entryOptions && enterButton) {
     let chosen = null;
@@ -239,7 +240,8 @@
       future: ['H / SPATIAL WORKSHOP','DIMENSION 026 · DIGITAL OBJECTS','Build beyond\nthe screen.','A workshop for ideas, interfaces and small systems with a little more dimension.','EXPLORE THE SPACE ↗','SPATIAL THINKING · REAL PROJECTS','Layered depth, sculptural shapes and spatial visual cues.'],
       blueprint: ['H / BLUEPRINTS','INDEPENDENT BUILDER · PRAYAGRAJ','Draw the plan.\nBuild the thing.','A technical drawing-board view of real projects, their moving parts, and the decisions behind each build.','OPEN THE DRAWING ↗','REV 019 · PROJECTS / SYSTEMS / NOTES','Blueprint paper, measured annotations, exploded diagrams and a drafting-table information hierarchy.'],
       office: ['HARIOM PATEL / PROFILE','WELCOME TO MY WORKSPACE','Step inside my\ndigital workspace.','Take a guided tour through my developer desk, project wall, tools and workbench.','START THE TOUR ↗','DESK · PROJECT WALL · WORKBENCH','A workspace-first composition inspired by a developer’s digital office.'],
-      netflix: ['H / ORIGINALS','A HARIOM BUILDS ORIGINAL SERIES','Ideas become\noriginals.','Every project has a story. Explore the builds, experiments and lessons behind each release.','▶ PLAY THE INTRO','SEASON 01 · REAL PROJECTS','A streaming-inspired cinematic portfolio, not affiliated with Netflix.']
+      netflix: ['H / ORIGINALS','A HARIOM BUILDS ORIGINAL SERIES','Ideas become\noriginals.','Every project has a story. Explore the builds, experiments and lessons behind each release.','▶ PLAY THE INTRO','SEASON 01 · REAL PROJECTS','A streaming-inspired cinematic portfolio, not affiliated with Netflix.'],
+      museum: ['H / THE MAKER’S MUSEUM','AN ONGOING COLLECTION · PRAYAGRAJ','A collection of useful things.','Enter a small digital museum of real projects, with exhibit notes on what each build explores and where to inspect it.','ENTER THE EXHIBITION ↗','HARIOM PATEL / COLLECTION 001','A museum-inspired portfolio with warm limestone, forest-green rooms, brass accession labels and sculptural project plinths.'],
     };
     const renderTemplate = id => {
       const button = buttons.find(item => item.dataset.template === id);
