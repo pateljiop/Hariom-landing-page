@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static repository-wide QA for Hariom's 19-world personal portfolio."""
+"""Static repository-wide QA for Hariom's 20-world personal portfolio."""
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
@@ -11,7 +11,7 @@ ERRORS = []
 EXPECTED_WORLDS = {
     "studio", "terminal", "editorial", "brutalist", "cinema", "minimal",
     "playful", "retro", "swiss", "neon", "nature", "dashboard",
-    "magazine", "mono", "pixel", "future", "blueprint", "office", "netflix",
+    "magazine", "mono", "pixel", "future", "blueprint", "office", "netflix", "museum",
 }
 
 class PageParser(HTMLParser):
@@ -66,7 +66,7 @@ for page in html_files:
                         "Hariom Patel", "Haryomix", "Hariom AI", 'aria-label="Main navigation"'):
             if feature not in raw: ERRORS.append(f"index.html: missing {feature}")
         if len(parser.templates) != len(EXPECTED_WORLDS):
-            ERRORS.append(f"index.html: expected 19 preview buttons, found {len(parser.templates)}")
+            ERRORS.append(f"index.html: expected 20 preview buttons, found {len(parser.templates)}")
         if set(parser.templates) != EXPECTED_WORLDS:
             ERRORS.append(f"index.html: selector mismatch; missing {sorted(EXPECTED_WORLDS-set(parser.templates))}, extra {sorted(set(parser.templates)-EXPECTED_WORLDS)}")
         if parser.template_pressed.count("true") != 1 or any(v not in ("true", "false") for v in parser.template_pressed):
@@ -96,21 +96,22 @@ readme = (ROOT / "README.md").read_text(encoding="utf-8") if (ROOT / "README.md"
 if "const worlds = [" in js:
     block = js.split("const worlds = [", 1)[1].split("];", 1)[0]
     entry_worlds = set(re.findall(r"\['([a-z-]+)'", block))
-    if entry_worlds != EXPECTED_WORLDS: ERRORS.append("script.js: entry selector does not match the 19 page IDs")
+    if entry_worlds != EXPECTED_WORLDS: ERRORS.append("script.js: entry selector does not match the 20 page IDs")
 else: ERRORS.append("script.js: missing entry selector")
 if "const concepts = {" in js:
     block = js.split("const concepts = {", 1)[1].split("};", 1)[0]
     preview_worlds = set(re.findall(r"^\s*([a-z-]+): \[", block, re.M))
     if preview_worlds != EXPECTED_WORLDS: ERRORS.append("script.js: live preview concept map does not match the 19 page IDs")
 else: ERRORS.append("script.js: missing preview concept map")
-for selector in (".p-template-layout", ".p-template-grid", ".p-template-preview", ".theme-blueprint",
-                 'data-world-page="blueprint"', 'data-landing-theme="blueprint"',
+for selector in (".p-template-layout", ".p-template-grid", ".p-template-preview", ".theme-blueprint", ".theme-museum",
+                 'data-world-page="blueprint"', 'data-landing-theme="blueprint"', 'data-world-page="museum"', 'data-landing-theme="museum"', '.p-museum-collection', '.p-museum-cards',
                  ":focus-visible", "prefers-reduced-motion", "@media(max-width:760px)"):
     if selector not in css: ERRORS.append(f"styles.css: missing {selector}")
 for feature in ("template-open-world", "worlds/' + id + '.html"):
     if feature not in js: ERRORS.append(f"script.js: missing preview navigation behaviour {feature}")
-if "19 selectable" not in readme.lower(): ERRORS.append("README.md: document 19 selectable directions")
+if "20 selectable" not in readme.lower(): ERRORS.append("README.md: document 20 selectable directions")
 if "Blueprint Workshop" not in readme: ERRORS.append("README.md: document Blueprint Workshop")
+if "Maker’s Museum" not in readme: ERRORS.append("README.md: document Maker’s Museum")
 
 if ERRORS:
     print(f"QA FAILED: {len(ERRORS)} issue(s)")
