@@ -101,7 +101,7 @@ else: ERRORS.append("script.js: missing entry selector")
 if "const concepts = {" in js:
     block = js.split("const concepts = {", 1)[1].split("};", 1)[0]
     preview_worlds = set(re.findall(r"^\s*([a-z-]+): \[", block, re.M))
-    if preview_worlds != EXPECTED_WORLDS: ERRORS.append("script.js: live preview concept map does not match the 19 page IDs")
+    if preview_worlds != EXPECTED_WORLDS: ERRORS.append("script.js: live preview concept map does not match the 20 page IDs")
 else: ERRORS.append("script.js: missing preview concept map")
 for selector in (".p-template-layout", ".p-template-grid", ".p-template-preview", ".theme-blueprint", ".theme-museum",
                  'data-world-page="blueprint"', 'data-landing-theme="blueprint"', 'data-world-page="museum"', 'data-landing-theme="museum"', '.p-museum-collection', '.p-museum-cards',
