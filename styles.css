@@ -798,3 +798,203 @@ body.has-selected-world .p-nav,body.has-selected-world .p-footer{transition:back
  :is(html[data-world-page="blueprint"], body[data-landing-theme="blueprint"]) .p-blueprint-figure,:is(html[data-world-page="blueprint"], body[data-landing-theme="blueprint"]) .p-blueprint-figure svg{min-height:210px}
 }
 @media(prefers-reduced-motion:reduce){:is(html[data-world-page="blueprint"], body[data-landing-theme="blueprint"]) .p-blueprint-rail{transition:none}}
+
+
+/* Maker's Museum — a curated exhibition of real projects, not another dashboard or editorial skin. */
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]){--bg:#192b25;--panel:#263a31;--paper:#f0e8d8;--muted:#b8b09f;--line:#526153;--acid:#d4b37a;--display:Georgia,serif;--mono:'DM Mono',monospace}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-hero{background:linear-gradient(125deg,#182a24 0%,#263b31 58%,#344438 100%)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-hero-copy h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(43px,6.2vw,82px);line-height:.98;letter-spacing:-.065em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-hero-copy h1 span{color:#d4b37a}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-kicker,:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-section-label{font-family:'DM Mono',monospace;letter-spacing:.14em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-workspace.p-museum-workspace{padding:0;overflow:hidden;border:1px solid #b99a69;border-radius:5px;background:#dcd3c1;box-shadow:14px 16px 0 #0c1813,0 28px 65px #0004;transform:perspective(1100px) rotateY(-5deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-workspace .p-workspace-top{background:#263b31;color:#e9ddc7;border-bottom:1px solid #657263;font:9px 'DM Mono',monospace;letter-spacing:.12em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-workspace .p-workspace-top i{background:#d4b37a}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-room{position:relative;min-height:350px;padding:0;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:linear-gradient(180deg,#e9e1d2 0%,#d9cfbd 72%,#b6a78e 72%,#9b8b73 100%);isolation:isolate}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-wall{position:absolute;inset:0 0 28%;display:flex;justify-content:space-between;align-items:flex-start;padding:20px 22px;background:linear-gradient(90deg,#f3ecdf,#e4dac8 50%,#eee6d8);border-bottom:1px solid #b9a98f;color:#716650;font:9px 'DM Mono',monospace;letter-spacing:.13em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-wall:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 31%,#9c8a6d14 31.1% 31.3%,transparent 31.4% 62%);pointer-events:none}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-lights{position:absolute;z-index:1;top:0;left:12%;right:12%;display:flex;justify-content:space-around}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-lights span{width:2px;height:55px;background:#a28d6d;position:relative}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-lights span:after{content:'';position:absolute;top:48px;left:-31px;width:64px;height:110px;background:linear-gradient(180deg,#fff3cf70,transparent);clip-path:polygon(40% 0,60% 0,100% 100%,0 100%)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibits{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:12px;height:100%;min-height:310px;padding:76px 22px 24px;perspective:900px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibit{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;height:220px;transform-style:preserve-3d}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-art{position:relative;z-index:2;display:grid;place-items:center;margin-bottom:-2px;transform-style:preserve-3d;filter:drop-shadow(0 13px 9px #574c3a45)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book{width:66px;height:94px;border:4px solid #d4b37a;border-left-width:9px;border-radius:3px 6px 6px 3px;background:linear-gradient(100deg,#24483b 0 12%,#315c49 12% 100%);box-shadow:inset -8px 0 #172e26,inset 0 0 0 5px #ffffff13;transform:rotateY(-24deg) rotateX(7deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book:after{content:'';position:absolute;right:-11px;top:4px;width:9px;height:84px;background:repeating-linear-gradient(180deg,#eee3cf 0 2px,#b9a98f 2px 3px);transform:rotateY(45deg);transform-origin:left}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book span{color:#e7d7b9;font:600 32px Georgia,serif}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb{width:83px;height:83px;border:1px solid #d6b777;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff3d6,#bd9861 26%,#5d6955 55%,#263b31 76%);box-shadow:inset -10px -9px 20px #15251d,inset 6px 6px 13px #fff8;animation:museum-orbit 14s linear infinite}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb:before{content:'';position:absolute;inset:-13px -21px;border:2px solid #a7834e;border-radius:50%;transform:rotateX(67deg) rotateZ(-20deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb:after{content:'';position:absolute;inset:-4px 10px;border:1px solid #f3dfb2;border-radius:50%;transform:rotateY(70deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb span{color:#fff0ce;font:24px Georgia,serif}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-frame{width:76px;height:98px;border:8px ridge #b48c52;background:linear-gradient(145deg,#385847,#1c3027);box-shadow:inset 0 0 0 4px #d8c49b;transform:rotateY(18deg) rotateX(4deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-frame span{color:#e8d8b8;font:600 24px Georgia,serif}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-plinth{position:relative;width:78%;height:43px;flex:none;background:linear-gradient(90deg,#9d8b70,#e5d8c1 50%,#8f7b60);border-top:5px solid #f1e5d0;box-shadow:0 13px 15px #51432d55;transform:perspective(170px) rotateX(8deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-plinth:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#fff3 0 2%,transparent 2% 98%,#493d2d33 98%)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-number{margin-top:10px;color:#5e584b;font:8px 'DM Mono',monospace;letter-spacing:.1em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-room-caption{position:relative;z-index:3;padding:8px 14px;background:#e8dfd0;color:#6e6554;text-align:center;font:8px 'DM Mono',monospace;letter-spacing:.09em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-workspace .p-workspace-bottom{background:#263b31;color:#e9ddc7;border-top:1px solid #657263;font:8px 'DM Mono',monospace;letter-spacing:.1em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection{max-width:1180px;margin:0 auto;padding:78px 0 72px;border-bottom:1px solid var(--line)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head{display:grid;grid-template-columns:1fr .8fr;gap:16px 54px;align-items:end;margin-bottom:30px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-overline{grid-column:1/-1;color:var(--acid);font:9px 'DM Mono',monospace;letter-spacing:.16em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head h2{margin:0;font:400 clamp(39px,6vw,76px)/.98 Georgia,serif;letter-spacing:-.06em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head h2 em{color:var(--acid);font-style:italic}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head>p{max-width:400px;margin:0;color:var(--muted);font-size:12px;line-height:1.9}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card{min-width:0;overflow:hidden;border:1px solid #586454;background:#263a31;box-shadow:0 18px 36px #0002}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-top{display:flex;justify-content:space-between;gap:8px;padding:13px 15px;border-bottom:1px solid #586454;color:#d5b982;font:8px 'DM Mono',monospace;letter-spacing:.08em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-art{position:relative;display:grid;place-items:center;height:180px;overflow:hidden;background:radial-gradient(ellipse at 50% 80%,#d4b37a25,transparent 55%),linear-gradient(135deg,#31463a,#1b2c25)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-art:after{content:'';position:absolute;bottom:18px;left:15%;right:15%;height:17px;background:linear-gradient(90deg,#89765a,#d7c4a3 50%,#89765a);transform:perspective(120px) rotateX(12deg);box-shadow:0 10px 14px #0005}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-book span{position:relative;z-index:1;display:grid;place-items:center;width:85px;height:112px;border:5px solid #d2b27a;border-left-width:10px;background:#315b48;color:#f2e4c9;font:600 18px/1 Georgia,serif;text-align:center;transform:perspective(400px) rotateY(-17deg);box-shadow:12px 14px 0 #101e18}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-orb span{position:relative;z-index:1;display:grid;place-items:center;width:96px;height:96px;border:1px solid #e1c58e;border-radius:50%;background:radial-gradient(circle at 28% 24%,#fff2d0,#b6955e 35%,#405344 72%);color:#fff0ce;font:30px Georgia,serif;box-shadow:inset -12px -14px 18px #13241b,0 14px 20px #0005}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-orb span:after{content:'';position:absolute;inset:-14px -22px;border:2px solid #d0aa69;border-radius:50%;transform:rotateX(65deg) rotateZ(-20deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-frame span{position:relative;z-index:1;display:grid;place-items:center;width:90px;height:116px;border:9px ridge #b48c52;background:#2e4a39;color:#f0dfbd;font:600 27px Georgia,serif;box-shadow:inset 0 0 0 4px #d7c49b,0 13px 18px #0005;transform:rotateY(12deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy{padding:20px 20px 22px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-kicker{margin:0 0 10px;color:#d5b982;font:8px 'DM Mono',monospace;letter-spacing:.12em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy h3{margin:0 0 10px;color:#f0e8d8;font:400 29px Georgia,serif;letter-spacing:-.04em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy>p:not(.p-museum-card-kicker){min-height:100px;margin:0;color:#c1b9a8;font-size:11px;line-height:1.85}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy>a{display:inline-flex;align-items:center;gap:8px;margin-top:17px;color:#e2c28b;font:9px 'DM Mono',monospace;text-decoration:none;border-bottom:1px solid #927c58;padding-bottom:6px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy>a:hover{color:#fff0ce}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator{display:grid;grid-template-columns:160px 1fr auto;gap:18px;align-items:center;margin-top:25px;padding:17px 0;border-top:1px solid #586454}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator>span{color:#d5b982;font:8px 'DM Mono',monospace;letter-spacing:.12em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator>p{margin:0;color:#bdb5a4;font-size:10px;line-height:1.7}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator>a{color:#e2c28b;font:9px 'DM Mono',monospace;text-decoration:none}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) :is(a,button,summary):focus-visible{outline:2px solid #e6c98f;outline-offset:4px}
+.theme-museum{--preview-bg:#e8dfcf;--preview-fg:#263a31;--preview-muted:#756f62;--preview-accent:#a77d49;font-family:Georgia,serif}
+.theme-museum .p-preview-nav{border-bottom:1px solid #b8aa91;letter-spacing:.08em}
+.theme-museum .p-preview-hero{margin-top:15px;padding:29px 17px 24px;background:linear-gradient(90deg,#f1eadc,#e5dbc9);border:1px solid #c8b99e}
+.theme-museum .p-preview-hero h3{font:400 clamp(29px,4.3vw,48px)/.95 Georgia,serif;letter-spacing:-.06em}
+.theme-museum .p-preview-art{top:72px;right:14px;width:31%;height:165px;border:8px ridge #ad8752;border-radius:0;background:linear-gradient(145deg,#355544,#1d3028);transform:rotateY(-12deg);box-shadow:9px 12px 0 #77664b55}
+.theme-museum .p-preview-art>span{font:600 clamp(62px,9vw,108px) Georgia,serif;color:#e0c89b}
+.theme-museum .p-preview-art>i{color:#e2c28b}
+.theme-museum .p-preview-hero>a{background:#294537;color:#f2e8d6}
+.theme-museum .p-preview-bottom{border-top:1px solid #b8aa91}
+@keyframes museum-orbit{to{transform:rotateY(360deg) rotateX(12deg)}}
+@media(max-width:760px){
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-workspace.p-museum-workspace{transform:none}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-room{min-height:310px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibits{min-height:275px;padding:68px 12px 20px;gap:4px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibit{height:195px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book{width:54px;height:78px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb{width:68px;height:68px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-frame{width:62px;height:82px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-number{font-size:7px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection{padding:50px 18px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head{grid-template-columns:1fr;gap:14px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-overline{grid-column:auto}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-cards{grid-template-columns:1fr 1fr}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator{grid-template-columns:1fr;gap:8px}
+}
+@media(max-width:480px){
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-room{min-height:270px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibits{min-height:240px;padding:62px 8px 15px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibit{height:175px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book{width:42px;height:65px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb{width:56px;height:56px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-frame{width:49px;height:68px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-number{font-size:6px;letter-spacing:.04em}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-cards{grid-template-columns:1fr}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy>p:not(.p-museum-card-kicker){min-height:0}
+}
+@media(prefers-reduced-motion:reduce){
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb{animation:none}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card{transition:none}
+}
+
+
+/* Maker's Museum — a curated exhibition of real projects, not another dashboard or editorial skin. */
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]){--bg:#192b25;--panel:#263a31;--paper:#f0e8d8;--muted:#b8b09f;--line:#526153;--acid:#d4b37a;--display:Georgia,serif;--mono:'DM Mono',monospace}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-hero{background:linear-gradient(125deg,#182a24 0%,#263b31 58%,#344438 100%)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-hero-copy h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(43px,6.2vw,82px);line-height:.98;letter-spacing:-.065em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-hero-copy h1 span{color:#d4b37a}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-kicker,:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-section-label{font-family:'DM Mono',monospace;letter-spacing:.14em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-workspace.p-museum-workspace{padding:0;overflow:hidden;border:1px solid #b99a69;border-radius:5px;background:#dcd3c1;box-shadow:14px 16px 0 #0c1813,0 28px 65px #0004;transform:perspective(1100px) rotateY(-5deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-workspace .p-workspace-top{background:#263b31;color:#e9ddc7;border-bottom:1px solid #657263;font:9px 'DM Mono',monospace;letter-spacing:.12em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-workspace .p-workspace-top i{background:#d4b37a}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-room{position:relative;min-height:350px;padding:0;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:linear-gradient(180deg,#e9e1d2 0%,#d9cfbd 72%,#b6a78e 72%,#9b8b73 100%);isolation:isolate}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-wall{position:absolute;inset:0 0 28%;display:flex;justify-content:space-between;align-items:flex-start;padding:20px 22px;background:linear-gradient(90deg,#f3ecdf,#e4dac8 50%,#eee6d8);border-bottom:1px solid #b9a98f;color:#716650;font:9px 'DM Mono',monospace;letter-spacing:.13em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-wall:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 31%,#9c8a6d14 31.1% 31.3%,transparent 31.4% 62%);pointer-events:none}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-lights{position:absolute;z-index:1;top:0;left:12%;right:12%;display:flex;justify-content:space-around}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-lights span{width:2px;height:55px;background:#a28d6d;position:relative}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-lights span:after{content:'';position:absolute;top:48px;left:-31px;width:64px;height:110px;background:linear-gradient(180deg,#fff3cf70,transparent);clip-path:polygon(40% 0,60% 0,100% 100%,0 100%)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibits{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:12px;height:100%;min-height:310px;padding:76px 22px 24px;perspective:900px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibit{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;height:220px;transform-style:preserve-3d}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-art{position:relative;z-index:2;display:grid;place-items:center;margin-bottom:-2px;transform-style:preserve-3d;filter:drop-shadow(0 13px 9px #574c3a45)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book{width:66px;height:94px;border:4px solid #d4b37a;border-left-width:9px;border-radius:3px 6px 6px 3px;background:linear-gradient(100deg,#24483b 0 12%,#315c49 12% 100%);box-shadow:inset -8px 0 #172e26,inset 0 0 0 5px #ffffff13;transform:rotateY(-24deg) rotateX(7deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book:after{content:'';position:absolute;right:-11px;top:4px;width:9px;height:84px;background:repeating-linear-gradient(180deg,#eee3cf 0 2px,#b9a98f 2px 3px);transform:rotateY(45deg);transform-origin:left}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book span{color:#e7d7b9;font:600 32px Georgia,serif}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb{width:83px;height:83px;border:1px solid #d6b777;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff3d6,#bd9861 26%,#5d6955 55%,#263b31 76%);box-shadow:inset -10px -9px 20px #15251d,inset 6px 6px 13px #fff8;animation:museum-orbit 14s linear infinite}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb:before{content:'';position:absolute;inset:-13px -21px;border:2px solid #a7834e;border-radius:50%;transform:rotateX(67deg) rotateZ(-20deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb:after{content:'';position:absolute;inset:-4px 10px;border:1px solid #f3dfb2;border-radius:50%;transform:rotateY(70deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb span{color:#fff0ce;font:24px Georgia,serif}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-frame{width:76px;height:98px;border:8px ridge #b48c52;background:linear-gradient(145deg,#385847,#1c3027);box-shadow:inset 0 0 0 4px #d8c49b;transform:rotateY(18deg) rotateX(4deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-frame span{color:#e8d8b8;font:600 24px Georgia,serif}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-plinth{position:relative;width:78%;height:43px;flex:none;background:linear-gradient(90deg,#9d8b70,#e5d8c1 50%,#8f7b60);border-top:5px solid #f1e5d0;box-shadow:0 13px 15px #51432d55;transform:perspective(170px) rotateX(8deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-plinth:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#fff3 0 2%,transparent 2% 98%,#493d2d33 98%)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-number{margin-top:10px;color:#5e584b;font:8px 'DM Mono',monospace;letter-spacing:.1em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-room-caption{position:relative;z-index:3;padding:8px 14px;background:#e8dfd0;color:#6e6554;text-align:center;font:8px 'DM Mono',monospace;letter-spacing:.09em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-workspace .p-workspace-bottom{background:#263b31;color:#e9ddc7;border-top:1px solid #657263;font:8px 'DM Mono',monospace;letter-spacing:.1em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection{max-width:1180px;margin:0 auto;padding:78px 0 72px;border-bottom:1px solid var(--line)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head{display:grid;grid-template-columns:1fr .8fr;gap:16px 54px;align-items:end;margin-bottom:30px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-overline{grid-column:1/-1;color:var(--acid);font:9px 'DM Mono',monospace;letter-spacing:.16em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head h2{margin:0;font:400 clamp(39px,6vw,76px)/.98 Georgia,serif;letter-spacing:-.06em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head h2 em{color:var(--acid);font-style:italic}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head>p{max-width:400px;margin:0;color:var(--muted);font-size:12px;line-height:1.9}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card{min-width:0;overflow:hidden;border:1px solid #586454;background:#263a31;box-shadow:0 18px 36px #0002}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-top{display:flex;justify-content:space-between;gap:8px;padding:13px 15px;border-bottom:1px solid #586454;color:#d5b982;font:8px 'DM Mono',monospace;letter-spacing:.08em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-art{position:relative;display:grid;place-items:center;height:180px;overflow:hidden;background:radial-gradient(ellipse at 50% 80%,#d4b37a25,transparent 55%),linear-gradient(135deg,#31463a,#1b2c25)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-art:after{content:'';position:absolute;bottom:18px;left:15%;right:15%;height:17px;background:linear-gradient(90deg,#89765a,#d7c4a3 50%,#89765a);transform:perspective(120px) rotateX(12deg);box-shadow:0 10px 14px #0005}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-book span{position:relative;z-index:1;display:grid;place-items:center;width:85px;height:112px;border:5px solid #d2b27a;border-left-width:10px;background:#315b48;color:#f2e4c9;font:600 18px/1 Georgia,serif;text-align:center;transform:perspective(400px) rotateY(-17deg);box-shadow:12px 14px 0 #101e18}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-orb span{position:relative;z-index:1;display:grid;place-items:center;width:96px;height:96px;border:1px solid #e1c58e;border-radius:50%;background:radial-gradient(circle at 28% 24%,#fff2d0,#b6955e 35%,#405344 72%);color:#fff0ce;font:30px Georgia,serif;box-shadow:inset -12px -14px 18px #13241b,0 14px 20px #0005}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-orb span:after{content:'';position:absolute;inset:-14px -22px;border:2px solid #d0aa69;border-radius:50%;transform:rotateX(65deg) rotateZ(-20deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-frame span{position:relative;z-index:1;display:grid;place-items:center;width:90px;height:116px;border:9px ridge #b48c52;background:#2e4a39;color:#f0dfbd;font:600 27px Georgia,serif;box-shadow:inset 0 0 0 4px #d7c49b,0 13px 18px #0005;transform:rotateY(12deg)}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy{padding:20px 20px 22px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-kicker{margin:0 0 10px;color:#d5b982;font:8px 'DM Mono',monospace;letter-spacing:.12em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy h3{margin:0 0 10px;color:#f0e8d8;font:400 29px Georgia,serif;letter-spacing:-.04em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy>p:not(.p-museum-card-kicker){min-height:100px;margin:0;color:#c1b9a8;font-size:11px;line-height:1.85}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy>a{display:inline-flex;align-items:center;gap:8px;margin-top:17px;color:#e2c28b;font:9px 'DM Mono',monospace;text-decoration:none;border-bottom:1px solid #927c58;padding-bottom:6px}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy>a:hover{color:#fff0ce}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator{display:grid;grid-template-columns:160px 1fr auto;gap:18px;align-items:center;margin-top:25px;padding:17px 0;border-top:1px solid #586454}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator>span{color:#d5b982;font:8px 'DM Mono',monospace;letter-spacing:.12em}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator>p{margin:0;color:#bdb5a4;font-size:10px;line-height:1.7}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator>a{color:#e2c28b;font:9px 'DM Mono',monospace;text-decoration:none}
+:is(html[data-world-page="museum"], body[data-landing-theme="museum"]) :is(a,button,summary):focus-visible{outline:2px solid #e6c98f;outline-offset:4px}
+.theme-museum{--preview-bg:#e8dfcf;--preview-fg:#263a31;--preview-muted:#756f62;--preview-accent:#a77d49;font-family:Georgia,serif}
+.theme-museum .p-preview-nav{border-bottom:1px solid #b8aa91;letter-spacing:.08em}
+.theme-museum .p-preview-hero{margin-top:15px;padding:29px 17px 24px;background:linear-gradient(90deg,#f1eadc,#e5dbc9);border:1px solid #c8b99e}
+.theme-museum .p-preview-hero h3{font:400 clamp(29px,4.3vw,48px)/.95 Georgia,serif;letter-spacing:-.06em}
+.theme-museum .p-preview-art{top:72px;right:14px;width:31%;height:165px;border:8px ridge #ad8752;border-radius:0;background:linear-gradient(145deg,#355544,#1d3028);transform:rotateY(-12deg);box-shadow:9px 12px 0 #77664b55}
+.theme-museum .p-preview-art>span{font:600 clamp(62px,9vw,108px) Georgia,serif;color:#e0c89b}
+.theme-museum .p-preview-art>i{color:#e2c28b}
+.theme-museum .p-preview-hero>a{background:#294537;color:#f2e8d6}
+.theme-museum .p-preview-bottom{border-top:1px solid #b8aa91}
+@keyframes museum-orbit{to{transform:rotateY(360deg) rotateX(12deg)}}
+@media(max-width:760px){
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-workspace.p-museum-workspace{transform:none}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-room{min-height:310px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibits{min-height:275px;padding:68px 12px 20px;gap:4px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibit{height:195px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book{width:54px;height:78px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb{width:68px;height:68px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-frame{width:62px;height:82px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-number{font-size:7px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection{padding:50px 18px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-collection-head{grid-template-columns:1fr;gap:14px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-overline{grid-column:auto}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-cards{grid-template-columns:1fr 1fr}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-curator{grid-template-columns:1fr;gap:8px}
+}
+@media(max-width:480px){
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-room{min-height:270px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibits{min-height:240px;padding:62px 8px 15px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-exhibit{height:175px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-book{width:42px;height:65px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb{width:56px;height:56px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-frame{width:49px;height:68px}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-number{font-size:6px;letter-spacing:.04em}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-cards{grid-template-columns:1fr}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card-copy>p:not(.p-museum-card-kicker){min-height:0}
+}
+@media(prefers-reduced-motion:reduce){
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-orb{animation:none}
+ :is(html[data-world-page="museum"], body[data-landing-theme="museum"]) .p-museum-card{transition:none}
+}
